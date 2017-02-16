@@ -1,0 +1,105 @@
+<div id="dashboard-view" data-role="view" data-title="Cancel AL"
+     data-after-show="disableBackButton" data-before-hide="enableBackButton"
+     data-layout="afterlogin"
+     data-model="app.alcancelleaveView.alcancelleaveViewModel"
+     data-bind="events: { show: onShow }">
+    <div id="dvcancelleaveview">
+        <div class="panel panel-custom">
+            <div class="panel-heading">
+                <span class="panel-title">
+                    <span class="fa fa-recycle"></span>  Pending List
+                </span>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <ul data-role="listview" id="listview-leaves">
+                        <li class="row">
+                            <div class="col-xs-10">
+                               <div><b> Radhakrishnan</b> </div>
+                                <div> INS-15395 </div>
+                                <div><span class="bg-info ">5</span> - 02/01/2017 to 06/01/2017</div>
+                            </div>
+                            <div class="col-xs-2">
+                                <a class="btn btn-success " data-role="button"
+                                   data-click="app.navigation.openmodalviewapplyleave">
+                                <i class="fa fa-check fa-fw"></i></a>
+                                <br />
+                                <a class="btn btn-danger" data-role="button"
+                                   data-click="openmodalviewapplyleave"><i class="fa fa-close fa-fw"></i></a>
+                            </div>
+                        </li>
+                        <li class="row">
+                            <div class="col-xs-10">
+                               <div><b> Radhakrishnan</b> </div>
+                                <div> INS-15395 </div>
+                                <div><span class="bg-info ">5</span> - 02/01/2017 to 06/01/2017</div>
+                            </div>
+                            <div class="col-xs-2">
+                                <a class="btn btn-success " data-role="button"
+                                   data-click="app.navigation.openmodalviewapplyleave">
+                                    <i class="fa fa-check fa-fw"></i>
+                                </a>
+                                <br />
+                                <a class="btn btn-danger" data-role="button"
+                                   data-click="openmodalviewapplyleave"><i class="fa fa-close fa-fw"></i></a>
+                            </div>
+                        </li>
+
+                        <li class="row">
+                            <div class="col-xs-10">
+                               <div><b> Radhakrishnan</b> </div>
+                                <div> INS-15395 </div>
+                                <div><span class="bg-info ">5</span> - 02/01/2017 to 06/01/2017</div>
+                            </div>
+                            <div class="col-xs-2">
+                                <a class="btn btn-success " data-role="button"
+                                   data-click="app.navigation.openmodalviewapplyleave">
+                                    <i class="fa fa-check fa-fw"></i>
+                                </a>
+                                <br />
+                                <a class="btn btn-danger" data-role="button"
+                                   data-click="openmodalviewapplyleave"><i class="fa fa-close fa-fw"></i></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div data-role="modalview" id="modalview-applyleave" style="height:auto;width:90%!important ">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="panel-title text-uppercase" style="padding-left:10px !important ; ">
+                    Leave Details <a data-click="closemodalviewapplyleave"
+                                     data-role="button" class="pull-right"
+                                     style="padding : 0 5px 0 0; ">
+                        <i class="fa fa-close"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-xs-12 col-sm-12">
+                    <label class="control-label">Remarks</label>
+                    <input name="email" type="email" class="form-control"
+                           data-bind="value: profile.Email" required
+                           onkeyup="return textinputlength(this.value, 200, this.id);" />
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="pull-right">
+                <a class="btn btn-danger"
+                   data-bind="events: {click: updateProfile }">
+                    <span class="fa fa-close"></span> Reject
+                </a>
+                <!--<a class="btn btn-primary" data-role="button"
+                   data-click="closemodalviewapplyleave">
+                    Close
+                </a>-->
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

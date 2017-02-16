@@ -1,0 +1,47 @@
+<div id="authentication-view" data-role="view" data-title="Authentication" data-layout="main"
+     data-after-show="disableBackButton" data-before-hide="enableBackButton"
+       data-model="app.authenticationView" data-show="app.authenticationView.onShow"
+       class="authentication-view">
+    <div class="signin-view" id="dvsignin">
+        <form id="login-form" class="col-xs-12 col-sm-6 col-sm-offset-3">  
+            <div class="text-left marginTopBottom-10" >
+                <img src="images/ethoslogo.png" alt="logo" />
+            </div>  
+            <div class="marginTopBottom-10"> 
+            </div>   
+            <div class="form-group">
+                <!--<span class="input-group-addon"><i class="fa fa-user "></i></span>-->
+                <input  id="username"     name="username" type="text" class="form-control" placeholder="Username" 
+                       data-bind="value: authenticationViewModel.user.username" 
+                       required autofocus/>
+
+            </div> 
+             <div class="form-group">
+                <!--<span class="input-group-addon "><i class="fa fa-lock"></i></span>-->
+                <input id="password"  name="password"  type="password" class="form-control" placeholder="Password" 
+                       data-bind="value: authenticationViewModel.user.password" required />
+
+            </div> 
+            <div class="form-group">
+                <a class="btn-block btn btn-success " 
+                   data-bind="events: { click: authenticationViewModel.signin }">
+                <i class="fa fa-1-5x fa-sign-in  fa-pull-right  " >  </i>Login</a>
+            </div> 
+            <!--<div class="form-group">
+                <a class="btn-block btn btn-danger"
+                   data-role="button" data-click="app.navigation.navigatesignout">
+                    Logout
+                </a>
+            </div>--> 
+            <!--<div class="form-group text-left "> 
+                    <ul> Note:
+                    <li> Use Ethos username and password.</li>
+                    <li> For any clarification contact Ethos Admin.</li>
+                    </ul> 
+            </div>--> 
+</form>
+    </div> 
+    <div class="offline" align="center" style="display:none;">
+        You are currently offline. Before using this app in offline mode you must initialize it while you are online
+    </div> 
+</div>

@@ -1,0 +1,64 @@
+<div id="coveragedetail-view" data-role="view" data-title="Team Coverage Details"
+     data-layout="afterlogin"
+     data-model="app.teamcoverageView.teamcoverageViewModel"
+     data-bind="events: { show: onShow }">
+    <footer data-role="footer">
+        <div class="text-center ">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!--<a data-role="button" data-rel="drawer"
+                       href="#left-drawer" class="faicon">
+                        <i class="fa fa-1-5x fa-list"></i>
+                    </a>-->
+                    <a data-bind="events: {click: onRefresh }">
+                        <i class="fa fa-2x fa-refresh"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div id="dvteamcoveragedetails" style="display:none;" 
+         >
+        <div class="panel panel-default">
+            <!--<div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-1 text-center drawertopicon" data-role="button" data-click="gotochartnextrecord" data-direction="right">
+                        <i class="fa fa-chevron-left"> </i>
+                    </div>
+                    <div class="col-xs-10 text-center text-uppercase">
+                            <span id="spanchartdivisionname"></span>
+                        <input type="hidden" id="hdnchartslno">
+                    </div>
+                    <div class="col-xs-1 text-center drawertopicon" data-role="button" data-click="gotochartnextrecord" data-direction="left">
+                        <i class="fa fa-chevron-right"> </i>
+                    </div>
+                </div>
+            </div>-->
+            <div class="panel-heading text-center" style="background-color:#fff!important ">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <input id="txtauocmpemployeelist" class="form-control"> 
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body" style="padding-top:0">
+                <div id="chartteamlist-listview"></div>
+                <script type="text/x-kendo-tmpl" id="template-chartteamlist">
+                    <div class="text-center param">
+                        <div class="paramvalue ">
+                            #=ParameterValue #
+                        </div>
+                        <div class="paramname">
+                            #=Parameter #
+                        </div>
+                    </div>
+                </script>
+                <div id="chartbarteamcoveragedetails" style="height:340px"></div>
+            </div>
+            <div class="panel-footer text-center">
+                <b>All data is for last six month</b>
+            </div>
+        </div>
+    </div>
+
+</div>

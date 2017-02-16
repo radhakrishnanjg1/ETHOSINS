@@ -1,0 +1,130 @@
+<div id="DCRView-view" data-role="view" data-title="Daily Call Reporting"
+     data-layout="afterlogin"
+     data-model="app.DCRView.DCRViewModel"
+     data-bind="events: { show: onShow }"> 
+    <div id="dvDCRView">
+        <div class="panel panel-custom"> 
+            <div class="panel-body padding0"> 
+                <div class="panel-body padding0" id="dvdcr2" style="display:none">
+                    <div class="padding-10"></div>
+                    <form id="form-dvdcr2">
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">Date</label>
+                            <input name="txtdate" id="txtdate" required disabled
+                                   class="form-control"
+                                   onkeyup="return textinputlength(this.value, 10, this.id);" />
+                        </div>
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">Activity</label>
+                            <select name="ddlactivity" id="ddlactivity"
+                                    class="dropdown-control" required>
+                                <option selected="selected" value="262">Select Activity(Select Activity)</option>
+                                <option value="235">FW(Field Work)</option>
+                                <option value="236">C&amp;F(Carry &amp; Forward Work)</option>
+                                <option value="237">SUN(Sunday)</option>
+                                <option value="238">HOL(Holiday)</option>
+                                <option value="239">INTV(Interview)</option>
+                                <option value="240">MTG(Meeting)</option>
+                                <option value="241">CYLMTG(Cycle Meeting)</option>
+                                <option value="242">CL(Casual Leave)</option>
+                                <option value="243">SL(Sick Leave)</option>
+                                <option value="244">EL(Earned Leave)</option>
+                                <option value="1131">LTA(LTA)</option>
+                                <option value="247">TRNG(Training)</option>
+                                <option value="248">CAMP(Campaign)</option>
+                                <option value="249">TRST(Transit)</option>
+                                <option value="250">DMP(Doctor Meet)</option>
+                                <option value="251">ADMN(Admin)</option>
+                                <option value="252">TXITR(Taxi Tour)</option>
+                                <option value="253">STW(Stockist Work)</option>
+                                <option value="254">AMC(Ayurvedic Medical College Camp)</option>
+                                <option value="255">SPLACT(Special Activity)</option>
+                                <option value="256">HOV(Head Office Visit)</option>
+                                <option value="257">NYJD(Not Yet Joined)</option>
+                                <option value="258">POB(Personal Order Booking)</option>
+                            </select>
+                        </div>
+                        <div id="dvdcrmasterdata" style="display:none ">
+                            <div class="form-group col-xs-6 col-sm-6">
+                                <label class="control-label">Category</label>
+                                <select name="ddlcategory" id="ddlcategory"
+                                        class="dropdown-control" required>
+                                    <option selected="selected" value="0">---Select---</option>
+                                    <option value="865">HQ </option>
+                                    <option value="2242">Ex-HQ</option>
+                                    <option value="2242">OS</option>
+                                    <option value="2242">Ex-OS</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-xs-6 col-sm-6">
+                                <label class="control-label">Mode</label>
+                                <select name="ddlmode" id="ddlmode"
+                                        class="dropdown-control" required>
+                                    <option selected="selected" value="0">---Select---</option>
+                                    <option value="865">TW </option>
+                                    <option value="2242">BUS</option>
+                                    <option value="2242">TR</option>
+                                    <option value="2242">TAXI</option>
+                                    <option value="2242">SHARE TAXI</option>
+                                    <option value="2242">CAR</option>
+                                    <option value="2242">AIR</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-12">
+                                <label class="control-label">SFC Route</label>
+                                <select name="ddlsfcroute" id="ddlsfcroute"
+                                        class="dropdown-control" required>
+                                    <option value="865">Patna - Hajipur Junction</option>
+                                    <option value="865">Patna - Patna</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="dvdcrmasterdata_ww" style="display:none ">
+                            <div class="form-group col-xs-12 col-sm-12">
+                                <label class="control-label">Work With</label>
+                                <select name="ddlworkwithmaster" id="ddlworkwithmaster" multiple="multiple"
+                                        data-placeholder="Select Employees..." required>
+                                    <option selected>NIKIL SHIRALI(NSM)</option>
+                                    <option>PRAVEEN JAYASWAL(DSM)</option>
+                                    <option>Nancy Davolio</option>
+                                    <option>Robert Davolio</option>
+                                    <option selected>Doss</option>
+                                    <option>RK</option>
+                                </select>
+                            </div> 
+                            <div class="form-group col-xs-12 col-sm-12">
+                                <label class="control-label">Major Town</label>
+                                <select name="ddlmajortown" id="ddlmajortown"
+                                        class="dropdown-control" required>
+                                    <option value="865">
+                                        ALLAHABAD (PRAVEEN JAYASWAL)
+                                    </option>
+                                    <option value="865">
+                                        BHOPAL (PRAVEEN JAYASWAL)
+                                    </option>
+                                    <option value="865">
+                                        CHENNAI (PRAVEEN JAYASWAL)
+                                    </option>
+                                    <option value="865">
+                                        COCHIN (PRAVEEN JAYASWAL)
+                                    </option>
+                                    <option value="865">INDORE (PRAVEEN JAYASWAL)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12">
+                            <!--<a class="btn btn-danger col-xs-6 padding-20"
+                               data-bind="events: {click: gotoDCR1 }">
+                                Home
+                            </a>-->
+                            <a class="btn btn-success col-xs-12 col-sm-12 padding-20"
+                               data-bind="events: {click: gotoDCR3 }">
+                                Next
+                            </a>
+                        </div>
+                    </form>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>

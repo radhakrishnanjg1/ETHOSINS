@@ -1,68 +1,169 @@
-<!DOCTYPE html>
-<html>
-
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title></title>
+    <title>Ethos HO APP</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, width=device-width">
-    <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *;
+	style-src 'self' 'unsafe-inline' 'unsafe-eval'  *;media-src 'self'
+	'unsafe-inline' 'unsafe-eval' *;">
 
-    <link href="styles/overrides.css" rel="stylesheet">
-    <link href="styles/main.css" rel="stylesheet">
-
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="styles/bootstrap-responsive.min.css" rel="stylesheet" />
+    <link href="bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="kendo/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="kendo/styles/kendo.default.min.css" rel="stylesheet" />
+    <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />  
+    <!--<link href="kendo/styles/kendo.custom-Himalaya.css" rel="stylesheet" />-->
+    <!--<link href="styles/custom.css" rel="stylesheet" />-->
+    <link href="styles/rkcustom.css" rel="stylesheet" /> 
     <script src="cordova.js"></script>
     <script src="kendo/js/jquery.min.js"></script>
-    <script src="kendo/js/kendo.mobile.min.js"></script>
+    <script src="kendo/js/kendo.dataviz.mobile.min.js"></script>
+    <script src="scripts/kendo.all.min.js"></script>
+    <!--bower components-->
+    <script src="bower_components/everlive/src/everlive.all.js"></script>
+    <script src="bower_components/lodash/dist/lodash.min.js"></script>
+    <script src="bower_components/noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+    <script src="bower_components/noty/js/noty/layouts/bottom.js"></script>
+    <script src="bower_components/noty/js/noty/themes/metroui.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!--App and utilities scripts-->
     <script src="app.js"></script>
+    <script src="scripts/common/navigation.js"></script>
+    <script src="scripts/common/notify.js"></script>
+    <script src="scripts/common/settings.js"></script>
+    <script src="scripts/common/validate.js"></script>
+    <script src="scripts/common/constants.js"></script>
+    <script src="scripts/common/utils.js"></script>
+    <script src="scripts/rkutilities.js"></script>
+    <!--<script src="scripts/lazyload.js"></script>
+    <script src="scripts/fileHelper.js"></script>-->
+    <script src="scripts/linq.min.js"></script>
+
+    <!--data provider-->
+    <script src="dataProviders/defaultProvider.js"></script> 
+    <!--new pages scripts-->
+    <!--left-->
+    <script src="components/authenticationView/index.js"></script>
+    <!--<script src="components/indcoverageView/index.js"></script>--> 
+    <script src="components/dashboardView/index.js"></script> 
+    <script src="components/teamcoverageView/index.js"></script> 
+    <script src="components/holidaysView/index.js"></script>
+
+    <!--right-->
+    <script src="components/updateprofileView/index.js"></script>
+    <script src="components/changepasswordView/index.js"></script> 
+    <script src="components/appversionupdateView/index.js"></script> 
+
+    <!--Leave Management--> 
+    <script src="components/leavemanagementView/index.js"></script>  
+    <script src="components/applyleaveView/index.js"></script>
+    <script src="components/cancelleaveView/index.js"></script>
+    <script src="components/leavecancelapprovalView/index.js"></script>
+    <script src="components/leavehistoryView/index.js"></script>
+
+    <script src="components/approveleaveView/index.js"></script>
+    <script src="components/alcancelleaveView/index.js"></script> 
+
+    <!--DCR--> 
+    <script src="components/DCRView/index.js"></script> 
+    <!--common -->
+    <script src="components/offlineView/index.js"></script>
 </head>
+<body id="ethosapp">
 
-<body id="kendoUiMobileApp">
-    <script src="components/home/index.js"></script>
     <div data-role="layout" data-id="main">
-        <header data-role="header">
-            <div data-role="navbar">
-                <span data-role="view-title"></span>
-            </div>
-        </header>
-        <footer data-role="footer">
-            <div data-role="tabstrip" id="navigation-container">
-                <a href="components/home/view.html" data-icon="home"><span class="navigation-link-text" data-bind="text: strings.home.title"></span></a>
-            </div>
-            <div id="navigation-container-more" style="display: none">
-            </div>
-        </footer>
     </div>
-
-
-    <div id="navigation-show-more-view" data-role="view" data-title="Show More" data-layout="main">
-        <header data-role="header">
+    <div data-role="layout" data-id="mobile-tabstrip">
+    </div>
+    <!--use the data-after-show and data-before-hide attributes on your view definition-->
+    <div data-role="layout" data-id="afterlogin" data-stretch="true">
+        <div data-role="header">
             <div data-role="navbar">
-                <span data-bind="text: strings._app.showMoreTitle"></span>
+                <a data-role="button" data-rel="drawer"
+                   href="#left-drawer"
+                   data-align="left" class="drawertopicon">
+                    <i class="fa fa-1-5x fa-bars"></i>
+                </a>
+                <div data-role="view-title"></div>
+                <a data-role="button" data-rel="drawer"
+                   href="#right-drawer"
+                   data-align="right" class="drawertopicon">
+                    <i class="fa fa-1-5x fa-cog"></i>
+                </a>
+            </div>
+        </div>
+        <div id="wrapper">
+            <div id="page-wrapper" class="container-fluid" style="overflow:auto ;">
+            </div>
+        </div>
+    </div>
+    <!--data-swipe-to-open-views="['dashboard-view','coveragedetail-view','holidays-view','profile-view','changepassword-view']"-->
+     <!--data-use-native-scrolling="false"-->
+    <div data-role="drawer" id="left-drawer" data-title="left" 
+       data-swipe-to-open-views="['dashboard-view','coveragedetail-view','holidays-view','profile-view','changepassword-view']">
+        <header data-role="header">
+            <div>
+                <img src="images/H_logo.png" style="width:15em !important;"> 
             </div>
         </header>
-        <ul data-role="listview" data-style="inset" data-click="app.listViewClick">
+        <ul data-role="listview" class="nav">
+            <li style="background-color:#f4f4f4 !important; color:#ff6600 !important;">
+                Hi &nbsp; <span id="dvusername">
+                </span>
+                <input type="hidden" id="hdnLogin_ID" value="0"/> 
+                <input type="hidden" id="hdnEmployee_ID" value="0" /> 
+            </li> 
+            <li data-role="button" data-click="app.navigation.navigatedashboard">
+                <i class="fa fa-1-5x fa-bar-chart"></i> Dashboard
+            </li>  
+            <li data-role="button" data-click="app.navigation.navigateteamcoverage" id="dvteamcoverage">
+                <i class="fa fa-1-5x fa-bar-chart "></i> Team Coverage Details
+            </li>  
+            <li data-role="button" data-click="app.navigation.navigateleavemanagement">
+                <i class="fa fa-1-5x fa-list"></i> Leave Mgt. System
+            </li>  
+            <li data-role="button" data-click="app.navigation.navigatedcr">
+                <i class="fa fa-1-5x fa-list"></i> DCR 
+            </li>    
+            <li data-role="button" data-click="app.navigation.navigateholidays">
+                <i class="fa fa-1-5x fa-calendar"></i> Field Holidays
+            </li>
+        </ul>   
+    </div>
+    <div data-role="drawer" id="right-drawer" data-position="right" 
+          data-swipe-to-open-views="['dashboard-view','holidays-view','profile-view','changepassword-view']">
+         <ul data-role="listview" class="km-vertical-tabstrip nav">
+            <li data-role="button" data-click="app.navigation.navigateProfile">
+                <a data-role="button" data-click="app.navigation.navigateProfile">
+                    <i class="fa fa-2x fa-user"></i>
+                    <br />
+                    Profile
+                </a>
+            </li>
+            <li data-role="button" data-click="app.navigation.navigatechangepassword">
+                <a>
+                    <i class="fa fa-2x fa-lock"></i>
+                    <br />
+                    Change Password
+                </a>
+            </li>
+            <li data-role="button" data-click="app.navigation.navigatesignout">
+                <a>
+                    <i class="fa fa-2x fa-sign-out"></i>
+                    <br />
+                    Log Out 
+                </a>
+            </li>
         </ul>
     </div>
 
-    <div data-role="layout" data-id="main-nonav">
-        <header data-role="header">
-            <div data-role="navbar">
-                <span data-role="view-title"></span>
-            </div>
-        </header>
-        <footer data-role="footer">
-        </footer>
+    <div id ="km-loader" class="km-loader" data-role="loader" style="display: none;">
+        <span class="km-loading km-spin"></span>
+        <span class="km-loading-left"></span>
+        <span class="km-loading-right"></span>
+        <h1>Loading...</h1>
     </div>
-    <div id="notify" class="notify-pop-up">
-        <span class="notify-pop-up__content"></span>
-    </div>
-    <!--  start index html save -->
-    <!--  end index html save -->
-
-    <!-- START_CUSTOM_CODE_kendoUiMobileApp -->
-    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
-
-    <!-- END_CUSTOM_CODE_kendoUiMobileApp -->
 </body>
-
 </html>

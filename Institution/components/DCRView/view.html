@@ -1,0 +1,561 @@
+<div id="DCRView-view" data-role="view" data-title="Daily Call Reporting"
+     data-layout="afterlogin"
+     data-model="app.DCRView.DCRViewModel"
+     data-bind="events: { show: onShow }">
+    <!--<style>
+        .form-control , .dropdown-control
+        {
+        height: 42px !important;
+        padding: 6px 16px !important;
+        font-size: 18px !important;
+        }
+    </style>-->
+    <div id="dvDCRView">
+        <div class="panel panel-custom">
+            <div class="panel-body" id="dvdcr1" style="display:none">
+                <div class="row">
+                    <div class="btn btn-success col-xs-4 col-xs-offset-4"
+                         data-bind="events: {click: gotoDCR2 }">
+                        <i class="fa fa-4x fa-edit"></i>
+                        <br />
+                        <h1>
+                            D C R
+                            <br /> S T A R T
+                        </h1>
+                    </div>
+                </div>
+
+            </div>
+            <div class="panel-body padding0">
+
+                <div class="panel-body padding0" id="dvdcr2" style="display:none">
+                    <div class="padding-10"></div>
+                    <form id="form-dvdcr2">
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">Date</label>
+                            <input name="txtdate" id="txtdate" required disabled
+                                   class="form-control"
+                                   onkeyup="return textinputlength(this.value, 10, this.id);" />
+                        </div>
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">Period</label>
+                            <select name="ddlperiod" id="ddlperiod"
+                                    class="dropdown-control" required> 
+                            </select>
+                        </div>
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">Activity</label>
+                            <select name="ddlactivity" id="ddlactivity"
+                                    class="dropdown-control" required>
+                                <!--<option selected="selected" value="262">Select Activity(Select Activity)</option>
+                                <option value="235">FW(Field Work)</option>
+                                <option value="236">C&amp;F(Carry &amp; Forward Work)</option>
+                                <option value="237">SUN(Sunday)</option>
+                                <option value="238">HOL(Holiday)</option>
+                                <option value="239">INTV(Interview)</option>
+                                <option value="240">MTG(Meeting)</option>
+                                <option value="241">CYLMTG(Cycle Meeting)</option>
+                                <option value="242">CL(Casual Leave)</option>
+                                <option value="243">SL(Sick Leave)</option>
+                                <option value="244">EL(Earned Leave)</option>
+                                <option value="1131">LTA(LTA)</option>
+                                <option value="247">TRNG(Training)</option>
+                                <option value="248">CAMP(Campaign)</option>
+                                <option value="249">TRST(Transit)</option>
+                                <option value="250">DMP(Doctor Meet)</option>
+                                <option value="251">ADMN(Admin)</option>
+                                <option value="252">TXITR(Taxi Tour)</option>
+                                <option value="253">STW(Stockist Work)</option>
+                                <option value="254">AMC(Ayurvedic Medical College Camp)</option>
+                                <option value="255">SPLACT(Special Activity)</option>
+                                <option value="256">HOV(Head Office Visit)</option>
+                                <option value="257">NYJD(Not Yet Joined)</option>
+                                <option value="258">POB(Personal Order Booking)</option>-->
+                            </select>
+                        </div>
+                        <div id="dvdcrmasterdata" style="display:none ">
+                            <div class="form-group col-xs-6 col-sm-6">
+                                <label class="control-label">Category</label>
+                                <select name="ddlcategory" id="ddlcategory"
+                                        class="dropdown-control" required>
+                                    <!--<option selected="selected" value="0">---Select---</option>
+                                    <option value="865">HQ </option>
+                                    <option value="2242">Ex-HQ</option>
+                                    <option value="2242">OS</option>
+                                    <option value="2242">Ex-OS</option>-->
+                                </select>
+                            </div>
+                            <div class="form-group col-xs-6 col-sm-6">
+                                <label class="control-label">Mode</label>
+                                <select name="ddlmode" id="ddlmode"
+                                        class="dropdown-control" required>
+                                    <!--<option selected="selected" value="0">---Select---</option>
+                                    <option value="865">TW </option>
+                                    <option value="2242">BUS</option>
+                                    <option value="2242">TR</option>
+                                    <option value="2242">TAXI</option>
+                                    <option value="2242">SHARE TAXI</option>
+                                    <option value="2242">CAR</option>
+                                    <option value="2242">AIR</option>-->
+                                </select>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-12">
+                                <label class="control-label">SFC Route</label>
+                                <select name="ddlsfcroute" id="ddlsfcroute"
+                                        class="dropdown-control" required>
+                                    <!--<option value="865">Patna - Hajipur Junction</option>
+                                    <option value="865">Patna - Patna</option>-->
+                                </select>
+                            </div>
+                        </div>
+                        <div id="dvdcrmasterdata_ww" style="display:none ">
+                            <div class="form-group col-xs-12 col-sm-12">
+                                <label class="control-label">Work With</label>
+                                <select name="ddlworkwithmaster" id="ddlworkwithmaster" multiple="multiple"
+                                        data-placeholder="Select Employees..." required>
+                                    <option selected>NIKIL SHIRALI(NSM)</option>
+                                    <option>PRAVEEN JAYASWAL(DSM)</option>
+                                    <option>Nancy Davolio</option>
+                                    <option>Robert Davolio</option>
+                                    <option selected>Doss</option>
+                                    <option>RK</option>
+                                </select>
+                            </div> 
+                            <div class="form-group col-xs-12 col-sm-12">
+                                <label class="control-label">Major Town</label>
+                                <select name="ddlmajortown" id="ddlmajortown"
+                                        class="dropdown-control" required>
+                                    <option value="865">
+                                        ALLAHABAD (PRAVEEN JAYASWAL)
+                                    </option>
+                                    <option value="865">
+                                        BHOPAL (PRAVEEN JAYASWAL)
+                                    </option>
+                                    <option value="865">
+                                        CHENNAI (PRAVEEN JAYASWAL)
+                                    </option>
+                                    <option value="865">
+                                        COCHIN (PRAVEEN JAYASWAL)
+                                    </option>
+                                    <option value="865">INDORE (PRAVEEN JAYASWAL)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12">
+                            <!--<a class="btn btn-danger col-xs-6 padding-20"
+                               data-bind="events: {click: gotoDCR1 }">
+                                Home
+                            </a>-->
+                            <a class="btn btn-success col-xs-12 col-sm-12 padding-20"
+                               data-bind="events: {click: gotoDCR3 }">
+                                Next
+                            </a>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-body padding0" id="dvdcr3" style="display:none">
+                    <!--<div class="padding-10"></div>-->
+                    <h2>Institution Details</h2>
+                    <form id="form-dvdcr3">
+                        <div class="form-group col-xs-12 col-sm-12">
+                            <label class="control-label">Institution</label>
+                            <input id="txtinstitution" name="txtinstitution"
+                                   class="form-control" required>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12">
+                            <!-- grid start -->
+                            <table id="tblJobType" class="table table-striped table-bordered  dataTable">
+                                <thead>
+                                    <tr>
+                                        <th id="thlistFirst" width="10px">
+                                            <input id="grvChkSelectAll" type="checkbox" onclick="SelectAllCheckBoxes(this);" />
+                                        </th>
+                                        <th>
+                                            KDM
+                                        </th>
+                                        <th>
+                                            POB
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input id="JobTypeID" isactive="@item.Status.ToString()"
+                                                   type="checkbox" class="chkCls" name="JobTypeID"
+                                                   value="@item.JobTypeID" onclick="SelectSingleCheckBox(this);" />
+                                        </td>
+                                        <td>
+                                            DR. P. N. MISRA (DEALING CLRARK)
+                                        </td>
+                                        <td>
+                                            <input name="txtpob" id="txtpob" required
+                                                   type="number" class="form-control"
+                                                   onkeyup="return textinputlength(this.value, 10, this.id);" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input id="JobTypeID" isactive="@item.Status.ToString()"
+                                                   type="checkbox" class="chkCls" name="JobTypeID"
+                                                   value="@item.JobTypeID" onclick="SelectSingleCheckBox(this);" />
+                                        </td>
+                                        <td>
+                                            DR M K BIRTHARAY
+                                        </td>
+                                        <td>
+                                            <input name="txtpob" id="txtpob" required
+                                                   type="number" class="form-control"
+                                                   onkeyup="return textinputlength(this.value, 10, this.id);" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- grid  end -->
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12">
+                            <label class="control-label">Work With</label>
+                            <select name="ddlworkwithchild" id="ddlworkwithchild" multiple="multiple"
+                                    data-placeholder="Select Employees..." required>
+                                <option selected>NIKIL SHIRALI(NSM)</option>
+                                <option>PRAVEEN JAYASWAL(DSM)</option>
+                                <option>Nancy Davolio</option>
+                                <option>Robert Davolio</option>
+                                <option selected>Doss</option>
+                                <option>RK</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-sm-12">
+                            <label class="control-label">Products Promoted</label>
+                            <select id="ddlproductspromoted" multiple="multiple"
+                                    data-placeholder="Select Products..." required> 
+                                <option selected>ABANA TABLETS</option>
+                                <option>NONE</option>
+                                <option>OTHERS</option>
+                                <option>YASHTI-MADHU CAPSULES </option>
+                                 
+                            </select>
+                        </div>
+                        
+                        <div class="form-group col-xs-12 col-sm-12">
+                            <!--<a class="btn btn-danger col-xs-3 padding-20"
+                               data-bind="events: {click: gotoDCR1 }">
+                                Home
+                            </a>-->
+                            <a class="btn btn-success col-xs-4 padding-20"
+                               data-bind="events: {click: gotoDCR3 }">
+                                Save & New
+                            </a>
+                            <a class="btn btn-success col-xs-4 padding-20"
+                               data-bind="events: {click: gotoDCR4 }">
+                                Unlisted Insts.
+                            </a>
+                            <a class="btn btn-success col-xs-4 padding-20"
+                               data-bind="events: {click: gotoDCR5 }">
+                                Finaly Entry
+                            </a>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-body padding0" id="dvdcr4" style="display:none">
+                    <h2>Unlist Institution Details</h2>
+                    <form id="form-dvdcr4">
+                        <!--<div class="form-group col-xs-12 col-sm-12">
+                            <label class="control-label col-xs-4 col-sm-4">Unlist Institution</label>
+                            <div class="form-group input-group " role="button">
+                                <input id="txtinstitution" name="txtinstitution"
+                                       class="form-control" required>
+                                <span class="input-group-btn">
+                                    <button type="submit" data-bind="events: {click: gotoDCR2 }"
+                                            class="btn btn-default">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>-->
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">Institution</label>
+                            <input id="txtinstitution" name="txtinstitution"
+                                   class="form-control" required>
+                        </div>
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">KDM</label>
+                            <input id="txtkdm" name="txtkdm"
+                                   class="form-control" required>
+                        </div>
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">Orders Procured</label>
+                            <input name="txtordersprocured" id="txtordersprocured" required
+                                   class="form-control" type="number"
+                                   onkeyup="return textinputlength(this.value, 6, this.id);" />
+                        </div>
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">Major Town</label>
+                            <select name="ddlmajortown" id="ddlmajortown"
+                                    class="dropdown-control" required>
+                                <option value="865">
+                                    ALLAHABAD (PRAVEEN JAYASWAL)
+                                </option>
+                                <option value="865">
+                                    BHOPAL (PRAVEEN JAYASWAL)
+                                </option>
+                                <option value="865">
+                                    CHENNAI (PRAVEEN JAYASWAL)
+                                </option>
+                                <option value="865">
+                                    COCHIN (PRAVEEN JAYASWAL)
+                                </option>
+                                <option value="865">INDORE (PRAVEEN JAYASWAL)</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">State</label>
+                            <select name="ddlstate" id="ddlstate"
+                                    class="dropdown-control" required>
+                                <option value="38">ANDAMAN AND NICOBAR</option>
+                                <option value="1">ANDHRA PRADESH</option>
+                                <option value="2">ARUNACHAL PRADESH</option>
+                                <option value="3">ASSAM</option>
+                                <option selected="selected" value="4">BIHAR</option>
+                                <option value="31">CHANDIGARH</option>
+                                <option value="5">CHHATTISGARH</option>
+                                <option value="6">DELHI</option>
+                                <option value="7">GOA</option>
+                                <option value="8">GUJARAT</option>
+                                <option value="9">HARYANA</option>
+                                <option value="10">HIMACHAL PRADESH</option>
+                                <option value="11">JAMMU &amp; KASHMIR</option>
+                                <option value="12">JHARKHAND</option>
+                                <option value="13">KARNATAKA</option>
+                                <option value="14">KASHMIR</option>
+                                <option value="15">KERALA</option>
+                                <option value="16">MADHYA PRADESH</option>
+                                <option value="17">MAHARASHTRA</option>
+                                <option value="18">MANIPUR</option>
+                                <option value="19">MEGHALAYA</option>
+                                <option value="20">MIZORAM</option>
+                                <option value="35">MUMBAI</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">City</label>
+                            <select name="ddlcity" id="ddlcity"
+                                    class="dropdown-control" required>
+                                <option value="819">AMARPUR</option>
+                                <option value="2330">AMDABAD</option>
+                                <option value="68">ARARIA</option>
+                                <option value="820">ARERAJ</option>
+                                <option value="583">ARRAH</option>
+                                <option value="821">ARWAL</option>
+                                <option value="823">ASARGANJ</option>
+                                <option value="77">AURANGABAD</option>
+                                <option value="824">BAGAHA</option>
+                                <option value="578">BAGHA</option>
+                                <option value="825">BAHADURGANJ</option>
+                                <option value="826">BAIRGANIA</option>
+                                <option value="827">BAKHTIARPUR</option>
+                                <option value="828">BANKA</option>
+                                <option value="830">BANMANKHI BAZAR</option>
+                                <option value="831">BARAHIYA</option>
+                                <option value="832">BARAULI</option>
+                                <option value="2259">BARAUNI</option>
+                                <option value="833">BARBIGHA</option>
+                                <option value="834">BARH</option>
+                                <option value="58">BEGUSARAI</option>
+                                <option value="835">BEHEA</option>
+                                <option value="51">BETTIAH</option>
+                                <option value="836">BHABUA</option>
+                                <option value="67">BHAGALPUR</option>
+                                <option value="837">BHOJPUR</option>
+                                <option value="81">BIHAR SHARIF</option>
+                                <option value="838">BIKRAMGANJ</option>
+                                <option value="839">BODH GAYA</option>
+                                <option value="64">BUXAR</option>
+                                <option value="75">CHAIBASA</option>
+                                <option value="840">CHANDAN BARA</option>
+                                <option value="841">CHANPATIA</option>
+                                <option value="2253">CHAPRA</option>
+                                <option value="62">CHHAPRA</option>
+                                <option value="842">COLGONG</option>
+                                <option value="843">DALSINGHSARAI</option>
+                                <option value="572">DARBHANGA</option>
+                                <option value="584">DARBHANGA</option>
+                                <option value="844">DAUDNAGAR</option>
+                                <option value="76">DEHRI-ON-SONE</option>
+                                <option value="83">DEOGHAR</option>
+                                <option value="80">DHANBAD</option>
+                                <option value="845">DIGHWARA</option>
+                                <option value="846">DUMRAON</option>
+                                <option value="847">EAST CHAMPARAN</option>
+                                <option value="848">FATWAH</option>
+                                <option value="849">FORBESGANJ</option>
+                                <option value="78">GAYA</option>
+                                <option value="850">GOGRI JAMALPUR</option>
+                                <option value="53">GOPALGANJ</option>
+                                <option value="851">HAJIPUR</option>
+                                <option value="579">HAZIPUR</option>
+                                <option value="852">HILSA</option>
+                                <option value="853">HISUA</option>
+                                <option value="854">JAGDISPUR</option>
+                                <option value="2299">JAINAGAR</option>
+                                <option value="855">JAMALPUR</option>
+                                <option value="856">JAMUI</option>
+                                <option value="858">JEHANABAD</option>
+                                <option value="860">JHAJHA</option>
+                                <option value="861">JHANJHARPUR</option>
+                                <option value="862">JOGABANI</option>
+                                <option value="863">KAIMUR</option>
+                                <option value="864">KANTI</option>
+                                <option value="65">KATIHAR</option>
+                                <option value="60">KHAGARIA</option>
+                                <option value="865">KHARAGPUR</option>
+                                <option value="2266">KHIZERSARAI</option>
+                                <option value="866">KISHANGANJ</option>
+                                <option value="57">LAHERIASARAI</option>
+                                <option value="868">LAKHISARAI</option>
+                                <option value="871">MADHEPURA</option>
+                                <option value="580">MADHUBANI</option>
+                                <option value="874">MAHNAR BAZAR</option>
+                                <option value="875">MAKHDUMPUR</option>
+                                <option value="876">MANER</option>
+                                <option value="877">MANIHARI</option>
+                                <option value="878">MARHAURA</option>
+                                <option value="879">MASAURHI</option>
+                                <option value="880">MIRGANJ</option>
+                                <option value="881">MOHANIA</option>
+                                <option value="882">MOKAMA</option>
+                                <option value="883">MOKAMEH</option>
+                                <option value="52">MOTIHARI</option>
+                                <option value="884">MOTIPUR</option>
+                                <option value="518">MUNGER</option>
+                                <option value="885">MURLIGANJ</option>
+                                <option value="50">MUZAFFARPUR</option>
+                                <option value="886">NALANDA</option>
+                                <option value="888">NARKATIAGANJ</option>
+                                <option value="577">NARKATIYAGANJ</option>
+                                <option value="889">NAUGACHHIA</option>
+                                <option value="82">NAWADA</option>
+                                <option value="599">OTHERS</option>
+                                <option value="69">PAKUR</option>
+                                <option selected="selected" value="61">PATNA</option>
+                                <option value="891">PIRO</option>
+                                <option value="66">PURNEA</option>
+                                <option value="892">PURNIA</option>
+                                <option value="894">RAFIGANJ</option>
+                                <option value="895">RAJGIR</option>
+                                <option value="576">RAMNAGAR</option>
+                                <option value="2236">RANCHI</option>
+                                <option value="55">RAXAUL</option>
+                                <option value="896">RAXAUL BAZAR</option>
+                                <option value="897">REVELGANJ</option>
+                                <option value="898">ROHTAS</option>
+                                <option value="899">ROSERA</option>
+                                <option value="575">ROSHRA</option>
+                                <option value="56">SAHARSA</option>
+                                <option value="59">SAMASTIPUR</option>
+                                <option value="900">SARAN</option>
+                                <option value="451">SASARAM</option>
+                                <option value="901">SHEIKHPURA</option>
+                                <option value="903">SHEOHAR</option>
+                                <option value="905">SHERGHATI</option>
+                                <option value="906">SILAO</option>
+                                <option value="54">SITAMARHI</option>
+                                <option value="2305">SITAMARHI</option>
+                                <option value="63">SIWAN</option>
+                                <option value="907">SONEPUR</option>
+                                <option value="908">SUGAULI</option>
+                                <option value="909">SULTANGANJ</option>
+                                <option value="910">SUPAUL</option>
+                                <option value="573">TAZPUR</option>
+                                <option value="574">TEGRA</option>
+                                <option value="912">VAISHALI</option>
+                                <option value="913">WARISALIGANJ</option>
+                                <option value="914">WEST CHAMPARAN</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12">
+                            <label class="control-label">Address</label>
+                            <input name="txtaddress" id="txtaddress" required
+                                   class="form-control" type="text"
+                                   onkeyup="return textinputlength(this.value, 1000, this.id);" />
+                        </div>
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">Pincode</label>
+                            <input name="txtpincode" id="txtpincode" required
+                                   class="form-control" type="number"
+                                   onkeyup="return textinputlength(this.value, 6, this.id);" />
+                        </div>
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">Phone</label>
+                            <input name="txtphone" id="txtphone" required
+                                   class="form-control" type="number"
+                                   onkeyup="return textinputlength(this.value,15, this.id);" />
+                        </div>
+
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">Mobile</label>
+                            <input name="txtmobile" id="txtmobile" required
+                                   class="form-control" type="number"
+                                   onkeyup="return textinputlength(this.value, 10, this.id);" />
+                        </div>
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">Email</label>
+                            <input name="txtemail" id="txtemail" required
+                                   class="form-control" type="email"
+                                   onkeyup="return textinputlength(this.value, 100, this.id);" />
+                        </div>
+
+                        
+                        <div class="form-group col-xs-12 col-sm-12">
+                            <!--<a class="btn btn-danger col-xs-3 padding-20"
+                               data-bind="events: {click: gotoDCR1 }">
+                                Home
+                            </a>-->
+                            <a class="btn btn-success col-xs-4 padding-20"
+                               data-bind="events: {click: gotoDCR3 }">
+                                MSL Entry
+                            </a>
+                            <a class="btn btn-success col-xs-4 padding-20"
+                               data-bind="events: {click: gotoDCR4save }">
+                                Save & Unlisted
+                            </a>
+                            <a class="btn btn-success col-xs-4 padding-20"
+                               data-bind="events: {click: gotoDCR5 }">
+                                Finaly Entry
+                            </a> 
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-body padding0" id="dvdcr5" style="display:none">
+                    <h2>Deviation Details</h2>
+                    <form id="form-dvdcr5">
+                        <div class="form-group col-xs-12 col-sm-12">
+                            <label class="control-label">Deviation Reason</label>
+                            <input name="txtdeviationreason" id="txtdeviationreason" required
+                                   class="form-control" type="text"
+                                   onkeyup="return textinputlength(this.value, 1000, this.id);" />
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12">
+                            <label class="control-label">Description/ Feedback</label>
+                            <input name="txtdescription" id="txtdescription" required
+                                   class="form-control" type="text"
+                                   onkeyup="return textinputlength(this.value, 1000, this.id);" />
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12">
+                            <a class="btn btn-success col-xs-12 col-sm-12 padding-20"
+                               data-bind="events: {click: gotoDCR1 }">
+                                Submit
+                            </a>
+                            <!--<a class="btn btn-danger col-xs-6 col-sm-6 padding-20"
+                               data-bind="events: {click: gotoDCR4 }">
+                                Back
+                            </a>-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

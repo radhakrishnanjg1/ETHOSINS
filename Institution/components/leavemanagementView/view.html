@@ -1,0 +1,54 @@
+<div id="leavemanagementView-view" data-role="view" data-title="Leave Management System"
+      data-layout="afterlogin"
+     data-model="app.leavemanagementView.leavemanagementViewModel"
+     data-bind="events: { show: onShow }">
+    <div id="dvleavemanagementView">
+        <div class="panel panel-custom">
+            <!--<div class="panel-heading">
+                <span class="panel-title">
+                    <span class="fa fa-bookmark"></span> Leave Management System
+                </span>
+            </div>-->
+            <div class="panel-body">
+                <div class="btn btn-leave col-xs-3" data-role="button"
+                     data-click="app.navigation.navigateapplyleave">
+                    <i class="fa fa-2x fa-plus-circle"></i>
+                    <br />
+                    Apply Req
+                </div>
+                <div class="btn btn-leave col-xs-3" data-role="button"
+                     data-click="app.navigation.navigatecancelleave">
+                    <i class="fa fa-2x fa-minus-circle"></i>
+                    <br />
+                    Leave Cancel 
+                </div>
+                <!--<div class="btn btn-leave col-xs-3" data-role="button"
+                     data-click="app.navigation.navigateleavecancelapproval">
+                    <i class="fa fa-2x fa-calendar-minus-o "></i>
+                    <br />
+                    AL Cancel
+                </div>--> 
+                <div class="btn btn-leave col-xs-3" data-role="button"
+                     data-click="app.navigation.navigateleavehistory">
+                    <i class="fa fa-2x fa-list-alt"></i>
+                    <br />
+                    History 
+                </div>
+                <div id="dvaccess_approval">
+                    <div class="btn btn-leave1 col-xs-3" data-role="button"
+                         data-click="app.navigation.navigateapproveleave">
+                        <i class="fa fa-2x fa-recycle"></i>
+                        <br />
+                        Approval
+                    </div>
+                    <div class="btn btn-leave1 col-xs-3" data-role="button"
+                         data-click="app.navigation.navigateleavecancelapproval">
+                        <i class="fa fa-2x fa-recycle"></i>
+                        <br />
+                        AL Cancel Approve 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<div id="dashboard-view" data-role="view" data-title="Dashboard"
+     data-layout="afterlogin"
+      data-after-show="disableBackButton" data-before-hide="enableBackButton"
+      data-model="app.dashboardView.dashboardViewModel"
+     data-bind="events: { show: onShow }">
+    <footer data-role="footer">
+        <div class="text-center ">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!--<a data-role="button" data-rel="drawer"
+                       href="#left-drawer" class="faicon">
+                        <i class="fa fa-1-5x fa-list"></i>
+                    </a>-->
+                    <a data-bind="events: {click: onRefresh }">
+                        <i class="fa fa-2x fa-refresh"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div id="dvvisionsummarycoveragedetails" style="display:none;">
+        <div class="panel panel-custom">
+            <div class="panel-headingcustom">
+                <div class="panel-title text-uppercase " id="dvemployeename"> 
+                </div>
+            </div>
+            <div class="panel-body padding0">
+                <div id="chartdivisionlist-listview"></div>
+                <script type="text/x-kendo-tmpl" id="template-chartdivisionlist">
+                    <div class="text-center param">
+                        <div class="paramvalue ">
+                            #=ParameterValue #
+                        </div>
+                        <div class="paramname">
+                            #=Parameter #
+                        </div>
+                    </div>
+                </script>
+                <div id="chartbarcoveragedetails" style="height:340px"></div>
+            </div>
+            <div class="panel-footer text-center">
+                <b>All data is for last six month</b>
+            </div>
+        </div>
+    </div>
+
+</div>
