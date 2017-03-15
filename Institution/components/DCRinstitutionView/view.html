@@ -1,0 +1,77 @@
+<div id="DCRinstitutionView" data-role="view" data-title="MSL Entry"
+     data-after-show="disableBackButton" data-before-hide="enableBackButton"
+     data-layout="afterlogin"
+     data-model="app.DCRinstitutionView.DCRinstitutionViewModel"
+     data-bind="events: { show: onShow }"> 
+    <footer data-role="footer">
+        <!--<div class="col3 " data-role="button"
+             data-bind="events: {click: savedcrmsterdetails }">
+            Save & New
+        </div>
+        <div class="col3 " data-role="button"
+             data-click="app.navigation.navigateDCRunlistedinstitutionView">
+            Unlisted Insts.
+        </div>
+        <div class="col3 " data-role="button"
+             data-click="app.navigation.navigateDCRfinaentryView">
+            Finaly Entry
+        </div>-->
+        <div class="input-group">
+            <div data-role="button"
+                 data-bind="events: {click: savelisteddcrdetails }">
+                Add <i class="fa fa-university"> </i>
+            </div>
+            <!--<span>|</span>-->
+            <div data-role="button"
+                 data-click="app.navigation.navigateDCRunlistedinstitutionView">
+                Unlisted <i class="fa fa-th"> </i>  <!--Save & Unlisted Insts.-->
+            </div>
+            <!--<span >|</span>-->
+            <div data-role="button"
+                 data-click="app.navigation.navigateDCRfinaentryView">
+                Deviation <i class="fa fa-file-text" aria-hidden="true"></i><!--Finaly Entry-->
+            </div>
+        </div>
+    </footer>
+    <div id="dvDCRinstitutionView">
+        <div class="panel panel-custom padding0">
+            <div class="panel-body">
+                <div class="row">
+                    <form id="form-listeddcr"> 
+                        <div class="form-group col-xs-12 col-sm-12">
+                            <label class="control-label">Entry No.</label>
+                            <input type="text" value="1" class="form-control" 
+                                   disabled 
+                                   id="hdndcr_ins_master_id" name="hdndcr_master_id" />
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12">
+                            <label class="control-label">Institution</label>
+                            <input id="txtlistedinstitution" name="txtlistedinstitution"
+                                   class="form-control" required>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12">  
+                            <label class="control-label">KDM Details</label>
+                            <!-- grid start -->  
+                            <div id="tblkdmlist"></div>
+                            <script id="template-tblkdmlist" type="text/x-kendo-template">
+                            </script>
+                            <!-- grid  end -->
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12">
+                            <label class="control-label">Work With</label>
+                            <select name="ddlworkwithinst" id="ddlworkwithinst" multiple="multiple"
+                                    data-placeholder="Select Employees..." required></select>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-sm-12">
+                            <label class="control-label">Products Promoted</label>
+                            <select id="ddlproductspromotedinst" multiple="multiple"
+                                    data-placeholder="Select Products..." required></select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 

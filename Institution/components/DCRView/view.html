@@ -23,8 +23,7 @@
                             <br /> S T A R T
                         </h1>
                     </div>
-                </div>
-
+                </div> 
             </div>
             <div class="panel-body padding0">
 
@@ -39,7 +38,7 @@
                         </div>
                         <div class="form-group col-xs-6 col-sm-6">
                             <label class="control-label">Period</label>
-                            <select name="ddlperiod" id="ddlperiod"
+                            <select name="ddlactivityperiod" id="ddlactivityperiod"
                                     class="dropdown-control" required> 
                             </select>
                         </div>
@@ -99,7 +98,7 @@
                                     <option value="2242">AIR</option>-->
                                 </select>
                             </div>
-                            <div class="form-group col-xs-12 col-sm-12">
+                            <div class="form-group col-xs-6 col-sm-6">
                                 <label class="control-label">SFC Route</label>
                                 <select name="ddlsfcroute" id="ddlsfcroute"
                                         class="dropdown-control" required>
@@ -285,7 +284,7 @@
                                    class="form-control" required>
                         </div>
                         <div class="form-group col-xs-6 col-sm-6">
-                            <label class="control-label">Orders Procured</label>
+                            <label class="control-label">POB</label>
                             <input name="txtordersprocured" id="txtordersprocured" required
                                    class="form-control" type="number"
                                    onkeyup="return textinputlength(this.value, 6, this.id);" />
@@ -506,7 +505,31 @@
                                    class="form-control" type="email"
                                    onkeyup="return textinputlength(this.value, 100, this.id);" />
                         </div>
+                        <div id="dvdcr_unlisteddata_ww">
+                            <div class="form-group col-xs-12 col-sm-12">
+                                <label class="control-label">Work With</label>
+                                <select name="ddlworkwithunlisted" id="ddlworkwithunlisted" multiple="multiple"
+                                        data-placeholder="Select Employees..." required>
+                                    <option selected>NIKIL SHIRALI(NSM)</option>
+                                    <option>PRAVEEN JAYASWAL(DSM)</option>
+                                    <option>Nancy Davolio</option>
+                                    <option>Robert Davolio</option>
+                                    <option selected>Doss</option>
+                                    <option>RK</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-12">
+                                <label class="control-label">Products Promoted</label>
+                                <select id="ddlproductspromotedunlisted" multiple="multiple"
+                                        data-placeholder="Select Products..." required>
+                                    <option selected>ABANA TABLETS</option>
+                                    <option>NONE</option>
+                                    <option>OTHERS</option>
+                                    <option>YASHTI-MADHU CAPSULES </option>
 
+                                </select>
+                            </div>
+                        </div>
                         
                         <div class="form-group col-xs-12 col-sm-12">
                             <!--<a class="btn btn-danger col-xs-3 padding-20"
@@ -544,9 +567,17 @@
                                    onkeyup="return textinputlength(this.value, 1000, this.id);" />
                         </div>
                         <div class="form-group col-xs-12 col-sm-12">
-                            <a class="btn btn-success col-xs-12 col-sm-12 padding-20"
-                               data-bind="events: {click: gotoDCR1 }">
-                                Submit
+                            <a class="btn btn-success col-xs-4 padding-20"
+                               data-bind="events: {click: gotoDCR3 }">
+                                MSL Entry
+                            </a>
+                            <a class="btn btn-success col-xs-4 padding-20"
+                               data-bind="events: {click: gotoDCR4save }">
+                                Save & Unlisted
+                            </a>
+                            <a class="btn btn-success col-xs-4 padding-20"
+                               data-bind="events: {click: gotoDCR6 }">
+                                Preview
                             </a>
                             <!--<a class="btn btn-danger col-xs-6 col-sm-6 padding-20"
                                data-bind="events: {click: gotoDCR4 }">
@@ -554,6 +585,23 @@
                             </a>-->
                         </div>
                     </form>
+                </div>
+                <div class="panel-body padding0" id="dvdcr6" style="display:none">
+                    <h2>Preview Details</h2> 
+                         <div>
+
+                             <h1> coming soon</h1>
+                         </div>
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <a class="btn btn-danger col-xs-6 col-sm-6 padding-20"
+                               data-bind="events: {click: gotoDCR5 }">
+                                Back
+                            </a>
+                            <a class="btn btn-success col-xs-6 col-sm-6 padding-20"
+                               data-bind="events: {click: gotoDCR1 }">
+                                Submit
+                            </a>
+                        </div> 
                 </div>
             </div>
         </div>

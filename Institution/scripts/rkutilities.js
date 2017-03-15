@@ -1,4 +1,4 @@
- // user not allowing to exceeding chars
+// user not allowing to exceeding chars
 function textinputlength(val, max, id) {
     // alert(val);
     if (val.length > max) {
@@ -96,3 +96,13 @@ function SelectSingleCheckBox(obj) {
 }
 
 
+function toggleSingleCheckBox(obj) {
+    var isActiveRecord = $(obj).attr('checked');
+    if (isActiveRecord = "checked")
+    {
+        obj.removeAttr("checked");
+    } 
+    else {
+        obj.attr("checked", "checked");
+    }
+}

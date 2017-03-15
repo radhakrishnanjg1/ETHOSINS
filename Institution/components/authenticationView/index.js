@@ -4,6 +4,10 @@
 
     var view = app.authenticationView = kendo.observable({
         onShow: function (e) {
+            //$('#authentication-view .km-flat .km-content').css("background-color", "#666 !important");
+
+            //$('#authentication-view .km-flat .km-content').addClass('.signbackground');
+
             var actionvalue = e.view.params.action;
             if (actionvalue == "logout") {                
                 app.utils.loading(true);
@@ -35,33 +39,48 @@
             displayName: '',
             //username: '',
             //password: '',
-            username: 'IN-MGR-PATNA1', //rep level
-            password: 'emp2114',
+            //username: 'ZE-RM-GUWAHATI1', //rm
+            //password: 'himalaya',
+
+            //username: 'ZE-ASANSOL1', //rep
+            //password: 'ASANSOL', 
+
+            //username: 'Shirali', //top most
+            //password: 'Shirali',
 
             //username: 'IN-MGR-LUCKNOW1', //approval level
             //password: 'JAYASWAL7',
-            email: ''
+
+            username: 'IN-MGR-PATNA1', //   rep level 
+            password: 'emp2114',
+
+            //username: 'IN-MGR-DELHI1', //   rep level 
+            //password: 'CHARLIE',
+            //email: ''
         },
         loginValidator: null,
         registerValidator: null,
         signin: function (username, password) {
-            this.loginValidator = app.validate.getValidator('#login-form');
-            if (!this.loginValidator.validate()) {
-                //$(".k-invalid-msg").show();
-                return;
-            }
+            //this.loginValidator = app.validate.getValidator('#login-form');
+            //if (!this.loginValidator.validate()) {
+            //    //$(".k-invalid-msg").show();
+            //    return;
+            //}
 
             var model = vm.user;
-            if (typeof username !== 'string') {
+            if (model.username == '') {
                 username = model.username;
-
+                app.notify.error("Enter username.!");
+                return false;
             }
 
-            if (typeof password !== 'string') {
+            if (model.password == '') {
                 password = model.password;
+                app.notify.error("Enter password.!");
+                return false;
             } 
             app.utils.loading(true);
-            fun_db_APP_Verify_Field_User_Authentication(username, password, app.utils.deviceinformation('Login'));
+            fun_db_APP_Verify_Field_User_Authentication(model.username, model.password, app.utils.deviceinformation('Login'));
         },
     });
 
@@ -93,22 +112,33 @@ function fun_db_APP_Verify_Field_User_Authentication(username, password, devicei
         var data = this.data();
         if (data[0][0].Output_ID == 1) {
             //app.user = data[0][0];
-            $('#dvusername').html(data[0][0].Username)
+            $('#dvusername').html(data[0][0].Employee_Name)
             $('#hdnLogin_ID').val(data[0][0].Login_ID)
             $('#hdnEmployee_ID').val(data[0][0].Employee_ID)
-            if (data[0][0].IsManager == 0)
-            {
-                $('#dvteamcoverage').hide();
-            } 
+            localStorage.clear();
             localStorage.setItem("userdata", JSON.stringify(data[0][0])); // userdata details 
 
             localStorage.setItem("ethosmastervalues", JSON.stringify(data[1])); // ethosmastervalues details 
 
-            //localStorage.setItem("holidaydetails", JSON.stringify(data[3])); // holiday details 
-
-            //redirect dashboard page 
-            app.navigation.navigatedashboard();// navigatedcr navigateapplyleave  navigateleavemanagement navigatedashboard
-            app.utils.loading(false);
+            if (data[0][0].IsManager == 0) {
+                $('#dvindvcoverage').show();
+                $('#dvfieldlocator').hide();
+                //redirect dashboard/indiviual  page 
+                app.navigation.navigatedashboard();//  navigateDCRstartView 
+                //navigateLMSleavemanagementView  navigateLMSapplyleaveView
+                //navigatedashboard
+                app.utils.loading(false);
+            }
+            else if (data[0][0].IsManager == 1) {
+                $('#dvteamcoverage').show();
+                $('#dvfieldlocator').show();
+                //redirect dashboard/team coverage page 
+                app.navigation.navigateteamcoverage();// navigateDCRstartView 
+                //navigateLMSleavemanagementView  navigateLMSapplyleaveView navigatedashboard
+                app.utils.loading(false);
+            }
+            
+            app_db_init();
         }
         else {
             app.notify.error(data[0][0].Output_Message);

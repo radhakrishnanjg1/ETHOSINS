@@ -4,29 +4,33 @@
 (function () {
     var view = app.teamcoverageView = kendo.observable();
     var teamcoverageViewModel = kendo.observable({
-        onShow: function () { 
+        onShow: function () {
             if (!app.utils.checkinternetconnection()) {
                 return app.navigation.navigateoffline("teamcoverageView");
             }
-            app.navigation.logincheck();
-            loadsubordinatesdetails();
-            $('#txtauocmpemployeelist').val('');
+            app.navigation.logincheck(); 
+            $('#txtauocmpemployeelist').val(''); 
+            $("#txtauocmpemployeelist").kendoAutoComplete({
+                clearButton: false
+            })
+            $('#dvteamename').html('Team');
             app.utils.loading(true);
             fun_db_APP_Get_MSL_Coverage_Details_INS_Employee_Team($('#hdnEmployee_ID').val());
 
         },
         onRefresh: function () {
             app.utils.loading(true);
-            if ($('#txtauocmpemployeelist').val().length>6)
-            {
+            if ($('#txtauocmpemployeelist').val().length > 6) {
+                $('#dvteamename').html($('#txtauocmpemployeelist').val().split("|")[0]);
                 var empid = $('#txtauocmpemployeelist').val().split("|")[1];
                 fun_db_APP_Get_Current_MSL_Coverage_Details_INS_Employee_TeamByEmployeeid(empid);
             }
 
             else {
+                $('#dvteamename').html('Team'); 
                 fun_db_APP_Get_Current_MSL_Coverage_Details_INS_Employee_Team($('#hdnEmployee_ID').val());
             }
-       },
+        },
     });
 
     view.set('teamcoverageViewModel', teamcoverageViewModel);
@@ -52,7 +56,7 @@ function fun_db_APP_Get_Current_MSL_Coverage_Details_INS_Employee_Team(Employee_
         },
         error: function (e) {
             app.utils.loading(false);
-            app.notify.error('Error loading data please try again later.!'); 
+            app.notify.error('Error loading data please try again later.!');
         }
     });
 
@@ -61,8 +65,8 @@ function fun_db_APP_Get_Current_MSL_Coverage_Details_INS_Employee_Team(Employee_
         app.utils.loading(false);
         if (data[0].SNO > 0) {
             teamloadchart(1);
-            localStorage.setItem("teamcoveragedetailscurrentmonth", JSON.stringify(data)); // coverage details  
-            localStorage.setItem("teamcoveragedetailscurrentmonth_refresh", 1);
+            localStorage.setItem("ethosinsteamcoveragedetailscurrentmonth", JSON.stringify(data)); // coverage details  
+            localStorage.setItem("ethosinsteamcoveragedetailscurrentmonth_refresh", 1);
             //  teamloadcurrentmonthdata(parseInt($('#hdnchartslno').val()));
             teamloadcurrentmonthdata(1);
             app.utils.loading(false);
@@ -93,19 +97,19 @@ function fun_db_APP_Get_MSL_Coverage_Details_INS_Employee_Team(Employee_ID) {
                 return getdata;
             }
         },
-        error: function (e) { 
+        error: function (e) {
             app.utils.loading(false); // alert(e);
-            app.notify.error('Error loading data please try again later.!'); 
+            app.notify.error('Error loading data please try again later.!');
         }
     });
 
     datasource.fetch(function () {
         var data = this.data();
         if (data[0][0].SNO > 0) {
-            localStorage.setItem("teamcoveragedetails", JSON.stringify(data[0])); // coverage details 
-           // localStorage.setItem("teamcoveragedetails_live", 1);
+            localStorage.setItem("ethosinsteamcoveragedetails", JSON.stringify(data[0])); // coverage details 
+            // localStorage.setItem("teamcoveragedetails_live", 1);
 
-            localStorage.setItem("subordinatesdetails", JSON.stringify(data[1])); // coverage details 
+            localStorage.setItem("ethosinssubordinatesdetails", JSON.stringify(data[1])); // coverage details 
             $('#dvteamcoveragedetails').show();
             teamloadchart(1);
             teamloadcurrentmonthdatafa(1);
@@ -149,8 +153,8 @@ function fun_db_APP_Get_Current_MSL_Coverage_Details_INS_Employee_TeamByEmployee
         app.utils.loading(false);
         if (data[0].SNO > 0) {
             teamloadchart(1);
-            localStorage.setItem("teamcoveragedetailscurrentmonth", JSON.stringify(data)); // coverage details  
-            localStorage.setItem("teamcoveragedetailscurrentmonth_refresh", 1);
+            localStorage.setItem("ethosinsteamcoveragedetailscurrentmonth", JSON.stringify(data)); // coverage details  
+            localStorage.setItem("ethosinsteamcoveragedetailscurrentmonth_refresh", 1);
             //  teamloadcurrentmonthdata(parseInt($('#hdnchartslno').val()));
             teamloadcurrentmonthdata(1);
             app.utils.loading(false);
@@ -190,10 +194,10 @@ function fun_db_APP_Get_MSL_Coverage_Details_INS_Employee_TeamByEmployeeid(Emplo
     datasource.fetch(function () {
         var data = this.data();
         if (data[0][0].SNO > 0) {
-            localStorage.setItem("teamcoveragedetails", JSON.stringify(data[0])); // coverage details 
-           // localStorage.setItem("teamcoveragedetails_live", 1);
+            localStorage.setItem("ethosinsteamcoveragedetails", JSON.stringify(data[0])); // coverage details 
+            // localStorage.setItem("teamcoveragedetails_live", 1);
 
-            localStorage.setItem("subordinatesdetails", JSON.stringify(data[1])); // coverage details 
+           // localStorage.setItem("ethosinssubordinatesdetails", JSON.stringify(data[1])); // coverage details 
             $('#dvteamcoveragedetails').show();
             teamloadchart(1);
             teamloadcurrentmonthdatafa(1);
@@ -210,7 +214,7 @@ function fun_db_APP_Get_MSL_Coverage_Details_INS_Employee_TeamByEmployeeid(Emplo
 
 
 function teamloadchart(filterid) {
-    var localdata = JSON.parse(localStorage.getItem("teamcoveragedetails"));
+    var localdata = JSON.parse(localStorage.getItem("ethosinsteamcoveragedetails"));
     var objdate = new Date(),
     locale = "en-us",
     currentmonname = objdate.toLocaleString(locale, { month: "short" });
@@ -221,7 +225,7 @@ function teamloadchart(filterid) {
     var chartcurrentdatafa = JSON.parse(Enumerable.From(localdata)
        .Where("$.SNO==" + filterid + " && $.DataMonth == '" + currentmonname + "'")
        .ToJSON());
-    localStorage.setItem("teamcoveragedetailscurrentmonthfa", JSON.stringify(chartcurrentdatafa));
+    localStorage.setItem("ethosinsteamcoveragedetails_live_currentmonth", JSON.stringify(chartcurrentdatafa));
     teamloadcurrentmonthdatafa(filterid);
 
     $("#spanchartdivisionname").html(chartdata[0].Division_Name);
@@ -265,7 +269,7 @@ function teamloadchart(filterid) {
         tooltip: {
             visible: true
         },
-    }); 
+    });
 }
 
 function teamloadcurrentmonthdatafa(filterid) {
@@ -273,7 +277,7 @@ function teamloadcurrentmonthdatafa(filterid) {
     locale = "en-us",
     currentmonname = objdate.toLocaleString(locale, { month: "short" });
 
-    var localdata = JSON.parse(localStorage.getItem("teamcoveragedetailscurrentmonthfa"));
+    var localdata = JSON.parse(localStorage.getItem("ethosinsteamcoveragedetails_live_currentmonth"));
 
     var currentmonthdata = JSON.parse(Enumerable.From(localdata)
        .Where("$.SNO==" + filterid + " && $.DataMonth == '" + currentmonname + "'")
@@ -304,7 +308,7 @@ function teamloadcurrentmonthdata(filterid) {
     locale = "en-us",
     currentmonname = objdate.toLocaleString(locale, { month: "short" });
 
-    var localdata = JSON.parse(localStorage.getItem("teamcoveragedetailscurrentmonth"));
+    var localdata = JSON.parse(localStorage.getItem("ethosinsteamcoveragedetailscurrentmonth"));
     var currentmonthdata = JSON.parse(Enumerable.From(localdata)
        .Where("$.SNO==" + filterid + " && $.DataMonth == '" + currentmonname + "'")
        .ToJSON());
@@ -332,16 +336,16 @@ function teamloadcurrentmonthdata(filterid) {
 
 }
 
-function loadsubordinatesdetails() {
-    var localdata = JSON.parse(localStorage.getItem("subordinatesdetails"));
+function loadsubordinatesdetails() { 
+    var localdata = JSON.parse(localStorage.getItem("ethosinssubordinatesdetails"));
     //create AutoComplete UI component
     $("#txtauocmpemployeelist").kendoAutoComplete({
-        dataSource: localdata, 
-        dataTextField: "Employee_Name", 
+        dataSource: localdata,
+        dataTextField: "Employee_Name",
         valuePrimitive: true,
         ignoreCase: true,
         minLength: 3,
-        filter: "startswith",
+        filter: "contains",
         placeholder: "Select Employee...",
         clearButton: false,
         //separator: ", "
@@ -349,14 +353,23 @@ function loadsubordinatesdetails() {
         change: function (e) {
             var value = this.value();
             if (value.length > 6) {
+                var ethosmastervaluesdata = JSON.parse(localStorage.getItem("ethosinssubordinatesdetails"));
+                var ethosmastervaluesrecords = JSON.parse(Enumerable.From(ethosmastervaluesdata)
+               .Where("$.Employee_Name=='" + value + "'")
+               .ToJSON());
+                if (ethosmastervaluesrecords.length == 0) {
+                    app.notify.error("Select valid employee name in list.!");
+                    return false;
+                }
                 var empid = value.split("|")[1];
+                $('#dvteamename').html(value.split("|")[0]);
                 app.utils.loading(true);
                 fun_db_APP_Get_MSL_Coverage_Details_INS_Employee_TeamByEmployeeid(empid);
             }
             // Use the value of the widget
         }
-    }); 
+    });
 }
 
- 
+
 

@@ -1,5 +1,6 @@
-<div id="coveragedetail-view" data-role="view" data-title="Team Coverage Details"
+<div id="teamcoveragedetail-view" data-role="view" data-title="Team Coverage Details"
      data-layout="afterlogin"
+     data-after-show="disableBackButton" data-before-hide="enableBackButton"
      data-model="app.teamcoverageView.teamcoverageViewModel"
      data-bind="events: { show: onShow }">
     <footer data-role="footer">
@@ -17,8 +18,7 @@
             </div>
         </div>
     </footer>
-    <div id="dvteamcoveragedetails" style="display:none;" 
-         >
+    <div id="dvteamcoveragedetails" style="display:none;">
         <div class="panel panel-default">
             <!--<div class="panel-heading">
                 <div class="row">
@@ -34,14 +34,20 @@
                     </div>
                 </div>
             </div>-->
-            <div class="panel-heading text-center" style="background-color:#fff!important ">
+            <div class="panel-heading text-center"
+                 style="background-color:#fff!important ">
                 <div class="row">
                     <div class="col-xs-12">
-                        <input id="txtauocmpemployeelist" class="form-control"> 
+                        <input id="txtauocmpemployeelist" class="form-control">
                     </div>
                 </div>
             </div>
-            <div class="panel-body" style="padding-top:0">
+            <div class="panel-headingcustom">
+                <div class="panel-title text-uppercase " id="dvteamename">
+                    Team
+                </div>
+            </div>
+            <div class="panel-body">
                 <div id="chartteamlist-listview"></div>
                 <script type="text/x-kendo-tmpl" id="template-chartteamlist">
                     <div class="text-center param">

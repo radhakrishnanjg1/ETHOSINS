@@ -1,0 +1,54 @@
+<div id="DCRfinaentryView" data-role="view" data-title="Deviation Details"
+     data-after-show="disableBackButton" data-before-hide="enableBackButton"
+     data-layout="afterlogin"
+     data-model="app.DCRfinaentryView.DCRfinaentryViewModel"
+     data-bind="events: { show: onShow }">
+    <!--style="border: 1px solid #fff !important;"-->
+    <footer data-role="footer">
+        <!--<div class="btn btn-info"
+             data-role="button"
+             data-click="app.navigation.navigateDCRinstitutionView">
+            MSL Entry
+        </div>
+        <div class="btn btn-info" data-role="button"
+             data-click="app.navigation.navigateDCRunlistedinstitutionView">
+            Unlisted
+        </div>-->
+        <div class="cols1 btnborder btn-block"
+             data-role="button" data-bind="events: {click: savefinalentrydetails }">
+            Preview
+        </div>
+    </footer>
+    <div id="dvDCRfinaentryView">
+        <div class="panel panel-custom padding0">
+            <div class="panel-body">
+                <div class="row">
+                    <form id="form-finalentry">
+                        <div class="form-group col-xs-12 col-sm-12">
+                            <label class="control-label">Deviation Reason</label>
+                            <input name="txtdeviationreason" id="txtdeviationreason"
+                                   required
+                                   class="form-control" type="text" />
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12">
+                            <label class="control-label">Description/ Feedback</label>
+                            <input name="txtdescription" id="txtdescription"
+                                   required
+                                   class="form-control" type="text" />
+                        </div>
+                        <!--<div class="form-group col-xs-12 col-sm-12">
+                            <div class="col-xs-12">
+                                Tour Plan details
+                                <div id="dvtourplandetails"></div>
+                            </div>
+                            <div class="col-xs-12">
+                                DCR details
+                                <div id="dvdcrdetails"></div>
+                            </div>
+                        </div>-->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

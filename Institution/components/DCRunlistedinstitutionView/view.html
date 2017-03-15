@@ -1,0 +1,125 @@
+<div id="DCRunlistedinstitutionView" data-role="view" data-title="Unlist Institution Details"
+     data-after-show="disableBackButton" data-before-hide="enableBackButton"
+     data-layout="afterlogin"
+     data-model="app.DCRunlistedinstitutionView.DCRunlistedinstitutionViewModel"
+     data-bind="events: { show: onShow }">
+    <footer data-role="footer"> 
+            <!--<div class="btn btn-info" data-role="button"
+                 data-click="app.navigation.navigateDCRinstitutionView">
+                MSL Entry
+            </div>
+            <div  class="btn btn-info"  data-role="button"
+                 data-click="app.navigation.navigateDCRunlistedinstitutionView">
+                Save & Unlisted Insts.
+            </div>
+            <div class="btn btn-info"   data-role="button"
+                 data-click="app.navigation.navigateDCRfinaentryView">
+                Finaly Entry
+            </div>--> 
+        <div class="input-group"> 
+            <div  data-role="button"
+                 data-click="app.navigation.navigateDCRinstitutionView">
+                MSL<!--MSL Entry-->
+            </div>
+            <div data-role="button" 
+                 data-bind="events: {click: saveunlistedscrdetails }">
+                Unlisted <!--Save & Unlisted Insts.-->
+            </div>
+            <div   data-role="button"
+                 data-click="app.navigation.navigateDCRfinaentryView">
+                Finaly Entry<!--Finaly Entry-->
+            </div>
+        </div>
+    </footer>
+    <div id="dvDCRunlistedinstitutionView">
+        <div class="panel panel-custom padding0">
+            <div class="panel-body">
+                <div class="row">
+                    <form id="form-unlistedscr">
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">Entry No.</label>
+                            <input type="text" value="1" class="form-control"
+                                   disabled 
+                                   id="hdndcr_unlisted_ins_master_id" name="hdndcr_unlisted_ins_master_id" />
+                        </div>
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">Institution</label>
+                            <input id="txtinstitution" name="txtinstitution"
+                                   class="form-control" required>
+                        </div>
+                        <!--<div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">KDM</label>
+                            <input id="txtkdm" name="txtkdm"
+                                   class="form-control" required>
+                        </div>-->
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">POB</label>
+                            <input name="txtpobsingle" id="txtpobsingle" required
+                                   class="form-control" type="number"
+                                   onkeyup="return textinputlength(this.value, 6, this.id);" />
+                        </div>
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">Major Town</label>
+                            <select name="ddlmajortownunlisted" id="ddlmajortownunlisted"
+                                    class="dropdown-control" required></select>
+                        </div>
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">State</label>
+                            <select name="ddlstate" id="ddlstate"
+                                    class="dropdown-control" required> 
+                            </select>
+                        </div>
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">City</label>
+                            <select name="ddlcity" id="ddlcity"
+                                    class="dropdown-control" required></select>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12">
+                            <label class="control-label">Address</label>
+                            <input name="txtaddress" id="txtaddress"  
+                                   class="form-control" type="text"
+                                   onkeyup="return textinputlength(this.value, 1000, this.id);" />
+                        </div>
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">Pincode</label>
+                            <input name="txtpincode" id="txtpincode"  
+                                   class="form-control" type="number"
+                                   onkeyup="return textinputlength(this.value, 6, this.id);" />
+                        </div>
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">Phone</label>
+                            <input name="txtphone" id="txtphone"  
+                                   class="form-control" type="number"
+                                   onkeyup="return textinputlength(this.value,15, this.id);" />
+                        </div>
+
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">Mobile</label>
+                            <input name="txtmobile" id="txtmobile"  
+                                   class="form-control" type="number"
+                                   onkeyup="return textinputlength(this.value, 10, this.id);" />
+                        </div>
+                        <div class="form-group col-xs-6 col-sm-6">
+                            <label class="control-label">Email</label>
+                            <input name="txtemail" id="txtemail"  
+                                   class="form-control" type="email"
+                                   onkeyup="return textinputlength(this.value, 100, this.id);" />
+                        </div>
+                        <div id="dvdcr_unlisteddata_ww">
+                            <div class="form-group col-xs-12 col-sm-12">
+                                <label class="control-label">Work With</label>
+                                <select name="ddlworkwithunlisted" id="ddlworkwithunlisted" multiple="multiple"
+                                        data-placeholder="Select Employees..." required></select>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-12">
+                                <label class="control-label">Products Promoted</label>
+                                <select id="ddlproductspromotedunlisted" multiple="multiple"
+                                        data-placeholder="Select Products..."></select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
