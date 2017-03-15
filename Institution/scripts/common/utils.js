@@ -13,7 +13,7 @@ var keyboardOpen = function () {
     cordova.plugins.Keyboard.show();
 };
 var keyboardClose = function () {
-    cordova.plugins.Keyboard.close();
+    cordova.plugins.Keyboard.close(); 
 }; 
 (function () {
     app.utils = app.utils || {};
