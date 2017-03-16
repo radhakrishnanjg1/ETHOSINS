@@ -32,7 +32,8 @@
 
         },
         showMap: function () {
-            if (!this.checkSimulator()) {
+            //if (!this.checkSimulator()) {
+                alert('a');
                 Mapbox.show(
                   {
                       style: 'emerald', // light|dark|emerald|satellite|hybrid|streets , default 'streets'
@@ -73,7 +74,8 @@
                   },
                   this.onError
             )
-            }
+              alert('b');
+           // }
         },
 
         hideMap: function () {

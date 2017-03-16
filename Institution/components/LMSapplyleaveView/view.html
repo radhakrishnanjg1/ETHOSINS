@@ -59,7 +59,7 @@
                             </div>
                             <div class="form-group col-xs-6 col-sm-6">
                                 <label class="control-label">From</label>
-                                <input name="txtfrom" id="txtfrom"   onfocus="keyboarddisableScroll()"
+                                <input name="txtfrom" id="txtfrom"   onfocus="keyboardClose2();"
                                        onchange="fun_applyleave_txttochange()"
                                      onkeydown="return false;"  onkeyup="return textinputlength(this.value, 10, this.id);" />
                             </div>
@@ -68,9 +68,9 @@
                                 <label class="control-label">To</label>
                                 <input name="txtto" id="txtto" 
                                        data-greaterdate-field="txtfrom"
-                                       onfocus="keyboardClose()" 
+                                         
                                        onchange="fun_applyleave_txttochange()"
-                                     onkeydown="return false;"  onkeyup="return textinputlength(this.value, 10, this.id);" />
+                                     onkeydown="return false;"  onkeyup="return textinputlength(this.value, 10, this.id);"  />
                                 </div>
                             <!--onfocus="keyboardClose()"-->
                             <div class="form-group col-xs-6 col-sm-6">
@@ -100,7 +100,8 @@
                         <a class="btn btn-success"
                            data-bind="events: {click: fun_applyleavesaveleavedetails }">
                             Save
-                        </a>
+                        </a> 
+                        
                         <a class="btn btn-primary" data-role="button"
                            data-click="app.navigation.navigateLMSleavemanagementView">
                             Back

@@ -16,7 +16,7 @@
         },
 
         showData: function () {
-        },
+        }, 
         fun_applyleavesaveleavedetails: function () { 
             if (fun_applyleave_validation()) {
                 var leavetype = parseInt($("#ddlleavetype").val());
@@ -40,6 +40,7 @@
     view.set('LMSapplyleaveViewModel', LMSapplyleaveViewModel);
 }());
 
+ 
 function fun_applyleave_pageload() {
     $("#txtfrom").kendoDatePicker({
         format: app.constants.dateFormat,//app.constants.dateFormat, 

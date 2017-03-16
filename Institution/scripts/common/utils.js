@@ -12,10 +12,11 @@ var enableBackButton = function ()
 var keyboardOpen = function () {
     //cordova.plugins.Keyboard.show();
 };
-var keyboardClose = function () {
-    alert(1);
-   cordova.plugins.Keyboard.close();
-    alert(11);
+var keyboardClose2 = function () {
+   setTimeout(function() {
+    	            cordova.plugins.Keyboard.close();                    
+                }, 310);
+            alert(11);
 }; 
 var keyboarddisableScroll = function () {
   
