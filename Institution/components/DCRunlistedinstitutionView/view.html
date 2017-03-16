@@ -3,31 +3,19 @@
      data-layout="afterlogin"
      data-model="app.DCRunlistedinstitutionView.DCRunlistedinstitutionViewModel"
      data-bind="events: { show: onShow }">
-    <footer data-role="footer"> 
-            <!--<div class="btn btn-info" data-role="button"
-                 data-click="app.navigation.navigateDCRinstitutionView">
-                MSL Entry
-            </div>
-            <div  class="btn btn-info"  data-role="button"
-                 data-click="app.navigation.navigateDCRunlistedinstitutionView">
-                Save & Unlisted Insts.
-            </div>
-            <div class="btn btn-info"   data-role="button"
-                 data-click="app.navigation.navigateDCRfinaentryView">
-                Finaly Entry
-            </div>--> 
+    <footer data-role="footer">  
         <div class="input-group"> 
             <div  data-role="button"
                  data-click="app.navigation.navigateDCRinstitutionView">
-                MSL<!--MSL Entry-->
+                <i class="fa fa-university"> </i>MSL <!--MSL Entry-->
             </div>
             <div data-role="button" 
                  data-bind="events: {click: saveunlistedscrdetails }">
-                Unlisted <!--Save & Unlisted Insts.-->
+                <i class="fa fa-th"> </i>Unlisted  <!--Save & Unlisted Insts.-->
             </div>
             <div   data-role="button"
                  data-click="app.navigation.navigateDCRfinaentryView">
-                Finaly Entry<!--Finaly Entry-->
+                <i class="fa fa-file-text"></i>  Finaly Entry  <!--Finaly Entry-->
             </div>
         </div>
     </footer>

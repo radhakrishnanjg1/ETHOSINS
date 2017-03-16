@@ -84,7 +84,7 @@
                 }
                 else if (ddlactivity == 236 || ddlactivity == 239
                || ddlactivity == 240 || ddlactivity == 241
-                || ddlactivity == 1131
+                || ddlactivity == 247
                || ddlactivity == 248 || ddlactivity == 249
                || ddlactivity == 250 || ddlactivity == 251
                || ddlactivity == 252 || ddlactivity == 253
@@ -395,7 +395,7 @@ function fun_dcr_load_activity() {
             } 
             else if (activity == 236 || activity == 239
                 || activity == 240 || activity == 241
-                 || activity == 1131
+                 || activity == 247
                 || activity == 248 || activity == 249
                 || activity == 250 || activity == 251
                 || activity == 252 || activity == 253

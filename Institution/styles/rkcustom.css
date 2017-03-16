@@ -231,11 +231,24 @@ mark, .mark {
     border: 0 !important;
     /*background-color:transparent !important ;*/
     background: rgba(0,0,0,0);
-}
-
+} 
 .km-flat .km-loader:before {
     border-radius: 50% !important;
-    background-color: #ff6600 !important;
+    background-color: #00C8B7 !important;
+}
+.km-flat .km-loader:after {
+    content: "Please wait...";
+    display: block;
+    position: absolute;
+    margin-top: -2em;
+    margin-left: -2em;
+    width: 8em;
+    height: 4em;
+    top: 63%;
+    left: 47%; 
+    color:#00C8B7 !important;
+    font-size:larger !important;
+    font-weight:800 !important;
 }
 
 .km-group-title {
@@ -671,3 +684,24 @@ footer {
     padding:6px 0px 4px 0px !important;
     height:34px !important;
 }
+
+/*.k-dropdown-wrap .k-state-default
+{
+    background-color: #000 !important;
+}
+.k-dropdown-wrap .k-state-hover
+{
+    background-color: #00C8B7 !important;
+}
+.k-dropdown-wrap .k-state-selected
+{
+    background-color: #00C8B7 !important;
+}
+.k-item .k-state-selected .k-state-focused
+{
+    background-color: #00C8B7 !important;
+}*/
+/*.k-state-selected 
+{
+     background-color: #00C8B7 !important;
+}*/

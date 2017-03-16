@@ -59,7 +59,7 @@
                             </div>
                             <div class="form-group col-xs-6 col-sm-6">
                                 <label class="control-label">From</label>
-                                <input name="txtfrom" id="txtfrom"   
+                                <input name="txtfrom" id="txtfrom"   onfocus="keyboarddisableScroll()"
                                        onchange="fun_applyleave_txttochange()"
                                      onkeydown="return false;"  onkeyup="return textinputlength(this.value, 10, this.id);" />
                             </div>
@@ -84,13 +84,13 @@
                                 <label class="control-label">Reason</label>
                                 <input id="txtreason" name="txtreason" type="text" class="form-control"
                                        value="reason"  
-                                         />
+                                       onkeyup="return textinputlength(this.value, 1000, this.id);"  />
                             </div>
                             <div class="form-group col-xs-12 col-sm-12" id="dvaddress" style="display:none">
                                 <label class="control-label">Address</label>
                                 <input id="txtaddress" name="txtaddress" type="text" class="form-control"
                                        value="address"  
-                                         />
+                                       onkeyup="return textinputlength(this.value, 1000, this.id);" />
                             </div>
                         </div>
                     </div>
@@ -223,7 +223,7 @@
                         joining. An employee has to complete 1 year of continuous service and has to work
                         for a minimum period of 240 days during each year.<br />
                         2. The first LTA would be for a block of 2 years, commencing from the date of joining.
-                        For example, if an MR’s date of joining is Oct 01, 2014, then he/she is eligible
+                        For example, if an MRï¿½s date of joining is Oct 01, 2014, then he/she is eligible
                         for 1st LTA between October 01, 2014 to September 30, 2016, subject to completion
                         of 1 year of continuous service and should have work for a minimum of 240 days.
                         The next LTA will be for the block of 2 years commencing from Oct 1, 2016 to Sep.

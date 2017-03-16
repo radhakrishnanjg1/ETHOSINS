@@ -546,6 +546,8 @@
     <Content Include="components\DCRmasterView\view.html" />
     <Content Include="components\DCRpreviewView\index.js" />
     <Content Include="components\DCRpreviewView\view.html" />
+    <Content Include="components\DCRscheduleView\index.js" />
+    <Content Include="components\DCRscheduleView\view.html" />
     <Content Include="components\DCRstartView\index - Copy.js" />
     <Content Include="components\DCRstartView\index.js" />
     <Content Include="components\DCRstartView\view.html" />
@@ -644,7 +646,6 @@
     <Content Include="kendo\styles\kendo.default.min.css" />
     <Content Include="kendo\styles\kendo.mobile.all.min.css" />
     <Content Include="scripts\common\constants.js" />
-    <Content Include="scripts\common\geolocation.js" />
     <Content Include="scripts\common\navigation.js" />
     <Content Include="scripts\common\notify.js" />
     <Content Include="scripts\common\settings.js" />
@@ -851,6 +852,7 @@
     <Folder Include="components\DCRfinaentryView\" />
     <Folder Include="components\DCRpreviewView\" />
     <Folder Include="components\fieldlocatorView\" />
+    <Folder Include="components\DCRscheduleView\" />
     <Folder Include="components\teamcoverageView\" />
     <Folder Include="components\offlineView\" />
     <Folder Include="components\updateprofileView\" />

@@ -332,7 +332,7 @@
         sfcroute_place, deviation_reason, deviation_description  ,latitude,longitude
         ) {
         app.db.transaction(function (tx) {
-            var addedon = new Date();
+            var addedon = todateddmmyyyhhmmss_hyphen(new Date());
             tx.executeSql("insert into dcr_master(employee_id,sub_territory_id,dcr_date, activity_peroid_id, activity_peroid_name, activity_id, activity_name," +
                 "category_id, category_name, mode_id, mode_name, sfcroute_id,"+
                 "sfcroute_place, deviation_reason, deviation_description ,latitude,longitude,added_on) "
@@ -373,7 +373,7 @@
     //  4 insert dcr instutition master informaton
     app.addto_dcr_ins_master = function (dcr_master_id, instutition_id, instutition_name, latitude, longitude) {
         app.db.transaction(function (tx) {
-            var addedon = new Date();
+            var addedon = todateddmmyyyhhmmss_hyphen(new Date()); 
             tx.executeSql("insert into dcr_ins_master(dcr_master_id,instutition_id,instutition_name,latitude,longitude,added_on) "
                 + " values (?,?,?,?,?,?)",
                           [dcr_master_id, instutition_id,instutition_name,latitude,longitude, addedon],
@@ -424,7 +424,7 @@
         city_name, address, pincode, phone, mobile, email,
         latitude, longitude) {
         app.db.transaction(function (tx) {
-            var addedon = new Date();
+            var addedon = todateddmmyyyhhmmss_hyphen(new Date()); 
             tx.executeSql("insert into dcr_unlisted_ins_master(dcr_master_id, instutition_name, kdm_name, pob," +
                 "mj_id, mj_name, state_id, state_name, city_id," +
                 "city_name, address,pincode,phone,mobile,email,"+
@@ -507,7 +507,7 @@
     // 4 select dcr instutition   
     app.select_dcr_ins_master = function (fn) {
         app.db.transaction(function (tx) {
-            tx.executeSql("SELECT dcr_ins_master_id, instutition_name FROM dcr_ins_master ", [], fn, app.onError);
+            tx.executeSql("SELECT dcr_ins_master_id,instutition_id, instutition_name,added_on FROM dcr_ins_master ", [], fn, app.onError);
         });
     };
     app.select_dcr_ins_master_bydcr_master_id = function (fn, dcr_master_id) {

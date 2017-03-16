@@ -3,33 +3,19 @@
      data-layout="afterlogin"
      data-model="app.DCRinstitutionView.DCRinstitutionViewModel"
      data-bind="events: { show: onShow }"> 
-    <footer data-role="footer">
-        <!--<div class="col3 " data-role="button"
-             data-bind="events: {click: savedcrmsterdetails }">
-            Save & New
-        </div>
-        <div class="col3 " data-role="button"
-             data-click="app.navigation.navigateDCRunlistedinstitutionView">
-            Unlisted Insts.
-        </div>
-        <div class="col3 " data-role="button"
-             data-click="app.navigation.navigateDCRfinaentryView">
-            Finaly Entry
-        </div>-->
+    <footer data-role="footer"> 
         <div class="input-group">
             <div data-role="button"
                  data-bind="events: {click: savelisteddcrdetails }">
-                Add <i class="fa fa-university"> </i>
-            </div>
-            <!--<span>|</span>-->
+                <i class="fa fa-university"> </i> Add 
+            </div> 
             <div data-role="button"
                  data-click="app.navigation.navigateDCRunlistedinstitutionView">
-                Unlisted <i class="fa fa-th"> </i>  <!--Save & Unlisted Insts.-->
-            </div>
-            <!--<span >|</span>-->
+                <i class="fa fa-th"> </i>  Unlisted  
+            </div> 
             <div data-role="button"
                  data-click="app.navigation.navigateDCRfinaentryView">
-                Deviation <i class="fa fa-file-text" aria-hidden="true"></i><!--Finaly Entry-->
+                <i class="fa fa-file-text"></i>  Deviation 
             </div>
         </div>
     </footer>

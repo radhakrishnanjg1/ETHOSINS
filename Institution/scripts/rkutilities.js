@@ -4,9 +4,9 @@ function textinputlength(val, max, id) {
     if (val.length > max) {
         $("#" + id).val(val.substring(0, max));
     }
-    else {
-        $("#" + id).val(val);
-    }
+    //else {
+    //    $("#" + id).val(val);
+    //}
 }
 
 function todateddmmyyy(dateObject) {
@@ -39,6 +39,33 @@ function todateddmmyyy_hyphen(dateObject) {
 
     return date;
 }
+
+function todateddmmyyyhhmmss_hyphen(dateObject) {
+    var d = new Date(dateObject);
+    var year = d.getFullYear(); 
+    var month = d.getMonth() + 1;
+    var day = d.getDate(); 
+    var hh = (d.getHours());
+    var mm = (d.getMinutes());
+    var ss = (d.getSeconds());
+    if (month < 10) {
+        month = "0" + month;
+    }
+    if (day < 10) {
+        day = "0" + day;
+    }
+    if (hh < 10) {
+        hh = "0" + hh;
+    }
+    if (mm < 10) {
+        mm = "0" + mm;
+    }
+    if (ss < 10) {
+        ss = "0" + ss;
+    } 
+    var date = day + "-" + month + "-" + year + " " + hh + ":" + mm + ":" + ss;
+    return date;
+} 
 //$(function () {
 //    $("input:text.datepicker").kendoDatePicker({
 //        format: 'dd-MM-yyyy'

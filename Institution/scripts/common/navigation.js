@@ -10,10 +10,10 @@
         back: function () {
             app.mobileApp.navigate('#:back');
             app.utils.loading(false);
-        }, 
+        },
         navigateNoAppId: function () {
             return app.mobileApp.navigate('components/missingSettingsView/noappidView.html');
-        }, 
+        },
 
         //common page for offline
         navigateoffline: function (redirect) {
@@ -23,10 +23,10 @@
         //right side menu 
         navigatedashboard: function () {
             return app.mobileApp.navigate('components/dashboardView/view.html');
-        },  
+        },
         navigateteamcoverage: function () {
             return app.mobileApp.navigate('components/teamcoverageView/view.html');
-        }, 
+        },
         navigateholidays: function () {
             return app.mobileApp.navigate('components/holidaysView/view.html');
         },
@@ -44,26 +44,26 @@
                 if (!confirm) {
                     return;
                 }
-                return app.mobileApp.navigate('components/authenticationView/view.html?action=logout'); 
+                return app.mobileApp.navigate('components/authenticationView/view.html?action=logout');
             })
         },
 
         //LMS
         navigateLMSleavemanagementView: function () {
             return app.mobileApp.navigate('components/LMSleavemanagementView/view.html');
-        }, 
+        },
         navigateLMSapplyleaveView: function () {
             return app.mobileApp.navigate('components/LMSapplyleaveView/view.html');
         },
         navigateLMScancelleaveView: function () {
             return app.mobileApp.navigate('components/LMScancelleaveView/view.html');
-        }, 
+        },
         navigateLMSleavehistoryView: function () {
             return app.mobileApp.navigate('components/LMSleavehistoryView/view.html');
-        }, 
+        },
         navigateLMSapproveleaveView: function () {
             return app.mobileApp.navigate('components/LMSapproveleaveView/view.html');
-        },  
+        },
         navigateLMSapproveleavecancelView: function () {
             return app.mobileApp.navigate('components/LMSapproveleavecancelView/view.html');
         },
@@ -86,7 +86,12 @@
         },
         navigateDCRpreviewView: function () {
             return app.mobileApp.navigate('components/DCRpreviewView/view.html');
+        }, 
+
+        navigateDCRscheduleView: function () {
+            return app.mobileApp.navigate('components/DCRscheduleView/view.html');
         },
+
 
         //navigatefieldlocatorView 
         navigatefieldlocatorView: function () {
@@ -94,6 +99,6 @@
         },
         navigateAuthentication: function () {
             return app.mobileApp.navigate('components/authenticationView/view.html');
-        },  
+        },
     };
 }());

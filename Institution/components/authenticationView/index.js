@@ -48,11 +48,11 @@
             //username: 'Shirali', //top most
             //password: 'Shirali',
 
-            //username: 'IN-MGR-LUCKNOW1', //approval level
-            //password: 'JAYASWAL7',
+            username: 'IN-MGR-LUCKNOW1', //approval level
+            password: 'JAYASWAL7',
 
-            username: 'IN-MGR-PATNA1', //   rep level 
-            password: 'emp2114',
+            //username: 'IN-MGR-PATNA1', //   rep level 
+            //password: 'emp2114',
 
             //username: 'IN-MGR-DELHI1', //   rep level 
             //password: 'CHARLIE',

@@ -10,33 +10,19 @@ var enableBackButton = function ()
 };
 //detect the keyboard opening and closing:
 var keyboardOpen = function () {
-    cordova.plugins.Keyboard.show();
+    //cordova.plugins.Keyboard.show();
 };
 var keyboardClose = function () {
-    cordova.plugins.Keyboard.close(); 
+   // cordova.plugins.keyboard.close(); 
 }; 
+var keyboarddisableScroll = function () {
+  alert(1);
+  cordova.plugins.Keyboard.disableScroll(true);
+  alert(11);
+}; 
+
 (function () {
-    app.utils = app.utils || {};
-
-    //Get a device infor with actin
-    app.utils.geoinformation = function () {
-        var options = {
-            enableHighAccuracy: true,
-            timeout: 10000
-        };
-        var geoinfo = "";
-        var geolo = navigator.geolocation.getCurrentPosition(function () {
-            //alert(JSON.stringify(arguments));
-            geoinfo += "latitude:" + JSON.stringify(arguments[0].coords.latitude) + "|";
-
-                // + "longitude:" + JSON.stringify(arguments[0].coords.longitude);
-        }, function () {
-            geoinfo += "latitude:" + 0 + "|"
-                 + "longitude:" + 0;
-        }, options);
-        return geoinfo;
-    };
-
+    app.utils = app.utils || {}; 
     //Get a device infor with actin
     app.utils.deviceinformation = function (action) {
         var deviceinformation = "App:Institution|action:"+action+"|" +
@@ -76,8 +62,7 @@ var keyboardClose = function () {
     app.utils.loading = function (load) {
         if (load) {
             return kendo.mobile.application.showLoading();
-        }
-
+        } 
         return kendo.mobile.application.hideLoading();
     };
 

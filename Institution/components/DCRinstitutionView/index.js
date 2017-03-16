@@ -43,8 +43,9 @@
                             .data("kendoGrid").dataItems();
             $.each(gridkdmdetails, function (i, item) {
                 var pob = gridkdmdetails[i].POB;
-                if (pob != undefined || pob != "") {
+                if ( parseInt(pob) >= 0) {
                     kdmflag = true;
+                    return true;
                 }
             });
             if (!kdmflag) {
@@ -131,7 +132,7 @@ function fun_save_dcr_institution() {
         var institution_kdm_id = gridkdmdetails[i].Institution_KDM_ID;
         var name_of_key_decision_maker = gridkdmdetails[i].Name_of_Key_Decision_Maker;
         var pob = gridkdmdetails[i].POB;
-        if (pob != undefined &&  pob != "") {
+        if (parseInt(pob) >= 0) {
             app.addto_dcr_ins_kdm_details(hdndcr_ins_master_id, institution_kdm_id,
                 name_of_key_decision_maker, pob);
         }

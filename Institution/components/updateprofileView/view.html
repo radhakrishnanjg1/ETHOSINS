@@ -13,7 +13,7 @@
             <div data-align="right">
                 <a data-role="button" data-click="app.navigation.back"
                    class="faicon">
-                    <i class="fa fa-1-5x fa-hand-o-left"></i>
+                    <i class="fa fa-1-5x fa-arrow-left"></i>
                 </a>
                 <a data-role="button" class="faicon"
                    data-bind="events: {click: updateProfile }">
@@ -26,117 +26,49 @@
                 </a>
             </div>
         </div>
-    </div> 
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="row">
-                        <form id="edit-profile-form"> 
-                            <div class="form-group col-xs-12 col-sm-8 col-sm-offset-2">
-                                <label class="control-label col-xs-4 ">Email</label>
-                                <div class="col-xs-8">
-                                    <input name="email" type="email" class="form-control"
-                                            data-bind="value: profile.Email" required
-                                            onkeyup="return textinputlength(this.value, 200, this.id);" />
-                                </div>
-                            </div>
-                            <div class="form-group col-xs-12 col-sm-8 col-sm-offset-2">
-                                <label class="control-label col-xs-4">Mobile</label>
-                                <div class="col-xs-8">
-                                    <input name="mobile" type="number" class="form-control"
-                                            data-bind="value: profile.Mobile" required
-                                            onkeyup="return textinputlength(this.value, 200, this.id);" />
-                                </div>
-                            </div>
-                            <div class="form-group col-xs-12 col-sm-8 col-sm-offset-2">
-                                <label class="control-label col-xs-4">Username</label>
-                                <div class="col-xs-8">
-                                    <input name="username" type="text" class="form-control"
-                                            data-bind="value: profile.Username" disabled />
-                                </div>
-                            </div>
-                            <!--<div class="form-group col-xs-12">
-                                <label class="control-label col-xs-4">Date of Birth</label>
-                                <div class="col-xs-8">
-                                    <input name="birthday" type="date" class="form-control"
-                                            data-bind="value: profile.Birthday" disabled />
-                                </div>
-                            </div>
-                            <div class="form-group col-xs-12">
-                                <label class="control-label col-xs-4">Designation</label>
-                                <div class="col-xs-8">
-                                    <input name="designation " type="text" class="form-control"
-                                            data-bind="value: profile.Designation" disabled />
-                                </div>
-                            </div> 
-                            <div class="form-group col-xs-12">
-                                <label class="control-label col-xs-4">Gender</label>
-                                <div class="col-xs-8">
-                                    <select disabled name="gender" id="gender" class="form-control"
-                                            data-bind="value: profile.Gender">
-                                        <option value="0" selected disabled>Gender</option>
-                                        <option value="1">Male</option>
-                                        <option value="2">Female</option>
-                                    </select>
-                                </div>
-                            </div> 
-                                <ul data-role="listview" data-style="inset">
-
-                                <li>
-                                    <label>
-                                        <span>Username</span>
-                                        <input disabled name="user-name" type="text" data-bind="value: profile.Username" required>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <span>Display Name</span>
-                                        <input name="display-name" type="text" data-bind="value: profile.DisplayName">
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <span>Email</span>
-                                        <input disabled name="email" type="text" data-bind="value: profile.Email">
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <span>Birth Date</span>
-                                        <input name="birth-date" type="date" id="birth" placeholder="Birth Date" data-bind="value: profile.BirthDate">
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <span>Gender</span>
-                                        <select disabled name="gender" id="gender" data-bind="value: profile.Gender">
-                                            <option value="0" selected disabled>Gender</option>
-                                            <option value="1">Male</option>
-                                            <option value="2">Female</option>
-                                        </select>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <span>About</span>
-                                        <textarea name="about" id="about" data-bind="value: profile.About"></textarea>
-                                    </label>
-                                </li>
-                            </ul>--> 
-                        </form>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row row ">
+                <form id="edit-profile-form">
+                    <div class="form-group col-xs-12 col-sm-8 col-sm-offset-2">
+                        <label class="control-label col-xs-4 ">Email</label>
+                        <div class="col-xs-8">
+                            <input name="email" type="email" class="form-control"
+                                   data-bind="value: profile.Email" required
+                                   onkeyup="return textinputlength(this.value, 200, this.id);" />
+                        </div>
                     </div>
-                </div>
-                <div class="panel-footer">
-                    <div class="pull-right">
-                        <a class="btn btn-success"
-                           data-bind="events: {click: updateProfile }">
-                            Save
-                        </a>
-                        <a class="btn btn-primary" data-role="button"
-                           data-click="app.navigation.navigatedashboard">
-                            Back
-                        </a>
+                    <div class="form-group col-xs-12 col-sm-8 col-sm-offset-2">
+                        <label class="control-label col-xs-4">Mobile</label>
+                        <div class="col-xs-8">
+                            <input name="mobile" type="number" class="form-control"
+                                   data-bind="value: profile.Mobile" required
+                                   onkeyup="return textinputlength(this.value, 200, this.id);" />
+                        </div>
                     </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div> 
+                    <div class="form-group col-xs-12 col-sm-8 col-sm-offset-2">
+                        <label class="control-label col-xs-4">Username</label>
+                        <div class="col-xs-8">
+                            <input name="username" type="text" class="form-control"
+                                   data-bind="value: profile.Username" disabled />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="pull-right">
+                <a class="btn btn-success"
+                   data-bind="events: {click: updateProfile }">
+                    Save
+                </a>
+                <a class="btn btn-primary" data-role="button"
+                   data-click="app.navigation.back">
+                    Back
+                </a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
 </div>

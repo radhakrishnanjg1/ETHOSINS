@@ -63,7 +63,7 @@
                 fun_dbupdateprofiledetail(user.Login_ID, user.Employee_ID, profile.Email, profile.Mobile);
             }
             else {
-                app.notify.error('Change the email or mobile.then proceed to save.!');
+                app.notify.error('Change the email or mobile.!');
             }
             //var userolddata = JSON.parse(localStorage.getItem("userdata"));
             //userolddata.Email = profile.Email;

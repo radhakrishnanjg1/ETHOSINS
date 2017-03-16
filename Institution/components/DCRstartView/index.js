@@ -8,20 +8,13 @@
             if (!app.utils.checkinternetconnection()) {
                 return app.navigation.navigateoffline("DCRstartView");
             }
-            app.navigation.logincheck();
-            var render_dcr_master_id = function (tx, rs) {
-                if (rs.rows.length > 0) {
-                    $("#hdndcr_master_id").val(rs.rows.item(0).dcr_master_id);
-                    $("#hdnactivityperiod").val(rs.rows.item(0).activity_peroid_id);
-                    $("#hdnactivity_id").val(rs.rows.item(0).activity_id);
-                }
-            }
-            app.select_count_dcr_master(render_dcr_master_id);
-            alert($("#hdndcr_master_id").val() + "|" + $("#hdnactivityperiod").val() + "|" + $("#hdnactivity_id").val());
+            app.navigation.logincheck(); 
+            setTimeout(get_dcr_master_values, 2000); 
+            //alert($("#hdndcr_master_id").val() + "|" + $("#hdnactivityperiod").val() + "|" + $("#hdnactivity_id").val());
         }, 
         afterShow: function () { 
             {
-                alert("hdndcr_master_id: " + parseInt($("#hdndcr_master_id").val()) + "|activityperiod:" + parseInt($("#hdnactivityperiod").val()) + "|activity_id:" + parseInt($("#hdnactivity_id").val()));
+                //alert("hdndcr_master_id: " + parseInt($("#hdndcr_master_id").val()) + "|activityperiod:" + parseInt($("#hdnactivityperiod").val()) + "|activity_id:" + parseInt($("#hdnactivity_id").val()));
 
                 if (parseInt($("#hdndcr_master_id").val()) == 1 && (parseInt($("#hdndcr_master_id").val()) == 235)) {
                    // alert("hdndcr_master_id: " + parseInt($("#hdndcr_master_id").val()) + "|activityperiod:" + parseInt($("#hdnactivityperiod").val()) + "|activity_id:" + parseInt($("#hdnactivity_id").val()));
@@ -48,7 +41,7 @@
                 }
                 else if (parseInt($("#hdndcr_master_id").val()) == 1 && (parseInt($("#hdnactivity_id").val()) == 236 || parseInt($("#hdnactivity_id").val()) == 239
                    || parseInt($("#hdnactivity_id").val()) == 240 || parseInt($("#hdnactivity_id").val()) == 241
-                    || parseInt($("#hdnactivity_id").val()) == 1131
+                    || parseInt($("#hdnactivity_id").val()) == 247
                    || parseInt($("#hdnactivity_id").val()) == 248 || parseInt($("#hdnactivity_id").val()) == 249
                    || parseInt($("#hdnactivity_id").val()) == 250 || parseInt($("#hdnactivity_id").val()) == 251
                    || parseInt($("#hdnactivity_id").val()) == 252 || parseInt($("#hdnactivity_id").val()) == 253
@@ -63,10 +56,10 @@
                     app.navigation.navigateDCRfinaentryView();
                 }
                 else {
-                    //alert("hdndcr_master_id: " + parseInt($("#hdndcr_master_id").val()) + "|activityperiod:" + parseInt($("#hdnactivityperiod").val()) + "|activity_id:" + parseInt($("#hdnactivity_id").val()));
+                   // alert("hdndcr_master_id: " + parseInt($("#hdndcr_master_id").val()) + "|activityperiod:" + parseInt($("#hdnactivityperiod").val()) + "|activity_id:" + parseInt($("#hdnactivity_id").val()));
 
-                    //fun_delete_all_dcrrecords();
-                    //fun_set_dcr_fields();
+                    fun_delete_all_dcrrecords();
+                    fun_set_dcr_fields();
                 }
                 //fun_delete_all_dcrrecords();
                 //fun_set_dcr_fields(); 
@@ -76,6 +69,19 @@
 
     view.set('DCRstartViewModel', DCRstartViewModel);
 }());
+
+
+function get_dcr_master_values() {  
+    var render_dcr_master_id = function (tx, rs) {
+        if (rs.rows.length > 0) {
+            $("#hdndcr_master_id").val(rs.rows.item(0).dcr_master_id);
+            $("#hdnactivityperiod").val(rs.rows.item(0).activity_peroid_id);
+            $("#hdnactivity_id").val(rs.rows.item(0).activity_id);
+        }
+    }
+    app.select_count_dcr_master(render_dcr_master_id);
+}
+
 
 function fun_delete_all_dcrrecords() {
     app.delete_dcr_master();
