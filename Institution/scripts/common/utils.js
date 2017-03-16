@@ -13,12 +13,14 @@ var keyboardOpen = function () {
     //cordova.plugins.Keyboard.show();
 };
 var keyboardClose = function () {
-   // cordova.plugins.keyboard.close(); 
+    alert(1);
+   cordova.plugins.Keyboard.close();
+    alert(11);
 }; 
 var keyboarddisableScroll = function () {
-  alert(1);
-  cordova.plugins.Keyboard.disableScroll(true);
-  alert(11);
+  
+  //cordova.plugins.Keyboard.disableScroll(true);
+ 
 }; 
 
 (function () {
