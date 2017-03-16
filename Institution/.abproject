@@ -48,7 +48,6 @@
   },
   "iOSDeploymentTarget": "6.0",
   "CorePlugins": [
-    "com.ionic.keyboard@2.0.1",
     "com.telerik.plugin.telerikanalytics@3.4.1",
     "cordova-plugin-device",
     "cordova-plugin-device-orientation",
