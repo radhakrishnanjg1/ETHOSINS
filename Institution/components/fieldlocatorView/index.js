@@ -9,204 +9,68 @@
             //    return app.navigation.navigateoffline("fieldlocatorView");
             //}
             //app.navigation.logincheck();   
-
+           // fun_db_APP_Get_MSL_Coverage_Details_INS_Employee($('#hdnEmployee_ID').val());
+            app.utils.loading(true);
+            fun_db_APP_Get_DCR_Master_GEO(2880);
             $('#txtfslist').val('');
             $("#txtfslist").kendoAutoComplete({
                 clearButton: false
             });
             fun_load_subordinatesdetails();
-        },
-        get_location: function () {
-            var options = {
-                enableHighAccuracy: true,
-                timeout: 10000
-            };
-          var geolo=  navigator.geolocation.getCurrentPosition(function () {
-              //alert(JSON.stringify(arguments));
-              alert("latitude:" + JSON.stringify(arguments[0].coords.latitude) + " | "
-                   + "longitude:" + JSON.stringify(arguments[0].coords.longitude))
-            }, function () {
-                alert(JSON.stringify(arguments));
-            }, options);
 
-
+            
         },
-        showMap: function () {
-            //if (!this.checkSimulator()) {
-                alert('a');
-                Mapbox.show(
-                  {
-                      style: 'emerald', // light|dark|emerald|satellite|hybrid|streets , default 'streets'
-                      margins: {
-                          left: 0, // default 0
-                          right: 0, // default 0
-                          // our demo apps have a different layout for Android (tabs at the top)
-                          top: navigator.userAgent.indexOf("Android") == -1 ? 316 : 340, // default 0
-                          bottom: navigator.userAgent.indexOf("Android") == -1 ? 50 : 0 // default 0
-                      },
-                      center: { // optional, without a default
-                          lat: 13.0693312,
-                          lng: 77.4551011
-                      },
-                      zoomLevel: 12, // 0 (the entire world) to 20, default 10
-                      showUserLocation: true, // default false
-                      hideAttribution: true, // default false, which is required by Mapbox if you're on a free plan
-                      hideLogo: true, // default false, which is required by Mapbox if you're on a free plan
-                      hideCompass: false, // default false
-                      disableRotation: false, // default false
-                      disableScroll: false, // default false
-                      disableZoom: false, // default false
-                      disablePitch: false, // default false
-                      markers: [
-                        {
-                            lat: 13.0693312,
-                            lng: 77.4551011,
-                            title: 'Nice location',
-                            subtitle: 'Really really nice location'
-                        }
-                      ]
-                  },
-                  function () {
-                      // let's add an click handler to the marker callouts
-                      Mapbox.addMarkerCallback(function (selectedMarker) {
-                          alert("Marker selected: " + JSON.stringify(selectedMarker));
-                      });
-                  },
-                  this.onError
-            )
-              alert('b');
-           // }
-        },
-
-        hideMap: function () {
-            if (!this.checkSimulator()) {
-                Mapbox.hide(
-                  {},
-                  this.onSuccess,
-                  this.onError
-                );
-            }
-        },
-
-        addMarkers: function () {
-            if (!this.checkSimulator()) {
-                Mapbox.addMarkers(
-	                [
-                    {
-                        'lat': 13.0693312,
-                        'lng': 77.4551011,
-                        'title': 'One-line title here', // no popup unless set
-                        'subtitle': 'This text can span multiple lines on Android only.'
-                    },
-                    {
-                        'lat': 13.0693312,
-                        'lng': 77.4551011,
-                        'title': 'Nu subtitle for this one' // iOS: no popup unless set, Android: an empty popup -- so please add something
-                    }
-	                ],
-                  this.onSuccess,
-                  this.onError
-                );
-            }
-        },
-
-        addPolygon: function () {
-            if (!this.checkSimulator()) {
-                Mapbox.addPolygon(
-                  {
-                      points: [
-                        {
-                            'lat': 52.3832160,
-                            'lng': 4.8991680
-                        },
-                        {
-                            'lat': 52.3632160,
-                            'lng': 4.9011680
-                        },
-                        {
-                            'lat': 52.3932160,
-                            'lng': 4.8911680
-                        }
-                      ]
-                  },
-                  this.onSuccess,
-                  this.onError
-                );
-            }
-        },
-
-        setCenter: function () {
-            if (!this.checkSimulator()) {
-                Mapbox.setCenter(
-                  {
-                      lat: 13.0693312,
-                      lng: 77.4551011,
-                      animated: true
-                  },
-                  this.onSuccess,
-                  this.onError
-                );
-            }
-        },
-
-        getCenter: function () {
-            if (!this.checkSimulator()) {
-                Mapbox.getCenter(
-                  this.onSuccessWithAlert
-                );
-            }
-        },
-
-        setZoomLevel: function () {
-            if (!this.checkSimulator()) {
-                Mapbox.setZoomLevel(
-                  {
-                      level: 10,
-                      animated: true
-                  },
-                  this.onSuccess,
-                  this.onError
-                );
-            }
-        },
-
-        getZoomLevel: function () {
-            if (!this.checkSimulator()) {
-                Mapbox.getZoomLevel(
-                  this.onSuccessWithAlert
-                );
-            }
-        },
-
-        checkSimulator: function () {
-            if (window.navigator.simulator === true) {
-                alert('This plugin is not available in the simulator.');
-                return true;
-            } else if (window.Mapbox === undefined) {
-                alert('Plugin not found. Maybe you are running in AppBuilder Companion app which currently does not support this plugin.');
-                return true;
-            } else {
-                return false;
-            }
-        },
-
-        // callbacks
-        onSuccess: function (msg) {
-            console.log('Mapbox success: ' + msg);
-        },
-
-        onSuccessWithAlert: function (msg) {
-            alert(JSON.stringify(msg));
-        },
-
-        onError: function (msg) {
-            alert('Mapbox error: ' + msg);
-        }
     });
 
     view.set('fieldlocatorViewModel', fieldlocatorViewModel);
 }());
 
+function fun_load_geolocation_by_employee_id(Employee_ID) { 
+    var alldivision = JSON.parse(localStorage.getItem("ethosinsdcrgeodetails"));
+    var singledivision = JSON.parse(Enumerable.From(alldivision)
+       .Where("$.Employee_ID=='" + Employee_ID)
+       .ToJSON());
+
+    L.mapbox.accessToken = 'pk.eyJ1IjoicmFkaGFrcmlzaG5hbmpnIiwiYSI6ImNqMGFqNTh3YzAwMDczMm53d3pha2x0ZGIifQ.tyPyR0XvtlNvQ3S1SE7HUg';
+
+    var map = L.mapbox.map('map', 'mapbox.streets')
+    .setView([13.0693312, 77.4551011], 4); 
+    var marker = L.marker(new L.LatLng(singledivision[0].Latitude , singledivision[0].Latitude), {
+            icon: L.mapbox.marker.icon({
+                'marker-color': '006666'
+            }),
+        });
+    marker.bindPopup('Date:' + singledivision[0].Latitude+
+        'Activity Period:' + singledivision[0].Activity_Period +
+        'Activity:' + singledivision[0].Activity);
+        marker.addTo(map);
+    } 
+
+function fun_load_geolocation()
+{
+
+    var alldivision = JSON.parse(localStorage.getItem("ethosinsdcrgeodetails"));
+    var singledivision = JSON.parse(Enumerable.From(alldivision)
+        .ToJSON());
+
+    L.mapbox.accessToken = 'pk.eyJ1IjoicmFkaGFrcmlzaG5hbmpnIiwiYSI6ImNqMGFqNTh3YzAwMDczMm53d3pha2x0ZGIifQ.tyPyR0XvtlNvQ3S1SE7HUg';
+
+    var map = L.mapbox.map('map', 'mapbox.streets')
+    .setView([13.0693312, 77.4551011], 4);
+
+    $.each(singledivision, function (i, item) {
+        var marker = L.marker(new L.LatLng(singledivision[i].Latitude,
+            singledivision[i].Latitude), {
+            icon: L.mapbox.marker.icon({
+                'marker-color': '006666'
+            }),
+        });
+        marker.bindPopup('Date:' + singledivision[i].Latitude +
+            'Activity Period:' + singledivision[i].Activity_Period +
+            'Activity:' + singledivision[i].Activity);
+        marker.addTo(map);
+    }); 
+}
 
 function fun_load_subordinatesdetails() {
     var localdata = JSON.parse(localStorage.getItem("ethosinssubordinatesdetails"));
@@ -223,26 +87,56 @@ function fun_load_subordinatesdetails() {
         //separator: ", "
         //noDataTemplate: 'No records found!',
 
-        //change: function (e) {
-        //    var value = this.value();
-        //    if (value.length > 6) {
-        //        var ethosmastervaluesdata = JSON.parse(localStorage.getItem("ethosinssubordinatesdetails"));
-        //        var ethosmastervaluesrecords = JSON.parse(Enumerable.From(ethosmastervaluesdata)
-        //       .Where("$.Employee_Name=='" + value + "'")
-        //       .ToJSON());
-        //        if (ethosmastervaluesrecords.length == 0) {
-        //            app.notify.error("Select valid employee name in list.!");
-        //            return false;
-        //        }
-        //        var empid = value.split("|")[1];
-        //        $('#dvteamename').html(value.split("|")[0]);
-        //        app.utils.loading(true);
-        //        fun_db_APP_Get_MSL_Coverage_Details_INS_Employee_TeamByEmployeeid(empid);
-        //    }
-        //    // Use the value of the widget
-        //}
+        change: function (e) {
+            var value = this.value();
+            if (value.length > 6) {
+                var ethosmastervaluesdata = JSON.parse(localStorage.getItem("ethosinssubordinatesdetails"));
+                var ethosmastervaluesrecords = JSON.parse(Enumerable.From(ethosmastervaluesdata)
+               .Where("$.Employee_Name=='" + value + "'")
+               .ToJSON());
+                if (ethosmastervaluesrecords.length == 0) {
+                    app.notify.error("Select valid employee name in list.!");
+                    return false;
+                }
+                var empid = value.split("|")[1]; 
+                app.utils.loading(true);
+                fun_load_geolocation_by_employee_id(empid);
+            }
+            // Use the value of the widget
+        }
     });
 }
 
- 
- 
+
+function fun_db_APP_Get_DCR_Master_GEO(Employee_ID) {
+    var datasource = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "https://api.everlive.com/v1/dvu4zra5xefb2qfq/Invoke/SqlProcedures/APP_Get_DCR_Master_GEO",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "Employee_ID": Employee_ID
+                }
+            }
+        },
+        schema: {
+            parse: function (response) {
+                var getdata = response.Result.Data[0];
+                return getdata;
+            }
+        },
+        error: function (e) { 
+            app.utils.loading(false);  
+        }
+    });
+
+    datasource.fetch(function () {
+        var data = this.data();
+        localStorage.setItem("ethosinsdcrgeodetails", JSON.stringify(data)); // dcrgeo details 
+        fun_load_geolocation();
+        app.utils.loading(false);
+    });
+
+}
+

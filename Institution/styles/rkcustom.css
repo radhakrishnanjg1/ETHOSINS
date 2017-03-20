@@ -231,11 +231,13 @@ mark, .mark {
     border: 0 !important;
     /*background-color:transparent !important ;*/
     background: rgba(0,0,0,0);
-} 
+}
+
 .km-flat .km-loader:before {
     border-radius: 50% !important;
     background-color: #00C8B7 !important;
 }
+
 .km-flat .km-loader:after {
     content: "Please wait...";
     display: block;
@@ -245,10 +247,10 @@ mark, .mark {
     width: 8em;
     height: 4em;
     top: 63%;
-    left: 47%; 
-    color:#00C8B7 !important;
-    font-size:larger !important;
-    font-weight:800 !important;
+    left: 47%;
+    color: #00C8B7 !important;
+    font-size: larger !important;
+    font-weight: 800 !important;
 }
 
 .km-group-title {
@@ -333,7 +335,7 @@ and (max-device-height : 736px) and (max-resolution: 401dpi)
 
 }*/
 @media(min-height : 480px ) {
-    #login-form ,#dvDCRstartView{
+    #login-form, #dvDCRstartView {
         padding-top: 35% !important;
     }
 
@@ -344,7 +346,8 @@ and (max-device-height : 736px) and (max-resolution: 401dpi)
     .full-height {
         height: 480px !important;
     }
-} 
+}
+
 @media(max-height : 320px ) {
     #login-form {
         padding-top: 20% !important;
@@ -642,47 +645,50 @@ footer {
     overflow: scroll !important;
     overflow-x: hidden !important;
 }
-.km-list input[type=checkbox]  {
-    -webkit-appearance:checkbox;
+
+.km-list input[type=checkbox] {
+    -webkit-appearance: checkbox;
 }
 /* LMS end */
- 
+
 /*.km-flat, .km-flat .k-toolbar, .km-flat .km-content, 
 .km-flat .km-detail, .km-flat .km-navbar {
     background: url('../images/bg2.png') top center no-repeat;
 }*/
- .km-flat .km-content {
+.km-flat .km-content {
     background: url('../images/bg1.png') no-repeat;
     background-position-x: center;
     background-position-y: -100px;
-} 
+}
 
- .signbackground {
+.signbackground {
     background: url('../images/bg1.png') no-repeat;
     background-position-x: center;
     background-position-y: -100px;
-} 
-#dvsignin .form-control{
+}
+
+#dvsignin .form-control {
     /*height: 1.6em !important;
     font-size: 1.2em !important;*/
 }
-#dvsignin .input-group-addon
-{ 
-   background-color: #00C8B7 !important;
-   color: #fff !important;
-}
-#dvsignin i
-{
+
+#dvsignin .input-group-addon {
     background-color: #00C8B7 !important;
-    color: #fff !important; 
+    color: #fff !important;
 }
+
+#dvsignin i {
+    background-color: #00C8B7 !important;
+    color: #fff !important;
+}
+
 #dvsignin .btn-block {
     background-color: #00C8B7 !important;
     color: #fff !important;
-    font-weight: bold;  
+    font-weight: bold;
     text-align: center;
-    padding:6px 0px 4px 0px !important;
-    height:34px !important;
+    padding: 6px 0px 4px 0px !important;
+    height: 34px !important;
 }
 
 /*.k-dropdown-wrap .k-state-default
@@ -705,3 +711,10 @@ footer {
 {
      background-color: #00C8B7 !important;
 }*/
+
+/*field locator start*/
+#map {
+    height: 325px;
+    width: 300px;
+}
+/*field locator end*/

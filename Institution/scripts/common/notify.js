@@ -3,7 +3,9 @@
         layout: 'center',
         theme: 'metroui', // or relax or defaultTheme
         type: 'alert',
-        timeout: 3500
+        timeout: 1800,
+        modal: true,
+        killer: true,
     });
 
     app.notify = {

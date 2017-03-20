@@ -3,37 +3,18 @@
      data-after-show="disableBackButton" data-before-hide="enableBackButton"
      data-model="app.teamcoverageView.teamcoverageViewModel"
      data-bind="events: { show: onShow }">
-    <footer data-role="footer">
+    <footer data-role="footer" >
         <div class="text-center ">
             <div class="row">
-                <div class="col-xs-12">
-                    <!--<a data-role="button" data-rel="drawer"
-                       href="#left-drawer" class="faicon">
-                        <i class="fa fa-1-5x fa-list"></i>
-                    </a>-->
-                    <a data-bind="events: {click: onRefresh }">
-                        <i class="fa fa-2x fa-refresh"></i>
-                    </a>
+                <div class="col-xs-12" data-bind="events: {click: onRefresh }"> 
+                        <i style="padding-top:4px!important " 
+                           class="fa fa-2x fa-refresh"></i> 
                 </div>
             </div>
         </div>
     </footer>
     <div id="dvteamcoveragedetails" style="display:none;">
-        <div class="panel panel-default">
-            <!--<div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-1 text-center drawertopicon" data-role="button" data-click="gotochartnextrecord" data-direction="right">
-                        <i class="fa fa-chevron-left"> </i>
-                    </div>
-                    <div class="col-xs-10 text-center text-uppercase">
-                            <span id="spanchartdivisionname"></span>
-                        <input type="hidden" id="hdnchartslno">
-                    </div>
-                    <div class="col-xs-1 text-center drawertopicon" data-role="button" data-click="gotochartnextrecord" data-direction="left">
-                        <i class="fa fa-chevron-right"> </i>
-                    </div>
-                </div>
-            </div>-->
+        <div class="panel panel-default"> 
             <div class="panel-heading text-center"
                  style="background-color:#fff!important ">
                 <div class="row">

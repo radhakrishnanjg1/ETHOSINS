@@ -507,7 +507,7 @@
     // 4 select dcr instutition   
     app.select_dcr_ins_master = function (fn) {
         app.db.transaction(function (tx) {
-            tx.executeSql("SELECT dcr_ins_master_id,instutition_id, instutition_name,added_on FROM dcr_ins_master ", [], fn, app.onError);
+            tx.executeSql("SELECT dcr_ins_master_id,instutition_id,instutition_name,latitude,longitude,added_on FROM dcr_ins_master ", [], fn, app.onError);
         });
     };
     app.select_dcr_ins_master_bydcr_master_id = function (fn, dcr_master_id) {
@@ -519,7 +519,7 @@
     // 5 select dcr instutition  kdm details
     app.select_dcr_ins_kdm_details = function (fn) {
         app.db.transaction(function (tx) {
-            tx.executeSql("SELECT dcr_ins_master_id, kdm_name,pob FROM dcr_ins_kdm_details ", [], fn, app.onError);
+            tx.executeSql("SELECT dcr_ins_master_id,kdm_id, kdm_name,pob FROM dcr_ins_kdm_details ", [], fn, app.onError);
         });
     };
     app.select_dcr_ins_kdm_details_bydcr_ins_master_id = function (fn, dcr_ins_master_id) {

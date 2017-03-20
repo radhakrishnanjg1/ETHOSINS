@@ -84,6 +84,7 @@
 
 
 function fun_save_dcr_all_details() {
+    app.utils.loading(true);
     var Activity_ID = localStorage.getItem("Activity_ID");
     fun_db_APP_Insert_INS_DCR_Report(parseInt(Activity_ID),
 $("#hdndcr_master_string").val(),
@@ -485,6 +486,9 @@ function fun_db_APP_Insert_INS_DCR_Report(Activity_Id, DCR_Master_String, DCR_Ma
         var data = this.data();
         app.utils.loading(false);
         if (data[0].Output_ID == 1) {
+            localStorage.setItem("Activity_Period_ID", 0);
+            localStorage.setItem("Activity_ID", 0);
+            localStorage.setItem("DCR_isavailable", 0);
             app.notify.success(data[0].Output_Message);
             fun_clear_dcr_all_details();
             app.navigation.navigateDCRstartView();

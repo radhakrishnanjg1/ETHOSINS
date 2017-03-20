@@ -178,7 +178,6 @@ function fun_load_dcr_institution_institutions() {
         //separator: ", "
         //noDataTemplate: 'No records found!',
         change: function (e) {
-            keyboardClose();
             var value = this.value();
             if (value.length > 6) {
                 var ethosmastervaluesdata = JSON.parse(localStorage.getItem("dcrinstutitiondetails"));

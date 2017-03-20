@@ -3,15 +3,14 @@
 
 (function () {
     var view = app.DCRfinaentryView = kendo.observable();
-    var DCRfinaentryViewModel = kendo.observable({
-        onShow: function () {
-            if (!app.utils.checkinternetconnection()) {
-                return app.navigation.navigateoffline("DCRfinaentryView");
-            }
-            app.navigation.logincheck(); 
-
-        },
+    var DCRfinaentryViewModel = kendo.observable({  
         dcrfinalentryValidator: null,
+        onShow: function () {
+            //if (!app.utils.checkinternetconnection()) {
+            //    return app.navigation.navigateoffline("DCRfinaentryView");
+            //}
+            //app.navigation.logincheck();  
+        },
         savefinalentrydetails: function () { 
             //hdnactivityperiod hdnactivity_id
             var Activity_Period_ID = parseInt($('#hdnactivityperiod').val());
@@ -32,7 +31,7 @@
                 $('#txtdeviationreason').val(), $('#txtdescription').val());
             fun_clearcontrols_dcrmaster_finalentry();
             app.navigation.navigateDCRpreviewView();
-        },
+        }
     });
 
     view.set('DCRfinaentryViewModel', DCRfinaentryViewModel);
