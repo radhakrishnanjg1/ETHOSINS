@@ -1,14 +1,20 @@
-<div id="DCRstartView" data-role="view" data-title="DCR Start"
-     data-after-show="disableBackButton" data-before-hide="enableBackButton"
-      data-layout="afterlogin"
+<div id="DCRstartView" data-role="view" data-title="Daily Call Report"
+     data-before-hide="enableBackButton"
+     data-layout="afterlogin"
      data-model="app.DCRstartView.DCRstartViewModel"
-     data-bind="events: { show: onShow }">  
+     data-show="app.DCRstartView.DCRstartViewModel.onShow"
+     data-after-show="app.DCRstartView.DCRstartViewModel.afterShow">
     <!--,afterShow: afterShow-->
-    <div id="dvDCRstartView" data-role="button"
-           data-click="app.navigation.navigateDCRmasterView"
-         style="height:325px;width:90%"> 
-        <h1 class="horange">
-            Touch to Start the DCR
-        </h1>
-    </div> 
+    <input type="hidden" value="0"
+           id="hdn_old_dcr_master_id" name="hdn_old_dcr_master_id" />
+    <input type="hidden" value="0"
+           id="hdnactivity_id" name="hdnactivity_id" />
+    <input type="hidden" value="0"
+           id="hdnactivityperiod" name="hdnactivityperiod" />
+    <div id="dvDCRstartView" > 
+        <img src="images/start.jpg" id="spandcrstartpage"
+             data-role="button"
+         data-bind="events: {click: redirecttocontinuedcr }"
+              style="border:0px !important;padding:0px !important;width:99%;height:100%;" />
+    </div>
 </div>

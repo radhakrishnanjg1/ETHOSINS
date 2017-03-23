@@ -1,21 +1,22 @@
 <div id="DCRinstitutionView" data-role="view" data-title="MSL Entry"
-     data-after-show="disableBackButton" data-before-hide="enableBackButton"
+       data-before-hide="enableBackButton"
      data-layout="afterlogin"
-     data-model="app.DCRinstitutionView.DCRinstitutionViewModel"
-     data-bind="events: { show: onShow }"> 
+     data-model="app.DCRinstitutionView.DCRinstitutionViewModel" 
+     data-show="app.DCRinstitutionView.DCRinstitutionViewModel.onShow"
+     data-after-show="app.DCRinstitutionView.DCRinstitutionViewModel.afterShow" >
     <footer data-role="footer"> 
-        <div class="input-group">
+        <div class="row text-center">
             <div data-role="button"
                  data-bind="events: {click: savelisteddcrdetails }">
-                <i class="fa fa-university"> </i> Add 
-            </div> 
+                <i class="fa fa-plus"> </i> Add
+            </div>
             <div data-role="button"
                  data-click="app.navigation.navigateDCRunlistedinstitutionView">
-                <i class="fa fa-th"> </i>  Unlisted  
-            </div> 
+                <i class="fa fa-university"> </i>  Unlisted
+            </div>
             <div data-role="button"
                  data-click="app.navigation.navigateDCRfinaentryView">
-                <i class="fa fa-file-text"></i>  Deviation 
+                <i class="fa fa-file-text"></i>  Final Entry
             </div>
         </div>
     </footer>
@@ -25,7 +26,7 @@
                 <div class="row">
                     <form id="form-listeddcr"> 
                         <div class="form-group col-xs-12 col-sm-12">
-                            <label class="control-label">Entry No.</label>
+                            <label class="control-label">Serial Number</label>
                             <input type="text" value="1" class="form-control" 
                                    disabled 
                                    id="hdndcr_ins_master_id" name="hdndcr_master_id" />
@@ -46,13 +47,13 @@
                         <div class="form-group col-xs-12 col-sm-12">
                             <label class="control-label">Work With</label>
                             <select name="ddlworkwithinst" id="ddlworkwithinst" multiple="multiple"
-                                    data-placeholder="Select Employees..." required></select>
+                                    data-placeholder="Select Employees." required></select>
                         </div>
 
                         <div class="form-group col-xs-12 col-sm-12">
                             <label class="control-label">Products Promoted</label>
                             <select id="ddlproductspromotedinst" multiple="multiple"
-                                    data-placeholder="Select Products..." required></select>
+                                    data-placeholder="Select Products." required></select>
                         </div>
                     </form>
                 </div>

@@ -24,7 +24,7 @@ function fun_load_leave_cancel_details(records) {
         dataBound: function (e) {
             if (this.dataSource.data().length == 0) {
                 //custom logic
-                $("#listview-leavecancelapproval").append("<li>No records found.!</li>");
+                $("#listview-leavecancelapproval").append("<li>No records found!</li>");
             }
         },
         template: $("#template-leavecancelapproval").html(),
@@ -36,7 +36,7 @@ function fun_leavecancelapprove(e) {
     var ethos_leave_master_id = data.ethos_leave_master_id;
     var employee_id = data.employee_id;
     var leave_type_id = data.leave_type_id;  
-    var confirmation = "Are you sure you want to Approve.?";
+    var confirmation = "Are you sure you want to approve?";
     app.notify.confirmation(confirmation, function (confirm) {
         if (!confirm) {
             return;
@@ -99,7 +99,7 @@ function fun_db_APP_Update_Ethos_Leave_Cancel_Approve(Ethos_leave_master_id, Can
         },
         error: function (e) {
             app.utils.loading(false); // alert(e);
-            app.notify.error('Error loading data please try again later.!');
+            app.notify.error('Error loading data please try again later!');
         }
     });
     datasource.fetch(function () {

@@ -20,22 +20,66 @@
                 fun_load_dcr_unlistedinstitution_pageload();
             }
         },
+        afterShow: function () {
+            disableBackButton();
+            get_dcrmaster_unlisted_institution_values();
+        },
         dcrunlistedscrValidator: null,
         saveunlistedscrdetails: function () {
-            this.dcrunlistedscrValidator = app.validate.getValidator('#form-unlistedscr');
-            if (!this.dcrunlistedscrValidator.validate()) {
-                //$(".k-invalid-msg").show();
-                return;
+            //this.dcrunlistedscrValidator = app.validate.getValidator('#form-unlistedscr');
+            //if (!this.dcrunlistedscrValidator.validate()) {
+            //    //$(".k-invalid-msg").show();
+            //    return;
+            //}
+            var txtinstitution = ($("#txtinstitution").val());
+            var txtpobsingle = parseInt($("#txtpobsingle").val());
+            var ddlmajortownunlisted = parseInt($("#ddlmajortownunlisted").val());
+            var ddlstate = parseInt($("#ddlstate").val());
+            var ddlcity = parseInt($("#ddlcity").val());
+            var ddlworkwithunlisted = $("#ddlworkwithunlisted").data("kendoMultiSelect").value().toString();
+            if (txtinstitution == "") {
+                app.notify.error("Enter institution!");
+                return false;
             }
-            //save dcr unlisteddetails
-            fun_save_dcrmaster_unlisted_institution();
-            fun_clearcontrols_dcr_unlisted_institution();
-            app.notify.success('Unlisted institution details saved successfully.');
+            else if (txtpobsingle == "" || isNaN(txtpobsingle)) {
+                app.notify.error("Enter POB!");
+                return false;
+            }
+            else if (ddlmajortownunlisted == "" || isNaN(ddlmajortownunlisted)) {
+                app.notify.error("Select major town!");
+                return false;
+            }
+            else if (ddlstate == "" || isNaN(ddlstate)) {
+                app.notify.error("Select state!");
+                return false;
+            }
+            else if (ddlcity == "" || isNaN(ddlcity)) {
+                app.notify.error("Select city!");
+                return false;
+            }
+            else if (ddlworkwithunlisted == "") {
+                app.notify.error("Select work with!");
+                return false;
+            }
+            else {
+                //save dcr unlisteddetails
+                fun_save_dcrmaster_unlisted_institution();
+                fun_clearcontrols_dcr_unlisted_institution();
+                app.notify.success('Unlisted institution details saved successfully.');
+            }
         },
     });
 
     view.set('DCRunlistedinstitutionViewModel', DCRunlistedinstitutionViewModel);
 }());
+
+function get_dcrmaster_unlisted_institution_values() {
+    var render_dcr_unlisted_ins_master = function (tx2, rs2) {
+         $("#hdndcr_unlisted_ins_master_id").val(rs2.rows.item(0).dcr_unlisted_ins_master_id);
+    }
+    app.select_count_dcr_unlisted_ins_master_bydcr_master_id(render_dcr_unlisted_ins_master, 1);
+}
+
 
 function fun_save_dcrmaster_unlisted_institution() {
     //  parent  table data and need to save dcr master data in sql lite db
@@ -53,7 +97,7 @@ function fun_save_dcrmaster_unlisted_institution() {
     var txtphone = $("#txtphone").val();
     var txtmobile = $("#txtmobile").val();
     var txtemail = $("#txtemail").val(); 
-    var dcr_master_id = $("#hdndcr_master_id").val();
+    var dcr_master_id = 1;
     //app.addto_dcr_unlisted_ins_master(dcr_master_id, txtinstitution, txtkdm, txtpobsingle,
     //ddlmajortownunlisted, ddlmajortownunlisted_name, ddlstate, ddlstate_name, ddlcity,
     //ddlcity_name, txtaddress, txtpincode, txtphone, txtmobile, txtemail);
@@ -80,7 +124,7 @@ function fun_save_dcrmaster_unlisted_institution() {
                             .data("kendoMultiSelect").dataItems();
     $.each(ddlwwrecords, function (i, item) { 
         var emp_id = ddlwwrecords[i].Employee_Name.split('|')[1];
-        var emp_name = ddlwwrecords[i].Employee_Name;
+        var emp_name = ddlwwrecords[i].Employee_Name.split('|')[0];
         app.addto_dcr_unlisted_ins_ww_details(hdndcr_unlisted_ins_master_id, emp_id, emp_name);
     });
     var ddlpprecords = $("#ddlproductspromotedunlisted")
@@ -233,7 +277,7 @@ function fun_db_APP_Get_DCR_State_City_Information(Sub_Territory_ID) {
         },
         error: function (e) {
             app.utils.loading(false); // alert(e);
-            app.notify.error('Error loading data please try again later.!');
+            app.notify.error('Error loading data please try again later!');
         }
     });
     datasource.fetch(function () {

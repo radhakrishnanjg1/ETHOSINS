@@ -1,26 +1,27 @@
-<div id="DCRmasterView" data-role="view" data-title="DCR Master Entry"
-     data-after-show="disableBackButton" data-before-hide="enableBackButton"
+<div id="DCRmasterView" data-role="view" data-reload="true"
+     data-title="DCR Master Entry"  data-before-hide="enableBackButton"
      data-layout="afterlogin"
      data-model="app.DCRmasterView.DCRmasterViewModel"
-     data-bind="events: { show: onShow }">
+     data-show="app.DCRmasterView.DCRmasterViewModel.onShow"
+     data-after-show="app.DCRmasterView.DCRmasterViewModel.afterShow" >
     <footer data-role="footer">
-        <div class="cols1 btnborder btn-block "
-             data-role="button" data-bind="events: {click: savedcrmsterdetails }">
-            Next
+        <div class="row text-center" 
+            data-role="button" data-bind="events: {click: savedcrmsterdetails }">
+            Next <i class="fa fa-arrow-right"></i>
         </div>
     </footer>
     <div id="dvDCRmasterView">
-        <div class="panel panel-custom padding0"> 
+        <div class="panel panel-custom"> 
             <div class="panel-body">
                 <div class="row">
                     <form id="form-dvdcr2"> 
                         <div class="form-group col-xs-6 col-sm-6">
                             <input type="hidden" value="1"
                                    id="hdndcr_master_id" name="hdndcr_master_id" />
-                            <input type="hidden" value="0"
+                            <!--<input type="hidden" value="0"
                                    id="hdnactivity_id" name="hdnactivity_id" />
                             <input type="hidden" value="0"
-                                   id="hdnactivityperiod" name="hdnactivityperiod" />
+                                   id="hdnactivityperiod" name="hdnactivityperiod" />-->
                             <label class="control-label">Date</label>
                             <input name="txtdcrdate" id="txtdcrdate" required disabled
                                  value=""   class="form-control"
@@ -58,7 +59,7 @@
                                 <label class="control-label">Work With</label>
                                 <select name="ddlworkwithmaster" id="ddlworkwithmaster"
                                         multiple="multiple"
-                                        data-placeholder="Select Work With..." required></select>
+                                        data-placeholder="Select Work With." required></select>
                             </div>
                             <div class="form-group col-xs-12 col-sm-12">
                                 <div class="pull-right ">
@@ -72,7 +73,7 @@
                                 <label class="control-label">Major Town</label>
                                 <select name="ddlmajortownmaster" id="ddlmajortownmaster"
                                         multiple="multiple"
-                                        data-placeholder="Select Major Town..." required></select>
+                                        data-placeholder="Select Major Town." required></select>
                             </div>
                         </div>
                     </form>

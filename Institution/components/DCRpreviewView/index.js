@@ -7,13 +7,15 @@
         onShow: function () { 
             if (!app.utils.checkinternetconnection()) {
                 return app.navigation.navigateoffline("DCRpreviewView");
-            }
-            app.navigation.logincheck(); 
-            fun_get_dcr_all_details();
-
-            var hdndcr_master_id = parseInt($("#hdndcr_master_id").val());
+            } 
+            app.navigation.logincheck();
+            app.utils.loading(true);
+            setTimeout(fun_get_dcr_all_details, 1500);
+            app.utils.loading(false);
+            var hdndcr_master_id = 1;
             var render_dcrmaster = function (tx, rs) {
                 $("#dvdcrmaster_date").html(rs.rows.item(0).dcr_date);
+                $("#hdnactivity_id").val(rs.rows.item(0).activity_id);
                 $("#dvdcrmaster_period").html(rs.rows.item(0).activity_peroid_name);
                 $("#dvdcrmaster_activity").html(rs.rows.item(0).activity_name);
                 $("#dvdcrmaster_deviationreason").html(rs.rows.item(0).deviation_reason);
@@ -74,6 +76,8 @@
                 if (!confirm) {
                     return;
                 }
+                fun_delete_all_dcrrecords();
+                fun_set_dcr_fields();
                 app.navigation.navigateDCRstartView();
             })
         },
@@ -85,7 +89,7 @@
 
 function fun_save_dcr_all_details() {
     app.utils.loading(true);
-    var Activity_ID = localStorage.getItem("Activity_ID");
+    var Activity_ID = parseInt($("#hdnactivity_id").val());
     fun_db_APP_Insert_INS_DCR_Report(parseInt(Activity_ID),
 $("#hdndcr_master_string").val(),
 $("#hdndcr_master_ww_details_string").val(),
@@ -250,7 +254,7 @@ function fun_load_dcr_master_ww(hdndcr_master_id) {
             dataBound: function (e) {
                 if (this.dataSource.data().length == 0) {
                     //custom logic
-                    $("#listview-dcrmasterww").append("<li>No records found.!</li>");
+                    $("#listview-dcrmasterww").append("<li>No records found!</li>");
                 }
             },
             template: $("#template-dcrmasterww").html(),
@@ -271,7 +275,7 @@ function fun_load_dcr_master_mj(hdndcr_master_id) {
             dataBound: function (e) {
                 if (this.dataSource.data().length == 0) {
                     //custom logic
-                    $("#listview-dcrmastermj").append("<li>No records found.!</li>");
+                    $("#listview-dcrmastermj").append("<li>No records found!</li>");
                 }
             },
             template: $("#template-dcrmastermj").html(),
@@ -292,7 +296,7 @@ function fun_load_dcr_listedinstutition(hdndcr_master_id) {
             dataBound: function (e) {
                 if (this.dataSource.data().length == 0) {
                     //custom logic
-                    $("#listview-dcr-listedinstutition").append("<li>No records found.!</li>");
+                    $("#listview-dcr-listedinstutition").append("<li>No records found!</li>");
                 }
             },
             template: $("#template-dcr-listedinstutition").html(),
@@ -326,7 +330,7 @@ function fun_load_dcr_listedinstutition_kdmdetails(dcr_ins_master_id) {
             dataBound: function (e) {
                 if (this.dataSource.data().length == 0) {
                     //custom logic
-                    $("#listview-dcr_listedinstutition_kdm").append("<li>No records found.!</li>");
+                    $("#listview-dcr_listedinstutition_kdm").append("<li>No records found!</li>");
                 }
             },
             template: $("#template-dcr_listedinstutition_kdm").html(),
@@ -347,7 +351,7 @@ function fun_load_dcr_listedinstutition_ww(dcr_ins_master_id) {
             dataBound: function (e) {
                 if (this.dataSource.data().length == 0) {
                     //custom logic
-                    $("#listview-dcr_listedinstutition_ww").append("<li>No records found.!</li>");
+                    $("#listview-dcr_listedinstutition_ww").append("<li>No records found!</li>");
                 }
             },
             template: $("#template-dcr_listedinstutition_ww").html(),
@@ -368,7 +372,7 @@ function fun_load_dcr_listedinstutition_pp(dcr_ins_master_id) {
             dataBound: function (e) {
                 if (this.dataSource.data().length == 0) {
                     //custom logic
-                    $("#listview-dcr_listedinstutition_pp").append("<li>No records found.!</li>");
+                    $("#listview-dcr_listedinstutition_pp").append("<li>No records found!</li>");
                 }
             },
             template: $("#template-dcr_listedinstutition_pp").html(),
@@ -389,7 +393,7 @@ function fun_load_dcr_unlistedinstutition(hdndcr_master_id) {
             dataBound: function (e) {
                 if (this.dataSource.data().length == 0) {
                     //custom logic
-                    $("#listview-dcr-unlistedinstutition").append("<li>No records found.!</li>");
+                    $("#listview-dcr-unlistedinstutition").append("<li>No records found!</li>");
                 }
             },
             template: $("#template-dcr-unlistedinstutition").html(),
@@ -422,7 +426,7 @@ function fun_load_dcr_unlistedinstutition_ww(dcr_ins_master_id) {
             dataBound: function (e) {
                 if (this.dataSource.data().length == 0) {
                     //custom logic
-                    $("#listview-dcr_unlistedinstutition_ww").append("<li>No records found.!</li>");
+                    $("#listview-dcr_unlistedinstutition_ww").append("<li>No records found!</li>");
                 }
             },
             template: $("#template-dcr_unlistedinstutition_ww").html(),
@@ -443,7 +447,7 @@ function fun_load_dcr_unlistedinstutition_pp(dcr_ins_master_id) {
             dataBound: function (e) {
                 if (this.dataSource.data().length == 0) {
                     //custom logic
-                    $("#listview-dcr_unlistedinstutition_pp").append("<li>No records found.!</li>");
+                    $("#listview-dcr_unlistedinstutition_pp").append("<li>No records found!</li>");
                 }
             },
             template: $("#template-dcr_unlistedinstutition_pp").html(),
@@ -479,7 +483,7 @@ function fun_db_APP_Insert_INS_DCR_Report(Activity_Id, DCR_Master_String, DCR_Ma
         },
         error: function (e) {
             app.utils.loading(false); // alert(e);
-            app.notify.error('Error loading data please try again later.!');
+            app.notify.error('Error loading data please try again later!');
         }
     });
     datasource.fetch(function () {
@@ -491,12 +495,47 @@ function fun_db_APP_Insert_INS_DCR_Report(Activity_Id, DCR_Master_String, DCR_Ma
             localStorage.setItem("DCR_isavailable", 0);
             app.notify.success(data[0].Output_Message);
             fun_clear_dcr_all_details();
+            $('#dvDCRstartView').show(); 
+            fun_clearcontrols_dcrmaster_finalentry();
+            fun_delete_all_dcrrecords();
+            fun_set_dcr_fields();
             app.navigation.navigateDCRstartView();
         }
         else {
-            app.notify.error(data[0].Output_Message);
-        }
+            app.notify.error(data[0].Output_Message); 
+            fun_db_adderrorlog(parseInt($('#hdnLogin_ID').val()), "ETHOS-INS",
+                data[0].Output_Message, data[0].ErrorMessage);
+    } 
     });
 }
 
+
+function fun_db_adderrorlog(Login_ID, App_Name, Error_key, Error_Message) {
+    var errorlogds = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "https://api.everlive.com/v1/dvu4zra5xefb2qfq/Invoke/SqlProcedures/APP_Insert_Error_Log",
+                type: "POST",
+                dataType: "json",
+                data: { 
+                    "Login_ID": Login_ID,
+                    "App_Name": App_Name,
+                    "Error_key": Error_key,
+                    "Error_Message": Error_Message,
+                }
+            }
+        },
+        schema: {
+            parse: function (response) {
+                var errordetails = response.Result.Data[0];
+                return errordetails;
+            }
+        },
+        error: function (e) {
+            app.utils.loading(false); // alert(e);
+            app.notify.error('Error loading data please try again later!');
+        }
+    }); 
+    errorlogds.fetch();
+}
 

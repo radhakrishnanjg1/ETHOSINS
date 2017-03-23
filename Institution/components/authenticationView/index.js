@@ -73,13 +73,13 @@
             var model = vm.user;
             if (model.username == '') {
                 username = model.username;
-                app.notify.error("Enter username.!");
+                app.notify.error("Enter username!");
                 return false;
             }
 
             if (model.password == '') {
                 password = model.password;
-                app.notify.error("Enter password.!");
+                app.notify.error("Enter password!");
                 return false;
             } 
             app.utils.loading(true);
@@ -139,8 +139,7 @@ function fun_db_APP_Verify_Field_User_Authentication(username, password, devicei
                 app.navigation.navigateteamcoverage();// navigateDCRstartView 
                 //navigateLMSleavemanagementView  navigateLMSapplyleaveView navigatedashboard
                 app.utils.loading(false);
-            }
-            
+            } 
             app_db_init();
         }
         else {

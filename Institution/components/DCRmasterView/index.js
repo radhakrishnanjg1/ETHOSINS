@@ -2,28 +2,16 @@
 (function () {
     var view = app.DCRmasterView = kendo.observable();
     var DCRmasterViewModel = kendo.observable({
-        afterShow: function () {
-            // get_dcr_master_id();
+        
+        onShow: function () { 
         },
-        onShow: function () {
+        afterShow: function () {
+            disableBackButton();
             if (!app.utils.checkinternetconnection()) {
                 return app.navigation.navigateoffline("DCRmasterView");
             }
             app.navigation.logincheck();
-            //if (localStorage.getItem("dcr_master_details_live") == null ||
-            //    localStorage.getItem("dcr_master_details_live") != 1) {
-            //    var user = JSON.parse(localStorage.getItem("userdata"));
-            //    var Employee_ID = user.Employee_ID;
-            //    var Sub_Territory_ID = user.Sub_Territory_ID;
-            //    var Designation_ID = user.Designation_ID;
-            //    var Division_ID = user.Division_ID;
-            //    app.utils.loading(true);
-            //    fun_db_APP_Get_DCR_Required_Information(Employee_ID, Sub_Territory_ID,
-            //        Designation_ID, Division_ID);
-            //}
-            //else {
-            //    fun_load_dcr_master_pageload();
-            //}
+            fun_load_dcr_master_pageinit();
             var user = JSON.parse(localStorage.getItem("userdata"));
             var Employee_ID = user.Employee_ID;
             var Sub_Territory_ID = user.Sub_Territory_ID;
@@ -39,14 +27,14 @@
             ddlworkwithmaster.close();
             var ddlworkwithmaster = $("#ddlworkwithmaster").data("kendoMultiSelect").value().toString();
             if (ddlworkwithmaster == "") {
-                app.notify.error("Select work with.!");
+                app.notify.error("Select work with!");
                 return false;
             }
             app.utils.loading(true);
             var user = JSON.parse(localStorage.getItem("userdata"));
             var emp_Sub_Territory_ID = user.Sub_Territory_ID;
             if (Sub_Territory_ID.match(',') && Sub_Territory_ID.match(emp_Sub_Territory_ID)) {
-                app.notify.error("You can't select alone and some one at same time.!");
+                app.notify.error("You can't select alone and some one at same time!");
                 return false;
             }
             else {
@@ -58,11 +46,11 @@
             var ddlactivityperiod = parseInt($("#ddlactivityperiod").val());
             var ddlactivity = parseInt($("#ddlactivity").val());
             if (ddlactivityperiod == "" || isNaN(ddlactivityperiod)) {
-                app.notify.error("Select period.!");
+                app.notify.error("Select period!");
                 return false;
             }
             if (ddlactivity == "" || isNaN(ddlactivity)) {
-                app.notify.error("Select activity.!");
+                app.notify.error("Select activity!");
                 return false;
             }
             else {
@@ -72,20 +60,20 @@
                 if (ddlactivity == 235) //Field Work
                 {
                     if (ddlcategory == "" || isNaN(ddlcategory)) {
-                        app.notify.error("Select category.!");
+                        app.notify.error("Select category!");
                         return false;
                     }
                     else if (ddlmode == "" || isNaN(ddlmode)) {
-                        app.notify.error("Select mode.!");
+                        app.notify.error("Select mode!");
                         return false;
                     }
                     else if (ddlsfcroute == "" || isNaN(ddlsfcroute)) {
-                        app.notify.error("Select SFC route.!");
+                        app.notify.error("Select SFC route!");
                         return false;
                     }
                     else {
                         fun_save_dcrmaster_fieldstaff();
-                        fun_clearcontrols_dcrmaster();
+                        fun_clearcontrols_dcrmaster_fieldstaff();
                         //app.notify.success('Master details saved successfully.');
                         app.navigation.navigateDCRinstitutionView();
                     }
@@ -104,11 +92,11 @@
                     var ddlworkwithmaster = $("#ddlworkwithmaster").data("kendoMultiSelect").value().toString();
                     var ddlmajortownmaster = $("#ddlmajortownmaster").data("kendoMultiSelect").value().toString();
                     if (ddlworkwithmaster == "") {
-                        app.notify.error("Select work with.!");
+                        app.notify.error("Select work with!");
                         return false;
                     }
                     else if (ddlmajortownmaster == "") {
-                        app.notify.error("Select major town.!");
+                        app.notify.error("Select major town!");
                         return false;
                     }
                     else {
@@ -117,11 +105,11 @@
                         var emp_Sub_Territory_ID = user.Sub_Territory_ID;
                         var Sub_Territory_ID = ddlworkwithmaster;
                         if (Sub_Territory_ID.match(',') && Sub_Territory_ID.match(emp_Sub_Territory_ID)) {
-                            app.notify.error("You can't select alone and some one at same time.!");
+                            app.notify.error("You can't select alone and some one at same time!");
                             return false;
                         }
                         fun_save_dcrmaster_secondflow();
-                        fun_clearcontrols_dcrmaster();
+                        fun_clearcontrols_dcrmaster_secondflow();
                         //app.notify.success('Master details saved successfully.'); 
                         app.navigation.navigateDCRfinaentryView();
                     }
@@ -130,11 +118,16 @@
                     || ddlactivity == 242 || ddlactivity == 243
                     || ddlactivity == 244 || ddlactivity == 1131) // other option Sunday / Holiday/cl/sl/el/lta/nyjd
                 {
+                    if (ddlactivityperiod == 228) // other option Sunday / Holiday/cl/sl/el/lta/nyjd
+                    {
+                        app.notify.error("Activity period and activity combination is not allowed!");
+                        return false;
+                    }
                     fun_save_dcrmaster_otherflow();
-                    fun_clearcontrols_dcrmaster();
+                    fun_clearcontrols_dcrmaster_otherflow();
                     //app.notify.success('Master details saved successfully.');
                     app.navigation.navigateDCRfinaentryView();
-                }
+                }  
             }
 
             //after validate n save n redirect next page
@@ -159,7 +152,7 @@
 //    });
 //}
 
-function fun_clearcontrols_dcrmaster() {
+function fun_clearcontrols_dcrmaster_fieldstaff() {
     var ddlactivityperiod = $("#ddlactivityperiod").data("kendoDropDownList");
     ddlactivityperiod.value("---Select---");
     var ddlactivity = $("#ddlactivity").data("kendoDropDownList");
@@ -169,11 +162,25 @@ function fun_clearcontrols_dcrmaster() {
     var ddlmode = $("#ddlmode").data("kendoDropDownList");
     ddlmode.value("---Select---");
     var ddlsfcroute = $("#ddlsfcroute").data("kendoDropDownList");
-    ddlsfcroute.value("---Select---");
+    ddlsfcroute.value("---Select---"); 
+}
+
+function fun_clearcontrols_dcrmaster_secondflow() {
+    var ddlactivityperiod = $("#ddlactivityperiod").data("kendoDropDownList");
+    ddlactivityperiod.value("---Select---");
+    var ddlactivity = $("#ddlactivity").data("kendoDropDownList");
+    ddlactivity.value("---Select---"); 
     var ddlworkwithmaster = $("#ddlworkwithmaster").data("kendoMultiSelect");
     ddlworkwithmaster.value("");
     var ddlmajortownmaster = $("#ddlmajortownmaster").data("kendoMultiSelect");
     ddlmajortownmaster.value("");
+}
+
+function fun_clearcontrols_dcrmaster_otherflow() {
+    var ddlactivityperiod = $("#ddlactivityperiod").data("kendoDropDownList");
+    ddlactivityperiod.value("---Select---");
+    var ddlactivity = $("#ddlactivity").data("kendoDropDownList");
+    ddlactivity.value("---Select---"); 
 }
 
 function fun_load_dcr_master_pageinit() {
@@ -184,8 +191,8 @@ function fun_load_dcr_master_pageinit() {
     $("#ddlsfcroute").kendoDropDownList().data("kendoDropDownList");
 
 
-    if (localStorage.getItem("dcr_master_ispageinitiated") == null ||
-      localStorage.getItem("dcr_master_ispageinitiated") != 1) {
+    //if (localStorage.getItem("dcr_master_ispageinitiated") == null ||
+    //  localStorage.getItem("dcr_master_ispageinitiated") != 1) {
         $("#ddlmajortownmaster").kendoMultiSelect({
             index: 0,
             dataTextField: "Market_Area_Name",
@@ -212,8 +219,8 @@ function fun_load_dcr_master_pageinit() {
                 ddlmajortownmaster.refresh();
             },
         });
-    }
-    localStorage.setItem("dcr_master_ispageinitiated", 1);
+   // }
+    //localStorage.setItem("dcr_master_ispageinitiated", 1);
 }
 
 function fun_load_dcr_master_pageload() {
@@ -224,9 +231,9 @@ function fun_load_dcr_master_pageload() {
 }
 
 function fun_save_dcrmaster_fieldstaff() {
-    localStorage.setItem("Activity_Period_ID", parseInt($("#ddlactivityperiod").val()));
-    localStorage.setItem("Activity_ID", parseInt($("#ddlactivity").val()));
-    localStorage.setItem("DCR_isavailable", 1);
+    //localStorage.setItem("Activity_Period_ID", parseInt($("#ddlactivityperiod").val()));
+    //localStorage.setItem("Activity_ID", parseInt($("#ddlactivity").val()));
+    //localStorage.setItem("DCR_isavailable", 1);
     // need to save dcr master data in sql lite db
     var dcr_date = $("#txtdcrdate").val();
     var activity_peroid_id = parseInt($("#ddlactivityperiod").val());
@@ -251,29 +258,16 @@ function fun_save_dcrmaster_fieldstaff() {
 
     var user = JSON.parse(localStorage.getItem("userdata"));
     var Employee_ID = user.Employee_ID;
-    var Sub_Territory_ID = user.Sub_Territory_ID;
-    var options = {
-        enableHighAccuracy: true,
-        timeout: 10000
-    };
-    var geolo = navigator.geolocation.getCurrentPosition(function () {
-        app.addto_dcr_master(Employee_ID, Sub_Territory_ID, dcr_date, activity_peroid_id, activity_peroid_name, activity_id, activity_name,
-        category_id, category_name, mode_id, mode_name, sfcroute_id,
-        sfcroute_place, deviation_reason, deviation_description,
-        JSON.stringify(arguments[0].coords.latitude),
-            JSON.stringify(arguments[0].coords.longitude));
-    }, function () {
-        app.addto_dcr_master(Employee_ID, Sub_Territory_ID, dcr_date, activity_peroid_id, activity_peroid_name, activity_id, activity_name,
+    var Sub_Territory_ID = user.Sub_Territory_ID; 
+    app.addto_dcr_master(Employee_ID, Sub_Territory_ID, dcr_date, activity_peroid_id, activity_peroid_name, activity_id, activity_name,
         category_id, category_name, mode_id, mode_name, sfcroute_id,
         sfcroute_place, deviation_reason, deviation_description,
         "", "");
-    }, options);
+    setTimeout(fun_update_dcr_master_geo, 1000);
 }
 
 function fun_save_dcrmaster_secondflow() {
-    localStorage.setItem("Activity_Period_ID", parseInt($("#ddlactivityperiod").val()));
-    localStorage.setItem("Activity_ID", parseInt($("#ddlactivity").val()));
-    localStorage.setItem("DCR_isavailable", 1);
+      
     // need to save dcr master data in sql lite db
     var dcr_date = $("#txtdcrdate").val();
     var activity_peroid_id = parseInt($("#ddlactivityperiod").val());
@@ -294,23 +288,12 @@ function fun_save_dcrmaster_secondflow() {
 
     var user = JSON.parse(localStorage.getItem("userdata"));
     var Employee_ID = user.Employee_ID;
-    var Sub_Territory_ID = user.Sub_Territory_ID;
-    var options = {
-        enableHighAccuracy: true,
-        timeout: 10000
-    };
-    var geolo = navigator.geolocation.getCurrentPosition(function () {
-        app.addto_dcr_master(Employee_ID, Sub_Territory_ID, dcr_date, activity_peroid_id, activity_peroid_name, activity_id, activity_name,
-        category_id, category_name, mode_id, mode_name, sfcroute_id,
-        sfcroute_place, deviation_reason, deviation_description,
-        JSON.stringify(arguments[0].coords.latitude),
-            JSON.stringify(arguments[0].coords.longitude));
-    }, function () {
-        app.addto_dcr_master(Employee_ID, Sub_Territory_ID, dcr_date, activity_peroid_id, activity_peroid_name, activity_id, activity_name,
+    var Sub_Territory_ID = user.Sub_Territory_ID; 
+    app.addto_dcr_master(Employee_ID, Sub_Territory_ID, dcr_date, activity_peroid_id, activity_peroid_name, activity_id, activity_name,
         category_id, category_name, mode_id, mode_name, sfcroute_id,
         sfcroute_place, deviation_reason, deviation_description,
         "", "");
-    }, options);
+    setTimeout(fun_update_dcr_master_geo, 1000);
     // get_dcr_master_id();
     var dcr_master_id = $("#hdndcr_master_id").val();
     var ddlwwrecords = $("#ddlworkwithmaster")
@@ -331,12 +314,11 @@ function fun_save_dcrmaster_secondflow() {
         var mj_name = ddlmjrecords[i].Market_Area_Name;
         app.addto_dcr_master_mj_details(dcr_master_id, mj_id, mj_name);
     });
+    setTimeout(fun_update_dcr_master_geo, 1000);
 }
 
 function fun_save_dcrmaster_otherflow() {
-    localStorage.setItem("Activity_Period_ID", parseInt($("#ddlactivityperiod").val()));
-    localStorage.setItem("Activity_ID", parseInt($("#ddlactivity").val()));
-    localStorage.setItem("DCR_isavailable", 1);
+     
     // need to save dcr master data in sql lite db
     var dcr_date = $("#txtdcrdate").val();
     var activity_peroid_id = parseInt($("#ddlactivityperiod").val());
@@ -354,24 +336,30 @@ function fun_save_dcrmaster_otherflow() {
     var user = JSON.parse(localStorage.getItem("userdata"));
     var Employee_ID = user.Employee_ID;
     var Sub_Territory_ID = user.Sub_Territory_ID;
-    var options = {
-        enableHighAccuracy: true,
-        timeout: 10000
-    };
-    var geolo = navigator.geolocation.getCurrentPosition(function () {
-        app.addto_dcr_master(Employee_ID, Sub_Territory_ID, dcr_date, activity_peroid_id, activity_peroid_name, activity_id, activity_name,
-        category_id, category_name, mode_id, mode_name, sfcroute_id,
-        sfcroute_place, deviation_reason, deviation_description,
-        JSON.stringify(arguments[0].coords.latitude),
-            JSON.stringify(arguments[0].coords.longitude));
-    }, function () {
-        app.addto_dcr_master(Employee_ID, Sub_Territory_ID, dcr_date, activity_peroid_id, activity_peroid_name, activity_id, activity_name,
+     
+    app.addto_dcr_master(Employee_ID, Sub_Territory_ID, dcr_date, activity_peroid_id, activity_peroid_name, activity_id, activity_name,
         category_id, category_name, mode_id, mode_name, sfcroute_id,
         sfcroute_place, deviation_reason, deviation_description,
         "", "");
-    }, options);
+    setTimeout(fun_update_dcr_master_geo, 1000); 
 }
 
+function fun_update_dcr_master_geo()
+{
+    var options = {
+            enableHighAccuracy: false,
+            timeout: 10000
+        };
+    var geolo = navigator.geolocation.getCurrentPosition(function () {
+        app.update_dcr_master_geo(1,
+                JSON.stringify(arguments[0].coords.latitude),
+                JSON.stringify(arguments[0].coords.longitude));
+    }, function () {
+        app.update_dcr_master_geo(1,
+                "",
+                "");
+    }, options);
+}
 function fun_dcr_load_activityperiod() {
     localStorage.setItem("Activity_Period_ID", parseInt($("#ddlactivityperiod").val()));
     localStorage.setItem("Activity_ID", parseInt($("#ddlactivity").val()));
@@ -533,13 +521,12 @@ function fun_db_APP_Get_DCR_Required_Information(Employee_ID, Sub_Territory_ID, 
         },
         error: function (e) {
             app.utils.loading(false); // alert(e);
-            app.notify.error('Error loading data please try again later.!');
+            app.notify.error('Error loading data please try again later!');
         }
     });
     datasource.fetch(function () {
         var data = this.data();
-        app.utils.loading(false);
-        localStorage.setItem("dcr_master_details_live", 1);
+        app.utils.loading(false); 
         localStorage.setItem("dcractivitytypedetails", JSON.stringify(data[0])); // ActivityType details 
 
         localStorage.setItem("dcrproductdetails", JSON.stringify(data[1])); // product details
@@ -555,8 +542,6 @@ function fun_db_APP_Get_DCR_Required_Information(Employee_ID, Sub_Territory_ID, 
         localStorage.setItem("dcrlastreporteddetails", JSON.stringify(data[6])); // last reported details  
 
         localStorage.setItem("dcrtourplandetails", JSON.stringify(data[7])); // tourplan details  based on empid,sub id,reported date
-
-        fun_load_dcr_master_pageinit();
 
         fun_load_dcr_master_pageload();
     });
@@ -582,7 +567,7 @@ function fun_db_dcr_master_APP_Get_Market_Area_Names(Sub_Territory_ID) {
         },
         error: function (e) {
             app.utils.loading(false); // alert(e);
-            app.notify.error('Error loading data please try again later.!');
+            app.notify.error('Error loading data please try again later!');
         }
     });
     datasource.fetch(function () {

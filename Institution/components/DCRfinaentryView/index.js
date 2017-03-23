@@ -6,10 +6,18 @@
     var DCRfinaentryViewModel = kendo.observable({  
         dcrfinalentryValidator: null,
         onShow: function () {
-            //if (!app.utils.checkinternetconnection()) {
-            //    return app.navigation.navigateoffline("DCRfinaentryView");
-            //}
-            //app.navigation.logincheck();  
+            if (!app.utils.checkinternetconnection()) {
+                return app.navigation.navigateoffline("DCRfinaentryView");
+            }
+            app.navigation.logincheck();  
+        },
+        afterShow: function ()
+        {
+            var render_dcrmaster = function (tx, rs) {
+                $("#txtdeviationreason").val(rs.rows.item(0).deviation_reason);
+                $("#txtdescription").val(rs.rows.item(0).deviation_description);
+            }
+            app.select_dcr_master_byid(render_dcrmaster, 1); 
         },
         savefinalentrydetails: function () { 
             //hdnactivityperiod hdnactivity_id
@@ -20,16 +28,28 @@
             .Where("$.Activity_Period_ID==" + Activity_Period_ID + " && $.Activity_ID==" + Activity_ID)
             .ToJSON());
             if (ethosmastervaluesrecords.length == 0) {
-                this.dcrfinalentryValidator = app.validate.getValidator('#form-finalentry');
-                if (!this.dcrfinalentryValidator.validate()) {
-                    return;
+                //this.dcrfinalentryValidator = app.validate.getValidator('#form-finalentry');
+                //if (!this.dcrfinalentryValidator.validate()) {
+                //    return;
+                //}
+                var txtdeviationreason = ($("#txtdeviationreason").val());
+                var txtdescription = parseInt($("#txtdescription").val());
+                if (txtdeviationreason == "") {
+                    app.notify.error("Enter deviation reason!");
+                    return false;
+                }
+                else if (txtdescription == "") {
+                    app.notify.error("Enter description/feedback!");
+                    return false;
+                }
+                else{
                 }
             }
             //update dcr master deviaion details n description
-            var dcr_ins_master_id = parseInt($("#hdndcr_master_id").val());
+            var dcr_ins_master_id = 1;
             app.update_dcr_master_deviation(dcr_ins_master_id,
                 $('#txtdeviationreason').val(), $('#txtdescription').val());
-            fun_clearcontrols_dcrmaster_finalentry();
+            //fun_clearcontrols_dcrmaster_finalentry();
             app.navigation.navigateDCRpreviewView();
         }
     });

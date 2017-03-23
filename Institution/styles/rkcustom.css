@@ -86,6 +86,13 @@ label, span, div, table, th, td {
     font-size: 1em !important;
 }
 
+.padding0 {
+    padding: 0px !important;
+}
+
+.paddingtop10 {
+    padding-top: 10px !important;
+}
 .paddingTopBottom-5 {
     padding-top: 5px !important;
     padding-bottom: 5px !important;
@@ -228,8 +235,7 @@ mark, .mark {
 }
 
 .km-flat .km-button {
-    border: 0 !important;
-    /*background-color:transparent !important ;*/
+    border: 0 !important; 
     background: rgba(0,0,0,0);
 }
 
@@ -246,7 +252,7 @@ mark, .mark {
     margin-left: -2em;
     width: 8em;
     height: 4em;
-    top: 63%;
+    top: 62%;
     left: 47%;
     color: #00C8B7 !important;
     font-size: larger !important;
@@ -328,15 +334,10 @@ label {
 
     #right-drawer li {
         text-align: center !important;
-    }
-/*@media screen and (min-device-width : 414px) 
-and (max-device-height : 736px) and (max-resolution: 401dpi)
-{
-
-}*/
+    } 
 @media(min-height : 480px ) {
-    #login-form, #dvDCRstartView {
-        padding-top: 35% !important;
+    #login-form  {
+        padding-top: 30% !important;
     }
 
     #right-drawer {
@@ -381,22 +382,7 @@ footer {
     height: 40px !important;
     font-size: 16px !important;
     text-align: center;
-}
-
-.cols1 {
-    width: 99% !important;
-    float: left;
-}
-
-.cols2 {
-    width: 49% !important;
-    float: left;
-}
-
-.cols3 {
-    width: 32.5% !important;
-    float: left;
-}
+} 
 
 .horange {
     color: #ff6600 !important;
@@ -407,8 +393,7 @@ footer {
 #dashboard-view .container-fluid {
     padding: 0;
     margin: 0px;
-}
-
+} 
 .btn-success {
     background-color: #006666 !important;
     color: #fff !important;
@@ -459,14 +444,14 @@ footer {
     }
 
 .btn-leave {
-    background-color: #2ABB9B !important;
-    color: #fff !important;
-    border: 0;
-    width: 32%;
+    background-color: #8bc3b9 !important;
+    color: #000 !important;
+    border: 0; 
+    text-transform: uppercase;
 }
 
     .btn-leave:hover {
-        background-color: #36D7B7 !important;
+        background-color: #8bc39b !important;
     }
 
 .btn-leave1 {
@@ -490,8 +475,7 @@ footer {
 
 .paramvalue {
     background-color: #006666 !important;
-    color: #eee !important;
-    /*border: 1px solid !important;*/
+    color: #eee !important; 
     font-size: 16px !important;
     font-weight: 800;
     padding: 6px;
@@ -538,8 +522,22 @@ footer {
     color: #fff !important;
     border: 0px !important;
     padding: 10px 15px !important;
+    text-transform:uppercase;
 }
 
+.panel-headingsubcustom {
+    background-color: #d3d3d3 !important;
+    color: #000 !important;
+    border: 0px !important;
+    padding: 10px 15px !important;
+    text-transform:uppercase;
+}
+.panel-headingmodal {
+    background-color: #006666 !important;
+    color: #fff !important;
+    border: 0px !important;
+    padding: 10px 15px !important; 
+}   
 .accordion-toggle:after {
     /* symbol for "opening" panels */
     font-family: 'Glyphicons Halflings'; /* essential for enabling glyphicon */
@@ -558,23 +556,8 @@ footer {
     padding: 3px 3px;
 }
 
-.padding0 {
-    padding: 0px !important;
-}
-
-.paddingtop10 {
-    padding-top: 10px !important;
-}
 /* bootstrap modal*/
-
-/* LMS start */
-/*.left15 {
-    width: 15% !important;
-}
-.right10 {
-    width: 10% !important;
-    float: right;
-}*/
+ 
 #listview-leaveapprovedetail > .km-list > li,
 #listview-leavecancelapproval > .km-list > li,
 #listview-leavecanceldetail > .km-list > li #listview-leavehistory > .km-list > li {
@@ -582,45 +565,7 @@ footer {
     background-color: darkorange !important;
     color: white !important;
 }
-
-.round {
-    font-weight: 800;
-    /*height: 50px !important;
-    width: 50px !important;
-    padding-top: 15px !important;
-    margin-top: 7px !important;
-    padding-left: 17px !important;
-    border-radius: 50% !important;*/
-    background-color: #006666 !important;
-    color: #fff !important;
-}
-
-.circle-text {
-    width: 50% !important;
-}
-
-    .circle-text:after {
-        content: "";
-        display: block !important;
-        width: 100% !important;
-        height: 0;
-        padding-bottom: 100% !important;
-        background: #4679BD;
-        -moz-border-radius: 50% !important;
-        -webkit-border-radius: 50% !important;
-        border-radius: 50% !important;
-    }
-
-    .circle-text div {
-        float: left !important;
-        width: 100% !important;
-        padding-top: 50% !important;
-        line-height: 1em !important;
-        margin-top: -0.5em !important;
-        text-align: center;
-        color: white;
-    }
-
+ 
 .leavedesc {
     font-weight: 800;
     padding-left: 10px !important;
@@ -650,40 +595,30 @@ footer {
     -webkit-appearance: checkbox;
 }
 /* LMS end */
-
-/*.km-flat, .km-flat .k-toolbar, .km-flat .km-content, 
-.km-flat .km-detail, .km-flat .km-navbar {
-    background: url('../images/bg2.png') top center no-repeat;
-}*/
-.km-flat .km-content {
+ 
+/*.km-flat .km-content {
     background: url('../images/bg1.png') no-repeat;
     background-position-x: center;
     background-position-y: -100px;
-}
+}*/
 
 .signbackground {
     background: url('../images/bg1.png') no-repeat;
     background-position-x: center;
     background-position-y: -100px;
-}
-
-#dvsignin .form-control {
-    /*height: 1.6em !important;
-    font-size: 1.2em !important;*/
-}
-
-#dvsignin .input-group-addon {
-    background-color: #00C8B7 !important;
+} 
+#dvsignin .input-group-addon { 
+    background-color: #ff6600 !important;
     color: #fff !important;
 }
 
 #dvsignin i {
-    background-color: #00C8B7 !important;
+    background-color: #ff6600 !important;
     color: #fff !important;
 }
 
 #dvsignin .btn-block {
-    background-color: #00C8B7 !important;
+    background-color: #006666 !important;
     color: #fff !important;
     font-weight: bold;
     text-align: center;
@@ -715,6 +650,6 @@ footer {
 /*field locator start*/
 #map {
     height: 325px;
-    width: 300px;
+    width: 98% !important ;
 }
 /*field locator end*/

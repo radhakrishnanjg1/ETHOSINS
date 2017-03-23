@@ -2,11 +2,11 @@
      data-after-show="disableBackButton" data-before-hide="enableBackButton"
      data-layout="afterlogin"
      data-model="app.DCRfinaentryView.DCRfinaentryViewModel"
-     data-bind="events: { show: onShow }"> 
-    <footer data-role="footer"> 
-        <div class="cols1 btnborder btn-block"
+     data-bind="events: { show: onShow ,afterShow: afterShow }">
+    <footer data-role="footer">
+        <div class="row text-center"
              data-role="button" data-bind="events: {click: savefinalentrydetails }">
-            Preview
+            <i class="fa fa-check-square"> </i> Preview
         </div>
     </footer>
     <div id="dvDCRfinaentryView">
@@ -25,9 +25,9 @@
                             <label class="control-label">Description/ Feedback</label>
                             <input name="txtdescription" id="txtdescription"
                                    required
-                                   class="form-control" type="text" 
+                                   class="form-control" type="text"
                                    onkeyup="return textinputlength(this.value, 1000, this.id);" />
-                        </div> 
+                        </div>
                     </form>
                 </div>
             </div>

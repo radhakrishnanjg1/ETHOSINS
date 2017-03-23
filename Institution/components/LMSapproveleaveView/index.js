@@ -29,7 +29,7 @@ function load_leave_approve_details(records) {
         dataBound: function (e) {
             if (this.dataSource.data().length == 0) {
                 //custom logic
-                $("#listview-leaveapprovedetail").append("<li>No records found.!</li>");
+                $("#listview-leaveapprovedetail").append("<li>No records found!</li>");
             }
         },
         template: $("#template-leaveapprovedetail").html(), 
@@ -42,7 +42,7 @@ function fun_leave_approve(e) {
     var remarks = "";
     var employee_id = data.employee_id;
     var leave_type_id = data.leave_type_id; 
-    var confirmation = "Are you sure you want to Approve.?";
+    var confirmation = "Are you sure you want to approve?";
     app.notify.confirmation(confirmation, function (confirm) {
         if (!confirm) {
             return;
@@ -75,7 +75,7 @@ function fun_leave_reject_submit() {
     }
     else
     {
-        app.notify.error('Enter the remarks to proceed.!');
+        app.notify.error('Enter the remarks to proceed!');
     } 
 }
 
@@ -131,7 +131,7 @@ function fun_db_APP_Update_Ethos_Leave_Approval(Ethos_leave_master_id, Remarks, 
         },
         error: function (e) {
             app.utils.loading(false); // alert(e);
-            app.notify.error('Error loading data please try again later.!');
+            app.notify.error('Error loading data please try again later!');
         }
     });
     datasource.fetch(function () {
@@ -170,7 +170,7 @@ function fun_db_APP_Update_Ethos_Leave_Rejected(Ethos_leave_master_id, Remarks, 
         },
         error: function (e) {
             app.utils.loading(false); // alert(e);
-            app.notify.error('Error loading data please try again later.!');
+            app.notify.error('Error loading data please try again later!');
         }
     });
     datasource.fetch(function () {

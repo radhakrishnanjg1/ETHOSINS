@@ -33,11 +33,11 @@
                 return;
             }
             if (profile.oldpassword === profile.newpassword) {
-                app.notify.error('Old password and New password should be not same.!');
+                app.notify.error('Old password and New password should be not same!');
                 return;
             }
             if (profile.newpassword !== profile.confirmpassword) {
-                app.notify.error('New password and confirm password are not same.!');
+                app.notify.error('New password and confirm password are not same!');
                 return;
             }
 

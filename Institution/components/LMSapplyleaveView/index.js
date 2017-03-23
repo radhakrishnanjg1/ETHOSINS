@@ -13,9 +13,8 @@
             fun_applyleave_pageload();
             validator = app.validate.getValidator('#form-applyleave');
             fun_applyleaveclearcontrols();
-        },
-
-        showData: function () {
+        }, 
+        afterShow: function () {
         }, 
         fun_applyleavesaveleavedetails: function () { 
             if (fun_applyleave_validation()) {
@@ -55,8 +54,8 @@ function fun_applyleave_pageload() {
     //var datepickertxtfrom = $("#txtfrom").data("kendoDatePicker");
     //datepickertxtfrom.readonly(false);
     //var datepickertxtto = $("#txtto").data("kendoDatePicker");
-    //datepickertxtto.readonly(false);
-    //$("#txtfrom").attr("readonly", "readonly");
+    //datepickertxtto.readonly(true);
+    //$("#txtfrom").attr("disabled", "true");
     //$(".k-datepicker input").prop("readonly", "readonly");
     var currentyearvalue = new Date().getFullYear();
     $("#currentyear").html(currentyearvalue);
@@ -117,11 +116,15 @@ function fun_applyleave_txttochange() {
     var diff_date = end - start;
     //var days = (Math.floor(((diff_date % 31536000000) % 2628000000) / 86400000)) + 1;
     var days = ((end - start) / 1000 / 60 / 60 / 24) + 1;
-    $("#txtdays").val(days);
+    if (days < 0) {
+        $("#txtdays").val(0);
+    } else {
+        $("#txtdays").val(days);
+    }
 }
 
 function fun_applyleave_leavetypechange(leavetype) {
-    $('#dvleavenorms p').hide();
+    $('#dvleavenorms div').hide();
     $('#dvaddress').hide();
     $('#dvpreviousltaperiod').hide();
     $('#dvnextltaeligibility').hide();
@@ -129,13 +132,16 @@ function fun_applyleave_leavetypechange(leavetype) {
     $('#dvearneddays').hide();
     $('#dveventdetailsforelencashment').hide();
     $('#dvcommoneventdetails').show();
+    $('#spanleavenorms').html('Leave Norms');
     if (leavetype == 865) {
         $('#dveldays').show();
         $('#dvleavenorms #paraCL').show();
+        $('#spanleavenorms').html('Casual Leave (CL) Norms');
     }
     else if (leavetype == 866) {
         $('#dveldays').show();
         $('#dvleavenorms #paraSL').show();
+        $('#spanleavenorms').html('Sick Leave (SL) Norms');
     }
     else if (leavetype == 868) {
         $('#dvaddress').show();
@@ -143,15 +149,18 @@ function fun_applyleave_leavetypechange(leavetype) {
         $('#dvpreviousltaperiod').show();
         $('#dvnextltaeligibility').show();
         $('#dvearneddays').show();
+        $('#spanleavenorms').html('Leave Travel Allowance (LTA) Norms');
     }
     else if (leavetype == 867) {
         $('#dvleavenorms #paraEL').show();
         $('#dvearneddays').show();
+        $('#spanleavenorms').html('Earned Leave (EL) Norms');
     }
     else if (leavetype == 869) {
         $('#dveventdetailsforelencashment').show();
         $('#dvcommoneventdetails').hide();
         $('#dvleavenorms #paraEncashment').show();
+        $('#spanleavenorms').html('Leave Encashment Norms');
     }
     else if (leavetype == 2234) {
         $('#txtopeningbalance').val('0');
@@ -160,6 +169,7 @@ function fun_applyleave_leavetypechange(leavetype) {
         $('#txtearneddays').val('0');
 
         $('#dvleavenorms #paraMaternity').show();
+        $('#spanleavenorms').html('Maternity Leave (ML) Norms');
         $('#dvcommoneventdetails').show();
         $('#dvearneddays').show();
     }
@@ -170,11 +180,13 @@ function fun_applyleave_leavetypechange(leavetype) {
         $('#txtearneddays').val('0');
 
         $('#dvleavenorms #paraPaternity').show();
+        $('#spanleavenorms').html('Paternity Leave (PL) Norms');
         $('#dvcommoneventdetails').show();
         $('#dvearneddays').show();
     }
     else {
-        $('#dvleavenorms p').hide();
+        $('#dvleavenorms div').hide();
+        $('#spanleavenorms').html('Leave Norms');
     }
 }
 
@@ -189,37 +201,37 @@ function fun_applyleave_validation() {
     var txtnodayelencash = $("#txtnodayelencash").val();
     var txteligibledays = $("#txteligibledays").val();
     if (leavetype == "" || isNaN(leavetype) || leavetype == null) {
-        app.notify.error("Select leavetype.!");
+        app.notify.error("Select leavetype!");
         return false;
     }
     if (leavetype == 865 || leavetype == 866 || leavetype == 867
         || leavetype == 868 || leavetype == 2234 || leavetype == 2242) {
 
         if (start == "" || start == null) {
-            app.notify.error("Select from date.!");
+            app.notify.error("Select from date!");
             return false;
         }
         if (end == "" || end == null) {
-            app.notify.error("Select to date.!");
+            app.notify.error("Select to date!");
             return false;
         }
         if (txtmobilenumber == "") {
-            app.notify.error("Enter Mobile Number.!");
+            app.notify.error("Enter Mobile Number!");
             return false;
         }
         if (txtreason == "") {
-            app.notify.error("Enter reason.!");
+            app.notify.error("Enter reason!");
             return false;
         }
         if (leavetype == 868 && txtaddress == "") {
-            app.notify.error("Enter address.!");
+            app.notify.error("Enter address!");
             return false;
         }
 
     }
     else if (leavetype == 869) {
         if (txtnodayelencash == "") {
-            app.notify.error("Enter number of days.!");
+            app.notify.error("Enter number of days!");
             return false;
         }
     }
@@ -482,7 +494,7 @@ function fun_db_APP_Get_Employee_Leave_Details(leavetype, Employee_ID) {
         },
         error: function (e) {
             app.utils.loading(false); // alert(e);
-            app.notify.error('Error loading data please try again later.!');
+            app.notify.error('Error loading data please try again later!');
         }
     }); 
     datasource.fetch(function () {
@@ -585,7 +597,7 @@ function fun_db_APP_Insert_Ethos_Leave_Master(Employee_ID, Leave_Type_ID, Openin
         },
         error: function (e) {
             app.utils.loading(false); // alert(e);
-            app.notify.error('Error loading data please try again later.!');
+            app.notify.error('Error loading data please try again later!');
         }
     });
     datasource.fetch(function () {

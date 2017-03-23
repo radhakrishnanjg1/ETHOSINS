@@ -124,7 +124,7 @@ $.noty.themes.metroui = {
         this.$buttons.css({borderTop: '1px solid #1BA1E2'});
         break;
       case 'success':
-        this.$bar.css({backgroundColor: '#60A917', border: 'none', color: '#fff'});
+          this.$bar.css({ backgroundColor: '#5CB85C', border: 'none', color: '#fff' });
         this.$buttons.css({borderTop: '1px solid #50C24E'});
         break;
       default:

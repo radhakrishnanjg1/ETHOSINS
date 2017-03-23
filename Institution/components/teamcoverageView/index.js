@@ -24,12 +24,15 @@
                 $('#dvteamename').html($('#txtauocmpemployeelist').val().split("|")[0]);
                 var empid = $('#txtauocmpemployeelist').val().split("|")[1];
                 fun_db_APP_Get_Current_MSL_Coverage_Details_INS_Employee_TeamByEmployeeid(empid);
+            } 
+            else if ($('#txtauocmpemployeelist').val()=='ALL') {
+                $('#dvteamename').html('Team');
+                fun_db_APP_Get_Current_MSL_Coverage_Details_INS_Employee_Team($('#hdnEmployee_ID').val());
             }
-
             else {
                 $('#dvteamename').html('Team'); 
                 fun_db_APP_Get_Current_MSL_Coverage_Details_INS_Employee_Team($('#hdnEmployee_ID').val());
-            }
+            } 
         },
     });
 
@@ -56,7 +59,7 @@ function fun_db_APP_Get_Current_MSL_Coverage_Details_INS_Employee_Team(Employee_
         },
         error: function (e) {
             app.utils.loading(false);
-            app.notify.error('Error loading data please try again later.!');
+            app.notify.error('Error loading data please try again later!');
         }
     });
 
@@ -99,7 +102,7 @@ function fun_db_APP_Get_MSL_Coverage_Details_INS_Employee_Team(Employee_ID) {
         },
         error: function (e) {
             app.utils.loading(false); // alert(e);
-            app.notify.error('Error loading data please try again later.!');
+            app.notify.error('Error loading data please try again later!');
         }
     });
 
@@ -144,7 +147,7 @@ function fun_db_APP_Get_Current_MSL_Coverage_Details_INS_Employee_TeamByEmployee
         },
         error: function (e) {
             app.utils.loading(false);
-            app.notify.error('Error loading data please try again later.!');
+            app.notify.error('Error loading data please try again later!');
         }
     });
 
@@ -187,7 +190,7 @@ function fun_db_APP_Get_MSL_Coverage_Details_INS_Employee_TeamByEmployeeid(Emplo
         },
         error: function (e) {
             app.utils.loading(false); // alert(e);
-            app.notify.error('Error loading data please try again later.!');
+            app.notify.error('Error loading data please try again later!');
         }
     });
 
@@ -344,12 +347,12 @@ function loadsubordinatesdetails() {
         dataTextField: "Employee_Name",
         valuePrimitive: true,
         ignoreCase: true,
-        minLength: 3,
+        minLength: 1,
         filter: "contains",
-        placeholder: "Select Employee...",
+        placeholder: "Type employee name or sub territory name",
         clearButton: false,
         //separator: ", "
-        noDataTemplate: 'No records found!',
+        noDataTemplate: 'No records found!', 
         change: function (e) {
             var value = this.value();
             if (value.length > 6) {
@@ -358,7 +361,7 @@ function loadsubordinatesdetails() {
                .Where("$.Employee_Name=='" + value + "'")
                .ToJSON());
                 if (ethosmastervaluesrecords.length == 0) {
-                    app.notify.error("Select valid employee name in list.!");
+                    app.notify.error("Select valid employee name in list!");
                     return false;
                 }
                 var empid = value.split("|")[1];
@@ -366,7 +369,11 @@ function loadsubordinatesdetails() {
                 app.utils.loading(true);
                 fun_db_APP_Get_MSL_Coverage_Details_INS_Employee_TeamByEmployeeid(empid);
             }
-            // Use the value of the widget
+            else if (value == 'ALL') {
+                $('#dvteamename').html('Team');
+                fun_db_APP_Get_Current_MSL_Coverage_Details_INS_Employee_Team($('#hdnEmployee_ID').val());
+            }
+            $('.k-nodata').hide(); 
         }
     });
 }

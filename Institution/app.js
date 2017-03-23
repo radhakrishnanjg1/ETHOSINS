@@ -38,13 +38,11 @@
             }
             if (device.platform === 'iOS' && parseFloat(device.version) >= 7.0) {
                 document.body.style.marginTop = "20px";
-            }
-            
+            } 
             bootstrap();
           
         }, false);
-    } else {
-        
+    } else { 
         bootstrap();
     }
 
@@ -612,6 +610,16 @@
         });
     };
 
+    // update dcr master geo
+    app.update_dcr_master_geo = function (dcr_master_id, Latitude, Longitude) {
+        app.db.transaction(function (tx) {
+            tx.executeSql("update dcr_master SET Latitude =?, Longitude = ? WHERE dcr_master_id = ? ",
+                          [Latitude, Longitude, dcr_master_id],
+                          app.onsuccess,
+                          app.onError);
+        });
+    };
+
     // update dcr master deviation
     app.update_dcr_master_deviation = function (dcr_master_id, deviation_reason, deviation_description) {
         app.db.transaction(function (tx) {
@@ -620,7 +628,7 @@
                           app.onsuccess,
                           app.onError);
         });
-    }; 
+    };
      
     app.onError = function (tx, e) {
         alert(e.message);

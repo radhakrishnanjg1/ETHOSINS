@@ -5,6 +5,7 @@
     var view = app.DCRinstitutionView = kendo.observable();
     var DCRinstitutionViewModel = kendo.observable({
         onShow: function () {
+            disableBackButton();
             if (!app.utils.checkinternetconnection()) {
                 return app.navigation.navigateoffline("DCRinstitutionView");
             }
@@ -19,22 +20,24 @@
             }
 
         },
+        afterShow: function () {
+            disableBackButton();
+            get_dcr_listedinstitution_values();
+        },
         dcrlistedscrValidator: null,
         savelisteddcrdetails: function () {
-            this.dcrlistedscrValidator = app.validate.getValidator('#form-listeddcr');
-            if (!this.dcrlistedscrValidator.validate()) {
-                //$(".k-invalid-msg").show();
-                return;
-            }
+            //this.dcrlistedscrValidator = app.validate.getValidator('#form-listeddcr');
+            //if (!this.dcrlistedscrValidator.validate()) { 
+            //    return;
+            //}
             //check auto complete string is a avaliable or not 
             var txtlistedinstitution = $("#txtlistedinstitution").val();
             var ethosmastervaluesdata = JSON.parse(localStorage.getItem("dcrinstutitiondetails"));
             var ethosmastervaluesrecords = JSON.parse(Enumerable.From(ethosmastervaluesdata)
-           .Where("$.Institution_Name=='" + txtlistedinstitution+"'")
+           .Where("$.Institution_Name=='" + txtlistedinstitution + "'")
            .ToJSON());
-            if (ethosmastervaluesrecords.length == 0)
-            {
-                app.notify.error("Select valid institution in list.!");
+            if (ethosmastervaluesrecords.length == 0) {
+                app.notify.error("Select valid institution in list!");
                 return false;
             }
             // first check kdm selected or not 
@@ -43,30 +46,51 @@
                             .data("kendoGrid").dataItems();
             $.each(gridkdmdetails, function (i, item) {
                 var pob = gridkdmdetails[i].POB;
-                if ( parseInt(pob) >= 0) {
+                if (parseInt(pob) >= 0) {
                     kdmflag = true;
                     return true;
                 }
             });
+            var ddlworkwithinst = $("#ddlworkwithinst").data("kendoMultiSelect").value().toString();
+            var ddlproductspromotedinst = $("#ddlproductspromotedinst").data("kendoMultiSelect").value().toString();
             if (!kdmflag) {
-                app.notify.error("Enter POB for any one of KDM.!");
+                app.notify.error("Enter POB for any one of KDM!");
                 return false;
-            }  
-            //save dcr listed details
-            fun_save_dcr_institution();
-            //fun_load_dcr_institution_pageload();
-            fun_clearcontrols_dcr_listedinstitution();
-            app.notify.success('Institution details saved successfully.');
+            }
+            else if (ddlworkwithinst == "") {
+                app.notify.error("Select work with!");
+                return false;
+            }
+            else if (ddlproductspromotedinst == "") {
+                app.notify.error("Select products promoted!");
+                return false;
+            }
+            else {
+                //save dcr listed details
+                fun_save_dcr_institution();
+                //fun_load_dcr_institution_pageload();
+                fun_clearcontrols_dcr_listedinstitution();
+                app.notify.success('Institution details saved successfully.');
+            }
         },
-    }); 
+    });
     view.set('DCRinstitutionViewModel', DCRinstitutionViewModel);
 }());
+
+function get_dcr_listedinstitution_values() {
+    var render_dcr_ins_master = function (tx1, rs1) {
+        // alert("hdndcr_ins_master_id: " + rs1.rows.item(0).dcr_ins_master_id);
+        $("#hdndcr_ins_master_id").val(rs1.rows.item(0).dcr_ins_master_id);
+    }
+    app.select_count_dcr_ins_master_bydcr_master_id(render_dcr_ins_master, 1);
+}
+
 function fun_clearcontrols_dcr_listedinstitution() {
     $('#txtlistedinstitution').val('');
     var ddlworkwithinst = $("#ddlworkwithinst").data("kendoMultiSelect");
     ddlworkwithinst.value([]);
     var ddlproductspromotedinst = $("#ddlproductspromotedinst").data("kendoMultiSelect");
-    ddlproductspromotedinst.value([]); 
+    ddlproductspromotedinst.value([]);
     $("#tblkdmlist").data("kendoGrid").dataSource.data([]);
 }
 
@@ -89,8 +113,8 @@ function fun_load_dcr_institution_pageinit() {
         optionLabel: "---Select---",
         autoClose: false,
         clearButton: false,
-    }); 
-    
+    });
+
 }
 
 function fun_load_dcr_institution_pageload() {
@@ -105,7 +129,7 @@ function fun_load_dcr_institution_pageload() {
 
 function fun_save_dcr_institution() {
     // need to save dcr institution data in sql lite db
-    var dcr_master_id = parseInt($('#hdndcr_master_id').val());
+    var dcr_master_id = 1;
     var instutition_id = $('#txtlistedinstitution').val().split('|')[1];
     var instutition_name = $('#txtlistedinstitution').val().split('|')[0];
 
@@ -114,8 +138,8 @@ function fun_save_dcr_institution() {
     var options = {
         enableHighAccuracy: true,
         timeout: 10000
-    }; 
-    var geolo = navigator.geolocation.getCurrentPosition(function () { 
+    };
+    var geolo = navigator.geolocation.getCurrentPosition(function () {
         app.addto_dcr_ins_master(dcr_master_id, instutition_id, instutition_name,
             JSON.stringify(arguments[0].coords.latitude),
             JSON.stringify(arguments[0].coords.longitude));
@@ -171,9 +195,9 @@ function fun_load_dcr_institution_institutions() {
         dataTextField: "Institution_Name",
         valuePrimitive: true,
         ignoreCase: true,
-        minLength: 3,
+        minLength: 1,
         filter: "contains",
-        placeholder: "Select Institution...",
+        placeholder: "Type institution name",
         clearButton: false,
         //separator: ", "
         //noDataTemplate: 'No records found!',
@@ -185,16 +209,16 @@ function fun_load_dcr_institution_institutions() {
                .Where("$.Institution_Name=='" + value + "'")
                .ToJSON());
                 if (ethosmastervaluesrecords.length == 0) {
-                    app.notify.error("Select valid institution in list.!");
+                    app.notify.error("Select valid institution in list!");
                     return false;
                 }
                 var user = JSON.parse(localStorage.getItem("userdata"));
                 var Sub_Territory_ID = user.Sub_Territory_ID;
                 var ins_msl_number = value.split("|")[1];
                 app.utils.loading(true);
-                fun_dcr_institution_kdms(Sub_Territory_ID, ins_msl_number); 
+                fun_dcr_institution_kdms(Sub_Territory_ID, ins_msl_number);
             }
-            var autocomplete = $("#txtlistedinstitution").data("kendoAutoComplete").close();
+            $('.k-nodata').hide();
         }
     });
 }
@@ -209,23 +233,23 @@ function fun_dcr_institution_kdms(Sub_Territory_ID, Institution_MSL_Number) {
         editable: true,
         columns: [
            { hidden: true, title: "Id", field: "Institution_KDM_ID", editable: false },
-           { enabled:false,title: "KDM", field: "Name_of_Key_Decision_Maker", editable: false, },
+           { enabled: false, title: "KDM", field: "Name_of_Key_Decision_Maker", editable: false, },
            {
-                field: "POB",
-                editor: function (container, options) {
-                    // create an input element
-                    var input = $("<input/>");
-                    // set its name to the field to which the column is bound ('name' in this case)
-                    input.attr("name", options.field);
-                    input.attr("id", options.field);
-                    input.attr("type", "number");
-                    // append it to the container
-                    input.appendTo(container);
-            },
-            editable: true
-            }
+               field: "POB",
+               editor: function (container, options) {
+                   // create an input element
+                   var input = $("<input/>");
+                   // set its name to the field to which the column is bound ('name' in this case)
+                   input.attr("name", options.field);
+                   input.attr("id", options.field);
+                   input.attr("type", "number");
+                   // append it to the container
+                   input.appendTo(container);
+               },
+               editable: true
+           }
         ],
-        dataSource: ethosmastervaluesrecords,  
+        dataSource: ethosmastervaluesrecords,
         //selectable: "multiple, row"
     });
 

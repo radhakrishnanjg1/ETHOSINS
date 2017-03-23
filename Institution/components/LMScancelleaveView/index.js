@@ -25,7 +25,7 @@ function fun_cancelleave_canceldetails(records) {
         dataBound: function (e) {
             if (this.dataSource.data().length == 0) {
                 //custom logic
-                $("#listview-leavecanceldetail").append("<li>No records found.!</li>");
+                $("#listview-leavecanceldetail").append("<li>No records found!</li>");
             }
         },
         template: $("#template-leavecanceldetail").html(),
@@ -48,7 +48,7 @@ function fun_leavecancel_savedetails() {
         }
     }
     else {
-        app.notify.error('Enter the reason for cancellation.!');
+        app.notify.error('Enter the reason for cancellation!');
     }
 }
 
@@ -104,7 +104,7 @@ function fun_db_APP_Update_Ethos_Leave_Cancel(Ethos_leave_master_id, Reason_For_
         },
         error: function (e) {
             app.utils.loading(false); // alert(e);
-            app.notify.error('Error loading data please try again later.!');
+            app.notify.error('Error loading data please try again later!');
         }
     });
     datasource.fetch(function () {

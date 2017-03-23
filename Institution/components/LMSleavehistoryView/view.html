@@ -3,14 +3,17 @@
      data-layout="afterlogin"
      data-model="app.LMSleavehistoryView.LMSleavehistoryViewModel"
      data-bind="events: { show: onShow }">
-    <footer data-role="footer"> 
-        <div class="cols2 btnborder" data-role="button" data-click="app.navigation.back">
-            Back
+    <footer data-role="footer">
+        <div class="row text-center">
+            <div data-role="button"
+                 data-click="app.navigation.back">
+                <i class="fa fa-arrow-left"></i> Back
+            </div>
+            <div data-role="button"
+                 data-click="app.navigation.navigateholidays">
+                <i class="fa fa-calendar"> </i> Holidays
+            </div>
         </div>
-        <div class="cols2 btnborder" data-role="button" 
-             data-click="app.navigation.navigateholidays">
-            Holidays
-        </div> 
     </footer>
     <div id="dvleavehistory">
         <div class="panel-body padding0">
@@ -18,8 +21,8 @@
             <script type="text/x-kendo-tmpl" id="template-leavehistory">
                 <div class="row">
                     <div class="col-xs-1">
-                        <div class="pull-left">
-                            <h2> #: No_Of_Days #</h2>
+                        <div class="pull-left" style="padding-top:10px !important">
+                            <h3 class="horange"> #: No_Of_Days #</h3>
                         </div>
                     </div>
                     <div class="col-xs-11" style="padding-left:15px!important">

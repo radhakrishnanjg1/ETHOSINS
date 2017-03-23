@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Ethos HO APP</title>
+    <title>ETHOS-INS APP</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *;
@@ -9,20 +9,19 @@
 	'unsafe-inline' 'unsafe-eval' *;">
 
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <!--<link href="styles/bootstrap-responsive.min.css" rel="stylesheet" />-->
     <link href="bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="kendo/styles/kendo.common.min.css" rel="stylesheet" />
     <link href="kendo/styles/kendo.default.min.css" rel="stylesheet" />
-    <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
-    <!--<link href="kendo/styles/kendo.custom-Himalaya.css" rel="stylesheet" />-->
-    <!--<link href="styles/custom.css" rel="stylesheet" />-->
-
-
+    <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" /> 
+    <!--Mapbox css-->
+    <!--<link href="styles/mapbox.css" rel="stylesheet" />-->
     <link href="styles/rkcustom.css" rel="stylesheet" />
     <script src="cordova.js"></script>
     <script src="kendo/js/jquery.min.js"></script>
     <script src="kendo/js/kendo.dataviz.mobile.min.js"></script>
     <script src="scripts/kendo.all.min.js"></script>
+    <!--Mapbox scripts and css-->
+    <script src="scripts/mapbox.js"></script>
     <!--bower components-->
     <script src="bower_components/everlive/src/everlive.all.js"></script>
     <script src="bower_components/lodash/dist/lodash.min.js"></script>
@@ -30,8 +29,7 @@
     <script src="bower_components/noty/js/noty/layouts/bottom.js"></script>
     <script src="bower_components/noty/js/noty/themes/metroui.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!--App and utilities scripts-->
-    <!--<script src="scripts/common/geolocation.js"></script>-->
+    <!--App and utilities scripts--> 
     <script src="app.js"></script>
     <script src="scripts/common/navigation.js"></script>
     <script src="scripts/common/notify.js"></script>
@@ -39,9 +37,7 @@
     <script src="scripts/common/validate.js"></script>
     <script src="scripts/common/constants.js"></script>
     <script src="scripts/common/utils.js"></script>
-    <script src="scripts/rkutilities.js"></script>
-    <!--<script src="scripts/lazyload.js"></script>
-    <script src="scripts/fileHelper.js"></script>-->
+    <script src="scripts/rkutilities.js"></script> 
     <script src="scripts/linq.min.js"></script>
 
     <!--data provider-->
@@ -81,9 +77,11 @@
     <!--common -->
     <script src="components/offlineView/index.js"></script>
 
-    <script src='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.js'></script>
+    <!--Mapbox scripts and css--> 
+    <!--<script src='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.js'></script>-->
     <link href='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.css' rel='stylesheet' />
-
+    
+    
 
 </head>
 <body id="ethosapp">
@@ -119,8 +117,9 @@
     <div data-role="drawer" id="left-drawer" data-title="left"
          data-swipe-to-open-views="['dashboard-view','teamcoveragedetail-view',
          'LMSleavemanagementView','LMSapplyleaveView','LMScancelleaveView',
-         'LMScancelleaveView','LMSapproveleaveView','LMSapproveleaveView',
+         'LMSleavehistoryView','LMSapproveleaveView','LMSapproveleavecancelView',
          'DCRstartView',
+         'fieldlocatorView',
          'holidays-view','profile-view','changepassword-view']">
         <header data-role="header">
             <div>
@@ -133,6 +132,8 @@
                 </span>
                 <input type="hidden" id="hdnLogin_ID" value="0" />
                 <input type="hidden" id="hdnEmployee_ID" value="0" />
+                <input type="hidden" name="hdnlatitude" id="hdnlatitude" value="" />
+                <input type="hidden" name="hdnlongitude" id="hdnlongitude" value="" />
             </li>
             <li data-role="button" data-click="app.navigation.navigatedashboard"
                 id="dvindvcoverage" style="display:none">
@@ -146,7 +147,7 @@
                 <i class="fa fa-1-5x fa-list-ol"></i> Leave Mgt. System
             </li>
             <li data-role="button" data-click="app.navigation.navigateDCRstartView">
-                <i class="fa fa-1-5x fa-inr"></i> DCR
+                <i class="fa fa-1-5x fa-calendar-plus-o"></i> DCR
             </li>
             <!--<li data-role="button" data-click="app.navigation.navigateDCRscheduleView">
                 <i class="fa fa-1-5x fa-calendar-check-o"></i>  DCR View
@@ -163,8 +164,9 @@
     <div data-role="drawer" id="right-drawer" data-position="right"
          data-swipe-to-open-views="['dashboard-view','teamcoveragedetail-view',
          'LMSleavemanagementView','LMSapplyleaveView','LMScancelleaveView',
-         'LMScancelleaveView','LMSapproveleaveView','LMSapproveleaveView',
+         'LMSleavehistoryView','LMSapproveleaveView','LMSapproveleavecancelView',
          'DCRstartView',
+         'fieldlocatorView',
          'holidays-view','profile-view','changepassword-view']">
         <ul data-role="listview" class="km-vertical-tabstrip nav" style="background-color:#fff !important">
             <li data-role="button" data-click="app.navigation.navigateProfile">

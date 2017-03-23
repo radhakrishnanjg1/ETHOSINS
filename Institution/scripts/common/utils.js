@@ -37,6 +37,19 @@ var keyboarddisableScroll = function () {
             + "manufacturer:" + device.manufacturer + "|"
             + "serial:" + device.serial;
         return deviceinformation;
+    };
+    app.utils.get_geoinfo = function (action) {
+        var options = {
+            enableHighAccuracy: false,
+            timeout: 10000
+        };
+        $('#hdnlatitude').val('');
+        $('#hdnlongitude').val('');
+        var geolo = navigator.geolocation.getCurrentPosition(function () {
+            $('#hdnlatitude').val(JSON.stringify(arguments[0].coords.latitude)); 
+            $('#hdnlongitude').val(JSON.stringify(arguments[0].coords.longitude));
+        }, function () {
+        }, options); 
     }; 
     //Menual checking internet checking 
     app.utils.checkinternetconnection = function () {

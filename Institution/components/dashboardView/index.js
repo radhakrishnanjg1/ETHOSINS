@@ -5,6 +5,7 @@
     var view = app.dashboardView = kendo.observable();
     var dashboardViewModel = kendo.observable({
         onShow: function () {
+            app_db_init();
             if (!app.utils.checkinternetconnection()) {
                 return app.navigation.navigateoffline("dashboardView");
             }

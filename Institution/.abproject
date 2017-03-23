@@ -22,7 +22,7 @@
     "Portrait"
   ],
   "AndroidHardwareAcceleration": "true",
-  "iOSStatusBarStyle": "Default",
+  "iOSStatusBarStyle": "BlackOpaque",
   "Framework": "Cordova",
   "WP8TileTitle": "",
   "WP8Publisher": "",
@@ -43,9 +43,7 @@
   ],
   "CordovaPluginVariables": {
     "com.telerik.plugin.telerikanalytics": {
-      "PRODUCT_ID": "6431c65bf8674b178e4fa0b206094f1f",
-      "AUTO_TRACK_EXCEPTIONS": "True",
-      "AUTO_TRACK_KENDO_EVENTS": "True"
+      "PRODUCT_ID": "6431c65bf8674b178e4fa0b206094f1f"
     }
   },
   "iOSDeploymentTarget": "6.0",
