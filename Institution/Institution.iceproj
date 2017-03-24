@@ -572,6 +572,8 @@
     <Content Include="components\LMSleavemanagementView\view.html" />
     <Content Include="components\offlineView\index.js" />
     <Content Include="components\offlineView\view.html" />
+    <Content Include="components\supportView\index.js" />
+    <Content Include="components\supportView\view.html" />
     <Content Include="components\teamcoverageView\index.js" />
     <Content Include="components\teamcoverageView\view.html" />
     <Content Include="components\updateprofileView\index.js" />
@@ -581,6 +583,7 @@
     <Content Include="cordova.wp8.js" />
     <Content Include="cultures\en\app.json" />
     <Content Include="dataProviders\defaultProvider.js" />
+    <Content Include="images\admin.png" />
     <Content Include="images\continue.jpg" />
     <Content Include="images\ethoslogo.png" />
     <Content Include="images\H_logo.png" />
@@ -847,6 +850,7 @@
     <Folder Include="components\DCRpreviewView\" />
     <Folder Include="components\fieldlocatorView\" />
     <Folder Include="components\DCRscheduleView\" />
+    <Folder Include="components\supportView\" />
     <Folder Include="components\teamcoverageView\" />
     <Folder Include="components\offlineView\" />
     <Folder Include="components\updateprofileView\" />

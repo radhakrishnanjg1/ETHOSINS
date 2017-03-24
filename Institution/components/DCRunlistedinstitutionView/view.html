@@ -22,7 +22,14 @@
         </div>
     </footer>
     <div id="dvDCRunlistedinstitutionView">
-        <div class="panel panel-custom padding0">
+        <div class="panel panel-custom">
+            <!--<div class="panel-headingcustom">
+                <div class="row">
+                    <div class="col-xs-12">
+                        Needed
+                    </div>
+                </div>
+            </div>-->
             <div class="panel-body">
                 <div class="row">
                     <form id="form-unlistedscr">
@@ -43,7 +50,7 @@
                                    class="form-control" required>
                         </div>-->
                         <div class="form-group col-xs-6 col-sm-6">
-                            <label class="control-label">POB</label>
+                            <label class="control-label">Orders</label>
                             <input name="txtpobsingle" id="txtpobsingle" required
                                    class="form-control" type="number"
                                    onkeyup="return textinputlength(this.value, 6, this.id);" />
@@ -66,7 +73,7 @@
                         </div>
                         <div class="form-group col-xs-12 col-sm-12">
                             <label class="control-label">Address</label>
-                            <input name="txtaddress" id="txtaddress"  
+                            <input name="txtaddressunlisted" id="txtaddressunlisted"  
                                    class="form-control" type="text"
                                    onkeyup="return textinputlength(this.value, 1000, this.id);" />
                         </div>
@@ -98,11 +105,13 @@
                         <div id="dvdcr_unlisteddata_ww">
                             <div class="form-group col-xs-12 col-sm-12">
                                 <label class="control-label">Work With</label>
+                                <div class="pull-right horange">Close</div>
                                 <select name="ddlworkwithunlisted" id="ddlworkwithunlisted" multiple="multiple"
                                         data-placeholder="Select Employees." required></select>
                             </div>
                             <div class="form-group col-xs-12 col-sm-12">
                                 <label class="control-label">Products Promoted</label>
+                                <div class="pull-right horange">Close</div>
                                 <select id="ddlproductspromotedunlisted" multiple="multiple"
                                         data-placeholder="Select Products."></select>
                             </div>

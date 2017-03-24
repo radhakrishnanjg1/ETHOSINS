@@ -92,7 +92,7 @@ function fun_save_dcrmaster_unlisted_institution() {
     var ddlcity_name = $("#ddlcity option:selected").text();
     var ddlmajortownunlisted = parseInt($("#ddlmajortownunlisted").val());
     var ddlmajortownunlisted_name = $("#ddlmajortownunlisted option:selected").text();
-    var txtaddress = $("#txtaddress").val();
+    var txtaddressunlisted = $("#txtaddressunlisted").val();
     var txtpincode = $("#txtpincode").val();
     var txtphone = $("#txtphone").val();
     var txtmobile = $("#txtmobile").val();
@@ -100,7 +100,7 @@ function fun_save_dcrmaster_unlisted_institution() {
     var dcr_master_id = 1;
     //app.addto_dcr_unlisted_ins_master(dcr_master_id, txtinstitution, txtkdm, txtpobsingle,
     //ddlmajortownunlisted, ddlmajortownunlisted_name, ddlstate, ddlstate_name, ddlcity,
-    //ddlcity_name, txtaddress, txtpincode, txtphone, txtmobile, txtemail);
+    //ddlcity_name, txtaddressunlisted, txtpincode, txtphone, txtmobile, txtemail);
 
     var options = {
         enableHighAccuracy: true,
@@ -109,12 +109,12 @@ function fun_save_dcrmaster_unlisted_institution() {
     var geolo = navigator.geolocation.getCurrentPosition(function () {
         app.addto_dcr_unlisted_ins_master(dcr_master_id, txtinstitution, txtkdm, txtpobsingle,
     ddlmajortownunlisted, ddlmajortownunlisted_name, ddlstate, ddlstate_name, ddlcity,
-    ddlcity_name, txtaddress, txtpincode, txtphone, txtmobile, txtemail,
+    ddlcity_name, txtaddressunlisted, txtpincode, txtphone, txtmobile, txtemail,
     JSON.stringify(arguments[0].coords.latitude), JSON.stringify(arguments[0].coords.longitude));
     }, function () {
         app.addto_dcr_unlisted_ins_master(dcr_master_id, txtinstitution, txtkdm, txtpobsingle,
      ddlmajortownunlisted, ddlmajortownunlisted_name, ddlstate, ddlstate_name, ddlcity,
-     ddlcity_name, txtaddress, txtpincode, txtphone, txtmobile, txtemail,
+     ddlcity_name, txtaddressunlisted, txtpincode, txtphone, txtmobile, txtemail,
       "","");
     }, options);
 
@@ -149,7 +149,7 @@ function fun_clearcontrols_dcr_unlisted_institution() {
     ddlstate.value("---Select---");
     var ddlcity = $("#ddlcity").data("kendoDropDownList");
     ddlcity.value("---Select---"); 
-    $("#txtaddress").val('');
+    $("#txtaddressunlisted").val('');
     $("#txtpincode").val('');
     $("#txtphone").val('');
     $("#txtmobile").val('');

@@ -36,9 +36,9 @@
             if (navigator && navigator.splashscreen) {
                 navigator.splashscreen.hide();
             }
-            if (device.platform === 'iOS' && parseFloat(device.version) >= 7.0) {
-                document.body.style.marginTop = "20px";
-            } 
+            //if (device.platform === 'iOS' && parseFloat(device.version) >= 7.0) {
+            //    document.body.style.marginTop = "20px";
+            //} 
             bootstrap();
           
         }, false);

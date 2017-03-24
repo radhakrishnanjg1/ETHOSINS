@@ -360,9 +360,7 @@ function fun_update_dcr_master_geo()
                 "");
     }, options);
 }
-function fun_dcr_load_activityperiod() {
-    localStorage.setItem("Activity_Period_ID", parseInt($("#ddlactivityperiod").val()));
-    localStorage.setItem("Activity_ID", parseInt($("#ddlactivity").val()));
+function fun_dcr_load_activityperiod() { 
     var ethosmastervaluesdata = JSON.parse(localStorage.getItem("dcrlastreporteddetails"));
     var records = JSON.parse(Enumerable.From(ethosmastervaluesdata)
    .ToJSON());

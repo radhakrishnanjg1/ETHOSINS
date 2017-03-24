@@ -18,7 +18,8 @@
             else {
                 fun_load_dcr_institution_pageload();
             }
-
+            //fun_load_dcr_institution_pageinit();
+            //fun_load_dcr_institution_pageload();
         },
         afterShow: function () {
             disableBackButton();
@@ -45,7 +46,7 @@
             var gridkdmdetails = $("#tblkdmlist")
                             .data("kendoGrid").dataItems();
             $.each(gridkdmdetails, function (i, item) {
-                var pob = gridkdmdetails[i].POB;
+                var pob = gridkdmdetails[i].Orders;
                 if (parseInt(pob) >= 0) {
                     kdmflag = true;
                     return true;
@@ -54,7 +55,7 @@
             var ddlworkwithinst = $("#ddlworkwithinst").data("kendoMultiSelect").value().toString();
             var ddlproductspromotedinst = $("#ddlproductspromotedinst").data("kendoMultiSelect").value().toString();
             if (!kdmflag) {
-                app.notify.error("Enter POB for any one of KDM!");
+                app.notify.error("Enter orders for any one of KDM!");
                 return false;
             }
             else if (ddlworkwithinst == "") {
@@ -155,7 +156,7 @@ function fun_save_dcr_institution() {
     $.each(gridkdmdetails, function (i, item) {
         var institution_kdm_id = gridkdmdetails[i].Institution_KDM_ID;
         var name_of_key_decision_maker = gridkdmdetails[i].Name_of_Key_Decision_Maker;
-        var pob = gridkdmdetails[i].POB;
+        var pob = gridkdmdetails[i].Orders;
         if (parseInt(pob) >= 0) {
             app.addto_dcr_ins_kdm_details(hdndcr_ins_master_id, institution_kdm_id,
                 name_of_key_decision_maker, pob);
@@ -235,7 +236,7 @@ function fun_dcr_institution_kdms(Sub_Territory_ID, Institution_MSL_Number) {
            { hidden: true, title: "Id", field: "Institution_KDM_ID", editable: false },
            { enabled: false, title: "KDM", field: "Name_of_Key_Decision_Maker", editable: false, },
            {
-               field: "POB",
+               field: "Orders",
                editor: function (container, options) {
                    // create an input element
                    var input = $("<input/>");

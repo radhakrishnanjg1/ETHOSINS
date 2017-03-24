@@ -76,7 +76,7 @@
     <script src="components/fieldlocatorView/index.js"></script>
     <!--common -->
     <script src="components/offlineView/index.js"></script>
-
+    <script src="components/supportView/index.js"></script>
     <!--Mapbox scripts and css--> 
     <!--<script src='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.js'></script>-->
     <link href='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.css' rel='stylesheet' />
@@ -120,6 +120,7 @@
          'LMSleavehistoryView','LMSapproveleaveView','LMSapproveleavecancelView',
          'DCRstartView',
          'fieldlocatorView',
+         'supportView',
          'holidays-view','profile-view','changepassword-view']">
         <header data-role="header">
             <div>
@@ -167,6 +168,7 @@
          'LMSleavehistoryView','LMSapproveleaveView','LMSapproveleavecancelView',
          'DCRstartView',
          'fieldlocatorView',
+         'supportView',
          'holidays-view','profile-view','changepassword-view']">
         <ul data-role="listview" class="km-vertical-tabstrip nav" style="background-color:#fff !important">
             <li data-role="button" data-click="app.navigation.navigateProfile">
@@ -188,6 +190,13 @@
                     <i class="fa fa-2x fa-sign-out"></i>
                     <br />
                     Log Out
+                </a>
+            </li>
+            <li data-role="button" data-click="app.navigation.navigatesupport">
+                <a>
+                    <i class="fa fa-2x fa-phone"></i>
+                    <br />
+                    Support
                 </a>
             </li>
         </ul>

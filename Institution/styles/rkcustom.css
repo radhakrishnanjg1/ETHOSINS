@@ -388,7 +388,10 @@ footer {
     color: #ff6600 !important;
     font-weight: 800 !important;
 }
-
+.hgreen {
+    color: #006666 !important;
+    font-weight: 800 !important;
+}
 
 #dashboard-view .container-fluid {
     padding: 0;
@@ -653,3 +656,13 @@ footer {
     width: 98% !important ;
 }
 /*field locator end*/
+
+/* Ios header issue start*/
+.km-on-ios .km-header .km-navbar {
+            background-color: skyblue;
+        }
+        .km-on-ios .km-header .km-widget,
+        .km-on-ios .km-header .km-view-title {
+            color: white;
+        }
+/*Ios header issue end */

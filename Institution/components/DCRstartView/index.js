@@ -24,6 +24,14 @@
         afterShow: function () {
            // setTimeout(get_dcr_master_values, 1500);
             get_dcr_master_values();
+            var user = JSON.parse(localStorage.getItem("userdata"));
+            var Employee_ID = user.Employee_ID;
+            var Sub_Territory_ID = user.Sub_Territory_ID;
+            var Designation_ID = user.Designation_ID;
+            var Division_ID = user.Division_ID
+            app.utils.loading(true);
+            fun_db_APP_Get_DCR_Required_Information(Employee_ID, Sub_Territory_ID,
+                Designation_ID, Division_ID);
         },
         redirecttocontinuedcr: function () {
             redirectDCRView();
@@ -42,15 +50,7 @@ function redirectDCRView() {
     var activity_id = parseInt($("#hdnactivity_id").val());
     var activity_period_id = parseInt($("#hdnactivityperiod").val());
 
-    if (dcr_isavailable == 1 && activity_id == 235) {
-        var user = JSON.parse(localStorage.getItem("userdata"));
-        var Employee_ID = user.Employee_ID;
-        var Sub_Territory_ID = user.Sub_Territory_ID;
-        var Designation_ID = user.Designation_ID;
-        var Division_ID = user.Division_ID
-        app.utils.loading(true);
-        fun_db_APP_Get_DCR_Required_Information(Employee_ID, Sub_Territory_ID,
-            Designation_ID, Division_ID);
+    if (dcr_isavailable == 1 && activity_id == 235) { 
         //redirect to instiution page as default  
         app.utils.loading(true);
         setTimeout("app.navigation.navigateDCRinstitutionView()", 1500);
@@ -69,14 +69,7 @@ function redirectDCRView() {
         || activity_id == 237 || activity_id == 238
             || activity_id == 242 || activity_id == 243
             || activity_id == 244 || activity_id == 1131)) { //redirect to final entry page
-        var user = JSON.parse(localStorage.getItem("userdata"));
-        var Employee_ID = user.Employee_ID;
-        var Sub_Territory_ID = user.Sub_Territory_ID;
-        var Designation_ID = user.Designation_ID;
-        var Division_ID = user.Division_ID;
-        app.utils.loading(true);
-        fun_db_APP_Get_DCR_Required_Information(Employee_ID, Sub_Territory_ID,
-            Designation_ID, Division_ID);
+         
         app.utils.loading(true);
         setTimeout("app.navigation.navigateDCRfinaentryView()", 1500);
         app.utils.loading(false);
@@ -105,19 +98,7 @@ function get_dcr_master_values() {
             $("#spandcrstartpage").attr('src', "images/continue.jpg");
         }
     }
-    app.select_count_dcr_master(render_dcr_master_id);
-
-    //var render_dcr_ins_master = function (tx1, rs1) {
-    //    alert("hdndcr_ins_master_id: " + rs1.rows.item(0).dcr_ins_master_id);
-    //    $("#hdndcr_ins_master_id").val(rs1.rows.item(0).dcr_ins_master_id);
-    //}
-    //app.select_count_dcr_ins_master_bydcr_master_id(render_dcr_ins_master, 1);
-
-    //var render_dcr_unlisted_ins_master = function (tx2, rs2) {
-    //    alert("hdndcr_unlisted_ins_master_id: " + rs2.rows.item(0).hdndcr_unlisted_ins_master_id);
-    //    $("#hdndcr_unlisted_ins_master_id").val(rs2.rows.item(0).dcr_unlisted_ins_master_id);
-    //}
-    //app.select_count_dcr_unlisted_ins_master_bydcr_master_id(render_dcr_unlisted_ins_master, 1);
+    app.select_count_dcr_master(render_dcr_master_id); 
 }
 
 function fun_delete_all_dcrrecords() {

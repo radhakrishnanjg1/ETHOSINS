@@ -48,6 +48,10 @@
             })
         },
 
+        navigatesupport: function () {
+            return app.mobileApp.navigate('components/supportView/view.html');
+        },
+
         //LMS
         navigateLMSleavemanagementView: function () {
             return app.mobileApp.navigate('components/LMSleavemanagementView/view.html');

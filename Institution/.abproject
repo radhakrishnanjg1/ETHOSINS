@@ -6,7 +6,7 @@
   "DisplayName": "ETHOS-INS",
   "Author": "Radhakrishnan J",
   "Description": "ETHOS Institution",
-  "BundleVersion": "1.0",
+  "BundleVersion": "1.0.1",
   "AndroidVersionCode": "1",
   "iOSDeviceFamily": [
     "1",
@@ -22,7 +22,7 @@
     "Portrait"
   ],
   "AndroidHardwareAcceleration": "true",
-  "iOSStatusBarStyle": "BlackOpaque",
+  "iOSStatusBarStyle": "BlackTranslucent",
   "Framework": "Cordova",
   "WP8TileTitle": "",
   "WP8Publisher": "",
