@@ -8,29 +8,28 @@
             if (!app.utils.checkinternetconnection()) {
                 return app.navigation.navigateoffline("DCRunlistedinstitutionView");
             }
-            app.navigation.logincheck();
-            if (localStorage.getItem("dcrs_unlistedinstutition_details_live") == null ||
+            app.navigation.logincheck(); 
+        },
+        afterShow: function () {
+            disableBackButton(); 
+            get_dcrmaster_unlisted_institution_values();
+             if (localStorage.getItem("dcrs_unlistedinstutition_details_live") == null ||
                 localStorage.getItem("dcrs_unlistedinstutition_details_live") != 1) {
                 var user = JSON.parse(localStorage.getItem("userdata"));
                 var Sub_Territory_ID = user.Sub_Territory_ID;
                 app.utils.loading(true);
-                fun_db_APP_Get_DCR_State_City_Information(Sub_Territory_ID); 
+                fun_db_APP_Get_DCR_State_City_Information(Sub_Territory_ID);
             }
-            else {
+             else {
+                 fun_load_dcr_unlistedinstitution_pageinit();
                 fun_load_dcr_unlistedinstitution_pageload();
-            }
-        },
-        afterShow: function () {
-            disableBackButton();
-            get_dcrmaster_unlisted_institution_values();
+             }
+            // if ($('#hdnlatitude').val() == "") {
+            //    return app.navigation.navigateoffGPSView("DCRstartView");
+            //}
         },
         dcrunlistedscrValidator: null,
-        saveunlistedscrdetails: function () {
-            //this.dcrunlistedscrValidator = app.validate.getValidator('#form-unlistedscr');
-            //if (!this.dcrunlistedscrValidator.validate()) {
-            //    //$(".k-invalid-msg").show();
-            //    return;
-            //}
+        saveunlistedscrdetails: function () { 
             var txtinstitution = ($("#txtinstitution").val());
             var txtpobsingle = parseInt($("#txtpobsingle").val());
             var ddlmajortownunlisted = parseInt($("#ddlmajortownunlisted").val());
@@ -79,7 +78,6 @@ function get_dcrmaster_unlisted_institution_values() {
     }
     app.select_count_dcr_unlisted_ins_master_bydcr_master_id(render_dcr_unlisted_ins_master, 1);
 }
-
 
 function fun_save_dcrmaster_unlisted_institution() {
     //  parent  table data and need to save dcr master data in sql lite db
@@ -159,6 +157,7 @@ function fun_clearcontrols_dcr_unlisted_institution() {
     var ddlproductspromotedunlisted = $("#ddlproductspromotedunlisted").data("kendoMultiSelect");
     ddlproductspromotedunlisted.value("");
 }
+
 function fun_load_dcr_unlistedinstitution_pageinit() {
     $("#ddlstate").kendoDropDownList().data("kendoDropDownList");
     $("#ddlcity").kendoDropDownList().data("kendoDropDownList");
@@ -170,7 +169,7 @@ function fun_load_dcr_unlistedinstitution_pageinit() {
         dataValueField: "Sub_Territory_ID",
         dataSource: [],
         optionLabel: "---Select---",
-        autoClose: false,
+        autoClose: true,
         clearButton: false,
     });
     $("#ddlproductspromotedunlisted").kendoMultiSelect({
@@ -179,10 +178,11 @@ function fun_load_dcr_unlistedinstitution_pageinit() {
         dataValueField: "ProductGroup_ID",
         dataSource: [],
         optionLabel: "---Select---",
-        autoClose: false,
+        autoClose: true,
         clearButton: false,
     });
 }
+
 function fun_load_dcr_unlistedinstitution_pageload() {
     $("#ddlstate").kendoDropDownList().data("kendoDropDownList");
     $("#ddlcity").kendoDropDownList().data("kendoDropDownList");
@@ -191,7 +191,6 @@ function fun_load_dcr_unlistedinstitution_pageload() {
     fun_dcr_unlistedinstitution_chiefs();
     fun_dcr_unlistedinstitution_productspromoted();
 }
-
 
 function fun_dcr_unlistedinstitution_chiefs() {
     var ethosmastervaluesdata = JSON.parse((localStorage.getItem("dcrchiefdetails")));
@@ -225,6 +224,7 @@ function fun_dcr_unlistedinstitution_marketareas() {
         optionLabel: "---Select---",
     });
 }
+
 function fun_dcr_unlistedinstitution_states() {
     var ethosmastervaluesdata = JSON.parse((localStorage.getItem("dcrstatedetails")));
     var ethosmastervaluesrecords = JSON.parse(Enumerable.From(ethosmastervaluesdata)

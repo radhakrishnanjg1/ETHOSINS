@@ -63,6 +63,7 @@
                             <div class="form-group col-xs-6 col-sm-6">
                                 <label class="control-label">From</label>
                                 <input name="txtfrom" id="txtfrom"
+                                       onfocus="this.blur();"
                                        onchange="fun_applyleave_txttochange()"
                                        onkeydown="return false;" onkeyup="return textinputlength(this.value, 10, this.id);" />
                             </div>
@@ -70,6 +71,7 @@
                             <div class="form-group col-xs-6 col-sm-6">
                                 <label class="control-label">To</label>
                                 <input name="txtto" id="txtto"
+                                       onfocus="this.blur();"
                                        data-greaterdate-field="txtfrom"
                                        onchange="fun_applyleave_txttochange()"
                                        onkeydown="return false;" onkeyup="return textinputlength(this.value, 10, this.id);" />

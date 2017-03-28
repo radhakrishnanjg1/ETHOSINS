@@ -38,7 +38,7 @@ var keyboarddisableScroll = function () {
             + "serial:" + device.serial;
         return deviceinformation;
     };
-    app.utils.get_geoinfo = function (action) {
+    app.utils.get_geoinfo = function () {
         var options = {
             enableHighAccuracy: false,
             timeout: 10000
@@ -48,9 +48,36 @@ var keyboarddisableScroll = function () {
         var geolo = navigator.geolocation.getCurrentPosition(function () {
             $('#hdnlatitude').val(JSON.stringify(arguments[0].coords.latitude)); 
             $('#hdnlongitude').val(JSON.stringify(arguments[0].coords.longitude));
+            return true;
         }, function () {
-        }, options); 
-    }; 
+            $('#hdnlatitude').val('');
+            $('#hdnlongitude').val('');
+            return false;
+        }, options);
+        return false;
+    };
+
+    //Menual checking internet with GPS  
+    app.utils.checkGPS = function () {
+        app.utils.get_geoinfo = function () {
+            var options = {
+                enableHighAccuracy: false,
+                timeout: 10000
+            };
+            $('#hdnlatitude').val('');
+            $('#hdnlongitude').val('');
+            var geolo = navigator.geolocation.getCurrentPosition(function () {
+                $('#hdnlatitude').val(JSON.stringify(arguments[0].coords.latitude));
+                $('#hdnlongitude').val(JSON.stringify(arguments[0].coords.longitude));
+                return true;
+            }, function () {
+                $('#hdnlatitude').val('');
+                $('#hdnlongitude').val('');
+                return false;
+            }, options); 
+        };
+        return false;
+    };
     //Menual checking internet checking 
     app.utils.checkinternetconnection = function () {
         var networkState = navigator.connection.type;
@@ -66,10 +93,7 @@ var keyboarddisableScroll = function () {
 
         // but not available now 
         if (states[networkState] == 'No network connection') {
-            // alert("we do something"); 
-            //$("#dvsignin").hide();
-            //$("#dvoffline").show(); 
-            // alert(0);
+            // alert("we do something");  
             return false;
         }
         return true;

@@ -5,8 +5,7 @@
             if ($('#hdnLogin_ID').val() === 0) {
                 return app.mobileApp.navigate('components/authenticationView/view.html');
             }
-        },
-
+        }, 
         back: function () {
             app.mobileApp.navigate('#:back');
             app.utils.loading(false);
@@ -18,6 +17,10 @@
         //common page for offline
         navigateoffline: function (redirect) {
             return app.mobileApp.navigate('components/offlineView/view.html?pageid=' + redirect);
+        },
+
+        navigateoffGPSView: function (redirect) {
+            return app.mobileApp.navigate('components/offGPSView/view.html?pageid=' + redirect);
         },
 
         //right side menu 
@@ -100,6 +103,9 @@
         //navigatefieldlocatorView 
         navigatefieldlocatorView: function () {
             return app.mobileApp.navigate('components/fieldlocatorView/view.html');
+        },
+        navigateGPSworklocationsView: function () {
+            return app.mobileApp.navigate('components/GPSworklocationsView/view.html');
         },
         navigateAuthentication: function () {
             return app.mobileApp.navigate('components/authenticationView/view.html');

@@ -8,10 +8,10 @@
             if (!app.utils.checkinternetconnection()) {
                 return app.navigation.navigateoffline("DCRpreviewView");
             } 
-            app.navigation.logincheck();
-            app.utils.loading(true);
-            setTimeout(fun_get_dcr_all_details, 1500);
-            app.utils.loading(false);
+            app.navigation.logincheck(); 
+        },
+        afterShow: function () {
+            fun_get_dcr_all_details();
             var hdndcr_master_id = 1;
             var render_dcrmaster = function (tx, rs) {
                 $("#dvdcrmaster_date").html(rs.rows.item(0).dcr_date);
@@ -58,7 +58,6 @@
                 }
             }
             app.select_dcr_master_byid(render_dcrmaster, hdndcr_master_id);
-
         },
         submitdcrdetails: function () {
             var confirmation = "Are you sure you want to save the details?";
@@ -90,7 +89,7 @@
 function fun_save_dcr_all_details() {
     app.utils.loading(true);
     var Activity_ID = parseInt($("#hdnactivity_id").val());
-    fun_db_APP_Insert_INS_DCR_Report(parseInt(Activity_ID),
+    fun_db_APP_Insert_DCR_INS_Report(parseInt(Activity_ID),
 $("#hdndcr_master_string").val(),
 $("#hdndcr_master_ww_details_string").val(),
 $("#hdndcr_master_mj_details_string").val(),
@@ -456,14 +455,14 @@ function fun_load_dcr_unlistedinstutition_pp(dcr_ins_master_id) {
     app.select_dcr_unlisted_ins_pp_details_bydcr_unlisted_ins_master_id(render_control, dcr_ins_master_id);
 }
 
-function fun_db_APP_Insert_INS_DCR_Report(Activity_Id, DCR_Master_String, DCR_Master_WW_Details_String,
+function fun_db_APP_Insert_DCR_INS_Report(Activity_Id, DCR_Master_String, DCR_Master_WW_Details_String,
     DCR_Master_MJ_Details_String, DCR_Ins_Master_String, DCR_Ins_KDM_Details_String,
          DCR_Ins_WW_Details_String, DCR_Ins_PP_Details_String, DCR_Unlisted_INS_Master_String,
          DCR_Unlisted_INS_WW_Details_String, DCR_Unlisted_INS_PP_Details_String) {
     var datasource = new kendo.data.DataSource({
         transport: {
             read: {
-                url: "https://api.everlive.com/v1/dvu4zra5xefb2qfq/Invoke/SqlProcedures/APP_Insert_INS_DCR_Report",
+                url: "https://api.everlive.com/v1/dvu4zra5xefb2qfq/Invoke/SqlProcedures/APP_Insert_DCR_INS_Report",
                 type: "POST",
                 dataType: "json",
                 data: {

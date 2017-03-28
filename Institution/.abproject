@@ -55,6 +55,7 @@
     "cordova-plugin-media",
     "cordova-plugin-network-information",
     "cordova-plugin-splashscreen",
+    "cordova-plugin-statusbar",
     "cordova-plugin-vibration",
     "cordova-plugin-whitelist"
   ]

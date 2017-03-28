@@ -27,10 +27,6 @@
             var ethosmastervaluesrecords = JSON.parse(Enumerable.From(ethosmastervaluesdata)
             .Where("$.Activity_Period_ID=='" + Activity_Period_ID + "' && $.Activity_ID=='" + Activity_ID + "'").ToJSON());
             if (ethosmastervaluesrecords.length == 0) {
-                //this.dcrfinalentryValidator = app.validate.getValidator('#form-finalentry');
-                //if (!this.dcrfinalentryValidator.validate()) {
-                //    return;
-                //}
                 var txtdeviationreason = ($("#txtdeviationreason").val());
                 var txtdescription = parseInt($("#txtdescription").val());
                 if (txtdeviationreason == "") {

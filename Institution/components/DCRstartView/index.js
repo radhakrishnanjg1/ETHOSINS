@@ -4,34 +4,20 @@
 (function () {
     var view = app.DCRstartView = kendo.observable();
     var DCRstartViewModel = kendo.observable({
-        onShow: function () {
-            disableBackButton();
+        onShow: function () { 
             if (!app.utils.checkinternetconnection()) {
-                return app.navigation.navigateoffline("DCRstartView");
+                return app.navigation.navigateoffGPSView("DCRstartView");
             }
             app.navigation.logincheck();
-            //setTimeout(app.utils.get_geoinfo(), 1500); 
-            //if($('#hdnlatitude').val()=="")
-            //{
-            //    app.notify.error('Switch on the GPS location on your phone device');
-            //    $('#dvDCRstartView').hide();
-            //}
-            //else
-            //{
-            //    $('#dvDCRstartView').show();
-            //}
+            //app.utils.get_geoinfo();
         },
         afterShow: function () {
-           // setTimeout(get_dcr_master_values, 1500);
-            get_dcr_master_values();
-            var user = JSON.parse(localStorage.getItem("userdata"));
-            var Employee_ID = user.Employee_ID;
-            var Sub_Territory_ID = user.Sub_Territory_ID;
-            var Designation_ID = user.Designation_ID;
-            var Division_ID = user.Division_ID
-            app.utils.loading(true);
-            fun_db_APP_Get_DCR_Required_Information(Employee_ID, Sub_Territory_ID,
-                Designation_ID, Division_ID);
+            disableBackButton();
+            get_dcr_master_values(); 
+            //if ($('#hdnlatitude').val() == "") {
+            //    return app.navigation.navigateoffGPSView("DCRstartView");
+            //}
+
         },
         redirecttocontinuedcr: function () {
             redirectDCRView();
@@ -50,7 +36,7 @@ function redirectDCRView() {
     var activity_id = parseInt($("#hdnactivity_id").val());
     var activity_period_id = parseInt($("#hdnactivityperiod").val());
 
-    if (dcr_isavailable == 1 && activity_id == 235) { 
+    if (dcr_isavailable == 1 && activity_id == 235) {
         //redirect to instiution page as default  
         app.utils.loading(true);
         setTimeout("app.navigation.navigateDCRinstitutionView()", 1500);
@@ -69,7 +55,7 @@ function redirectDCRView() {
         || activity_id == 237 || activity_id == 238
             || activity_id == 242 || activity_id == 243
             || activity_id == 244 || activity_id == 1131)) { //redirect to final entry page
-         
+
         app.utils.loading(true);
         setTimeout("app.navigation.navigateDCRfinaentryView()", 1500);
         app.utils.loading(false);
@@ -87,7 +73,7 @@ function redirectDCRView() {
     }
 }
 function get_dcr_master_values() {
-   // $("#spandcrstartpage").html('start');
+    // $("#spandcrstartpage").html('start');
     $("#spandcrstartpage").attr('src', "images/start.jpg");
     var render_dcr_master_id = function (tx, rs) {
         if (rs.rows.length > 0) {
@@ -98,7 +84,7 @@ function get_dcr_master_values() {
             $("#spandcrstartpage").attr('src', "images/continue.jpg");
         }
     }
-    app.select_count_dcr_master(render_dcr_master_id); 
+    app.select_count_dcr_master(render_dcr_master_id);
 }
 
 function fun_delete_all_dcrrecords() {
@@ -119,7 +105,11 @@ function fun_set_dcr_fields() {
     $('#hdndcr_ins_master_id').val(1);
     $('#hdndcr_unlisted_ins_master_id').val(1);
 
-    $('#hdn_old_dcr_master_id').val(0); 
+    $('#hdn_old_dcr_master_id').val(0);
     $('#hdnactivity_id').val(0);
     $('#hdnactivityperiod').val(0);
+
+    localStorage.removeItem("dcrs_listedinstutition_details_live");
+
+    localStorage.removeItem("dcrs_unlistedinstutition_details_live");
 }

@@ -18,19 +18,41 @@
             fun_db_APP_Get_MSL_Coverage_Details_INS_Employee_Team($('#hdnEmployee_ID').val());
 
         },
+        fun_close_txtauocmpemployeelist: function () {
+            $('#txtauocmpemployeelist').val('');
+            setTimeout(function () {
+                $("#txtauocmpemployeelist").blur();
+                var autocomplete = $("#txtauocmpemployeelist").data("kendoAutoComplete");
+                 // Close the suggestion popup
+                autocomplete.close();
+            }, 1);
+        }, 
         onRefresh: function () {
             app.utils.loading(true);
-            if ($('#txtauocmpemployeelist').val().length > 6) {
-                $('#dvteamename').html($('#txtauocmpemployeelist').val().split("|")[0]);
-                var empid = $('#txtauocmpemployeelist').val().split("|")[1];
+            var value=$('#txtauocmpemployeelist').val();
+            if (value.length > 6) {
+
+                var ethosmastervaluesdata = JSON.parse(localStorage.getItem("ethosinssubordinatesdetails"));
+                var ethosmastervaluesrecords = JSON.parse(Enumerable.From(ethosmastervaluesdata)
+               .Where("$.Employee_Name=='" + value + "'")
+               .ToJSON());
+                if (ethosmastervaluesrecords.length == 0) {
+                    app.notify.error("Select valid employee name in list!");
+                    return false;
+                }
+                var empid = value.split("|")[1];
+                $('#dvteamename').html(value.split("|")[0]);
+                app.utils.loading(true);  
                 fun_db_APP_Get_Current_MSL_Coverage_Details_INS_Employee_TeamByEmployeeid(empid);
             } 
-            else if ($('#txtauocmpemployeelist').val()=='ALL') {
+            else if (value == 'ALL') {
                 $('#dvteamename').html('Team');
+                app.utils.loading(true);
                 fun_db_APP_Get_Current_MSL_Coverage_Details_INS_Employee_Team($('#hdnEmployee_ID').val());
             }
             else {
-                $('#dvteamename').html('Team'); 
+                $('#dvteamename').html('Team');
+                app.utils.loading(true);
                 fun_db_APP_Get_Current_MSL_Coverage_Details_INS_Employee_Team($('#hdnEmployee_ID').val());
             } 
         },
@@ -38,183 +60,6 @@
 
     view.set('teamcoverageViewModel', teamcoverageViewModel);
 }());
-
-function fun_db_APP_Get_Current_MSL_Coverage_Details_INS_Employee_Team(Employee_ID) {
-    var datasource = new kendo.data.DataSource({
-        transport: {
-            read: {
-                url: "https://api.everlive.com/v1/dvu4zra5xefb2qfq/Invoke/SqlProcedures/APP_Get_Current_MSL_Coverage_Details_INS_Employee_Team",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    "Employee_ID": Employee_ID
-                }
-            }
-        },
-        schema: {
-            parse: function (response) {
-                var getdata = response.Result.Data[0];
-                return getdata;
-            }
-        },
-        error: function (e) {
-            app.utils.loading(false);
-            app.notify.error('Error loading data please try again later!');
-        }
-    });
-
-    datasource.fetch(function () {
-        var data = this.data();
-        app.utils.loading(false);
-        if (data[0].SNO > 0) {
-            teamloadchart(1);
-            localStorage.setItem("ethosinsteamcoveragedetailscurrentmonth", JSON.stringify(data)); // coverage details  
-            localStorage.setItem("ethosinsteamcoveragedetailscurrentmonth_refresh", 1);
-            //  teamloadcurrentmonthdata(parseInt($('#hdnchartslno').val()));
-            teamloadcurrentmonthdata(1);
-            app.utils.loading(false);
-        }
-        else {
-            //app.notify.error(data[0][0].Output_Message);
-            app.utils.loading(false);
-        }
-    });
-
-}
-
-function fun_db_APP_Get_MSL_Coverage_Details_INS_Employee_Team(Employee_ID) {
-    var datasource = new kendo.data.DataSource({
-        transport: {
-            read: {
-                url: "https://api.everlive.com/v1/dvu4zra5xefb2qfq/Invoke/SqlProcedures/APP_Get_MSL_Coverage_Details_INS_Employee_Team",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    "Employee_ID": Employee_ID
-                }
-            }
-        },
-        schema: {
-            parse: function (response) {
-                var getdata = response.Result.Data;
-                return getdata;
-            }
-        },
-        error: function (e) {
-            app.utils.loading(false); // alert(e);
-            app.notify.error('Error loading data please try again later!');
-        }
-    });
-
-    datasource.fetch(function () {
-        var data = this.data();
-        if (data[0][0].SNO > 0) {
-            localStorage.setItem("ethosinsteamcoveragedetails", JSON.stringify(data[0])); // coverage details 
-            // localStorage.setItem("teamcoveragedetails_live", 1);
-
-            localStorage.setItem("ethosinssubordinatesdetails", JSON.stringify(data[1])); // coverage details 
-            $('#dvteamcoveragedetails').show();
-            teamloadchart(1);
-            teamloadcurrentmonthdatafa(1);
-            loadsubordinatesdetails();
-            app.utils.loading(false);
-        }
-        else {
-            //app.notify.error(data[0][0].Output_Message);
-            app.utils.loading(false);
-        }
-    });
-
-}
-
-function fun_db_APP_Get_Current_MSL_Coverage_Details_INS_Employee_TeamByEmployeeid(Employee_ID) {
-    var datasource = new kendo.data.DataSource({
-        transport: {
-            read: {
-                url: "https://api.everlive.com/v1/dvu4zra5xefb2qfq/Invoke/SqlProcedures/APP_Get_Current_MSL_Coverage_Details_INS_Employee",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    "Employee_ID": Employee_ID
-                }
-            }
-        },
-        schema: {
-            parse: function (response) {
-                var getdata = response.Result.Data[0];
-                return getdata;
-            }
-        },
-        error: function (e) {
-            app.utils.loading(false);
-            app.notify.error('Error loading data please try again later!');
-        }
-    });
-
-    datasource.fetch(function () {
-        var data = this.data();
-        app.utils.loading(false);
-        if (data[0].SNO > 0) {
-            teamloadchart(1);
-            localStorage.setItem("ethosinsteamcoveragedetailscurrentmonth", JSON.stringify(data)); // coverage details  
-            localStorage.setItem("ethosinsteamcoveragedetailscurrentmonth_refresh", 1);
-            //  teamloadcurrentmonthdata(parseInt($('#hdnchartslno').val()));
-            teamloadcurrentmonthdata(1);
-            app.utils.loading(false);
-        }
-        else {
-            //app.notify.error(data[0][0].Output_Message);
-            app.utils.loading(false);
-        }
-    });
-
-}
-
-function fun_db_APP_Get_MSL_Coverage_Details_INS_Employee_TeamByEmployeeid(Employee_ID) {
-    var datasource = new kendo.data.DataSource({
-        transport: {
-            read: {
-                url: "https://api.everlive.com/v1/dvu4zra5xefb2qfq/Invoke/SqlProcedures/APP_Get_MSL_Coverage_Details_INS_Employee",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    "Employee_ID": Employee_ID
-                }
-            }
-        },
-        schema: {
-            parse: function (response) {
-                var getdata = response.Result.Data;
-                return getdata;
-            }
-        },
-        error: function (e) {
-            app.utils.loading(false); // alert(e);
-            app.notify.error('Error loading data please try again later!');
-        }
-    });
-
-    datasource.fetch(function () {
-        var data = this.data();
-        if (data[0][0].SNO > 0) {
-            localStorage.setItem("ethosinsteamcoveragedetails", JSON.stringify(data[0])); // coverage details 
-            // localStorage.setItem("teamcoveragedetails_live", 1);
-
-           // localStorage.setItem("ethosinssubordinatesdetails", JSON.stringify(data[1])); // coverage details 
-            $('#dvteamcoveragedetails').show();
-            teamloadchart(1);
-            teamloadcurrentmonthdatafa(1);
-            //loadsubordinatesdetails();
-            app.utils.loading(false);
-        }
-        else {
-            //app.notify.error(data[0][0].Output_Message);
-            app.utils.loading(false);
-        }
-    });
-
-}
-
 
 function teamloadchart(filterid) {
     var localdata = JSON.parse(localStorage.getItem("ethosinsteamcoveragedetails"));
@@ -349,7 +194,7 @@ function loadsubordinatesdetails() {
         ignoreCase: true,
         minLength: 1,
         filter: "contains",
-        placeholder: "Type employee name or sub territory name",
+        placeholder: "Type employee or sub-territory name",
         clearButton: false,
         //separator: ", "
         noDataTemplate: 'No records found!', 
@@ -371,12 +216,202 @@ function loadsubordinatesdetails() {
             }
             else if (value == 'ALL') {
                 $('#dvteamename').html('Team');
-                fun_db_APP_Get_Current_MSL_Coverage_Details_INS_Employee_Team($('#hdnEmployee_ID').val());
+                app.utils.loading(true);
+                fun_db_APP_Get_MSL_Coverage_Details_INS_Employee_Team($('#hdnEmployee_ID').val());
+            }
+            else  {
+                $('#dvteamename').html('Team');
+                app.utils.loading(true);
+                fun_db_APP_Get_MSL_Coverage_Details_INS_Employee_Team($('#hdnEmployee_ID').val());
             }
             $('.k-nodata').hide(); 
+            setTimeout(function () {
+                $("#txtauocmpemployeelist").blur();
+                var autocomplete = $("#txtauocmpemployeelist").data("kendoAutoComplete");
+                // Close the suggestion popup
+                autocomplete.close();
+            }, 1);
         }
     });
 }
+
+function fun_db_APP_Get_MSL_Coverage_Details_INS_Employee_Team(Employee_ID) {
+    var datasource = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "https://api.everlive.com/v1/dvu4zra5xefb2qfq/Invoke/SqlProcedures/APP_Get_MSL_Coverage_Details_INS_Employee_Team",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "Employee_ID": Employee_ID
+                }
+            }
+        },
+        schema: {
+            parse: function (response) {
+                var getdata = response.Result.Data;
+                return getdata;
+            }
+        },
+        error: function (e) {
+            app.utils.loading(false); // alert(e);
+            app.notify.error('Error loading data please try again later!');
+        }
+    });
+
+    datasource.fetch(function () {
+        var data = this.data();
+        if (data[0][0].SNO > 0) {
+            localStorage.setItem("ethosinsteamcoveragedetails", JSON.stringify(data[0])); // coverage details 
+            // localStorage.setItem("teamcoveragedetails_live", 1);
+
+            localStorage.setItem("ethosinssubordinatesdetails", JSON.stringify(data[1])); // coverage details 
+            $('#dvteamcoveragedetails').show();
+            teamloadchart(1);
+            teamloadcurrentmonthdatafa(1);
+            loadsubordinatesdetails();
+            app.utils.loading(false);
+        }
+        else {
+            //app.notify.error(data[0][0].Output_Message);
+            app.utils.loading(false);
+        }
+    });
+
+}
+
+function fun_db_APP_Get_Current_MSL_Coverage_Details_INS_Employee_Team(Employee_ID) {
+    var datasource = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "https://api.everlive.com/v1/dvu4zra5xefb2qfq/Invoke/SqlProcedures/APP_Get_Current_MSL_Coverage_Details_INS_Employee_Team",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "Employee_ID": Employee_ID
+                }
+            }
+        },
+        schema: {
+            parse: function (response) {
+                var getdata = response.Result.Data[0];
+                return getdata;
+            }
+        },
+        error: function (e) {
+            app.utils.loading(false);
+            app.notify.error('Error loading data please try again later!');
+        }
+    });
+
+    datasource.fetch(function () {
+        var data = this.data();
+        app.utils.loading(false);
+        if (data[0].SNO > 0) {
+            teamloadchart(1);
+            localStorage.setItem("ethosinsteamcoveragedetailscurrentmonth", JSON.stringify(data)); // coverage details  
+            localStorage.setItem("ethosinsteamcoveragedetailscurrentmonth_refresh", 1);
+            //  teamloadcurrentmonthdata(parseInt($('#hdnchartslno').val()));
+            teamloadcurrentmonthdata(1);
+            app.utils.loading(false);
+        }
+        else {
+            //app.notify.error(data[0][0].Output_Message);
+            app.utils.loading(false);
+        }
+    });
+
+}
+
+function fun_db_APP_Get_MSL_Coverage_Details_INS_Employee_TeamByEmployeeid(Employee_ID) {
+    var datasource = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "https://api.everlive.com/v1/dvu4zra5xefb2qfq/Invoke/SqlProcedures/APP_Get_MSL_Coverage_Details_INS_Employee",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "Employee_ID": Employee_ID
+                }
+            }
+        },
+        schema: {
+            parse: function (response) {
+                var getdata = response.Result.Data;
+                return getdata;
+            }
+        },
+        error: function (e) {
+            app.utils.loading(false); // alert(e);
+            app.notify.error('Error loading data please try again later!');
+        }
+    });
+
+    datasource.fetch(function () {
+        var data = this.data();
+        if (data[0][0].SNO > 0) {
+            localStorage.setItem("ethosinsteamcoveragedetails", JSON.stringify(data[0])); // coverage details 
+            // localStorage.setItem("teamcoveragedetails_live", 1);
+
+            // localStorage.setItem("ethosinssubordinatesdetails", JSON.stringify(data[1])); // coverage details 
+            $('#dvteamcoveragedetails').show();
+            teamloadchart(1);
+            teamloadcurrentmonthdatafa(1);
+            //loadsubordinatesdetails();
+            app.utils.loading(false);
+        }
+        else {
+            //app.notify.error(data[0][0].Output_Message);
+            app.utils.loading(false);
+        }
+    });
+
+}
+
+function fun_db_APP_Get_Current_MSL_Coverage_Details_INS_Employee_TeamByEmployeeid(Employee_ID) {
+    var datasource = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "https://api.everlive.com/v1/dvu4zra5xefb2qfq/Invoke/SqlProcedures/APP_Get_Current_MSL_Coverage_Details_INS_Employee",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "Employee_ID": Employee_ID
+                }
+            }
+        },
+        schema: {
+            parse: function (response) {
+                var getdata = response.Result.Data[0];
+                return getdata;
+            }
+        },
+        error: function (e) {
+            app.utils.loading(false);
+            app.notify.error('Error loading data please try again later!');
+        }
+    });
+
+    datasource.fetch(function () {
+        var data = this.data();
+        app.utils.loading(false);
+        if (data[0].SNO > 0) {
+            teamloadchart(1);
+            localStorage.setItem("ethosinsteamcoveragedetailscurrentmonth", JSON.stringify(data)); // coverage details  
+            localStorage.setItem("ethosinsteamcoveragedetailscurrentmonth_refresh", 1);
+            //  teamloadcurrentmonthdata(parseInt($('#hdnchartslno').val()));
+            teamloadcurrentmonthdata(1);
+            app.utils.loading(false);
+        }
+        else {
+            //app.notify.error(data[0][0].Output_Message);
+            app.utils.loading(false);
+        }
+    });
+
+}
+
+
 
 
 

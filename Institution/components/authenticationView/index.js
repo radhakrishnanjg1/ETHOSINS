@@ -3,11 +3,7 @@
 (function () {
 
     var view = app.authenticationView = kendo.observable({
-        onShow: function (e) {
-            //$('#authentication-view .km-flat .km-content').css("background-color", "#666 !important");
-
-            //$('#authentication-view .km-flat .km-content').addClass('.signbackground');
-
+        onShow: function (e) { 
             var actionvalue = e.view.params.action;
             if (actionvalue == "logout") {                
                 app.utils.loading(true);
@@ -16,7 +12,7 @@
                 $('#username').val('');
                 $('#password').val('');
                 $('#hdnLogin_ID').val('0'); 
-                localStorage.clear();
+                localStorage.clear(); 
             }
             if (app.user != null) {
                 return app.navigation.navigatedashboard();
@@ -37,8 +33,8 @@
     var vm = kendo.observable({
         user: {
             displayName: '',
-            username: '',
-            password: '',
+            //username: '',
+            //password: '',
             //username: 'ZE-RM-GUWAHATI1', //rm
             //password: 'himalaya',
 
@@ -48,8 +44,8 @@
             //username: 'Shirali', //top most
             //password: 'Shirali',
 
-            //username: 'IN-MGR-LUCKNOW1', //approval level
-            //password: 'JAYASWAL7',
+            username: 'IN-MGR-LUCKNOW1', //approval level
+            password: 'JAYASWAL7',
 
             //username: 'IN-MGR-AURANGABAD1', //approval level
             //password: 'ABCD',
@@ -63,13 +59,7 @@
         },
         loginValidator: null,
         registerValidator: null,
-        signin: function (username, password) {
-            //this.loginValidator = app.validate.getValidator('#login-form');
-            //if (!this.loginValidator.validate()) {
-            //    //$(".k-invalid-msg").show();
-            //    return;
-            //}
-
+        signin: function (username, password) { 
             var model = vm.user;
             if (model.username == '') {
                 username = model.username;
@@ -113,8 +103,7 @@ function fun_db_APP_Verify_Field_User_Authentication(username, password, devicei
 
     storelogin.fetch(function () {
         var data = this.data();
-        if (data[0][0].Output_ID == 1) {
-            //app.user = data[0][0];
+        if (data[0][0].Output_ID == 1) { 
             $('#dvusername').html(data[0][0].Employee_Name)
             $('#hdnLogin_ID').val(data[0][0].Login_ID)
             $('#hdnEmployee_ID').val(data[0][0].Employee_ID)

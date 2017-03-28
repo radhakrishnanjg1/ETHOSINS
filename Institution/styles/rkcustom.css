@@ -507,8 +507,8 @@ footer {
     font-size: 1.5em;
 }
 
-.fa-wifi {
-    color: #ff6600;
+.fa-wifi,#fa-map-marker{
+    color: #ff6600 !important;
 }
 /* Custome rk page header,button,loading and error class end */
 
@@ -653,6 +653,11 @@ footer {
 /*field locator start*/
 #map {
     height: 325px;
+    width: 98% !important ;
+}
+
+#map-worklocation {
+    height: 100% !important;
     width: 98% !important ;
 }
 /*field locator end*/

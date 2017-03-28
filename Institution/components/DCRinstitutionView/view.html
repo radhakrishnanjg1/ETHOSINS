@@ -1,4 +1,6 @@
-<div id="DCRinstitutionView" data-role="view" data-title="MSL Entry"
+<div id="DCRinstitutionView" data-role="view" 
+     data-reload="true"
+     data-title="MSL Entry"
        data-before-hide="enableBackButton"
      data-layout="afterlogin"
      data-model="app.DCRinstitutionView.DCRinstitutionViewModel" 
@@ -33,8 +35,26 @@
                         </div>
                         <div class="form-group col-xs-12 col-sm-12">
                             <label class="control-label">Institution</label>
-                            <input id="txtlistedinstitution" name="txtlistedinstitution"
-                                   class="form-control" required>
+                            <!--<input id="txtlistedinstitution" name="txtlistedinstitution"
+                                   class="form-control" required>-->
+
+                            <!--<div class="col-xs-11">
+                                <input id="txtlistedinstitution" name="txtlistedinstitution"
+                                        class="form-control" required>
+                            </div>
+                            <div class="col-xs-1 paddingTopBottom-5">
+                                <div class="pull-left"
+                                     data-bind="events: {click: fun_close_txtlistedinstitution }">
+                                    <i class="fa fa-1-5x fa-close horange"></i>
+                                </div>
+                            </div>--> 
+                            <div class="input-group">
+                                <input id="txtlistedinstitution" name="txtlistedinstitution"
+                                        class="form-control " required>
+                                <span class="input-group-addon" data-bind="events: {click: fun_close_txtlistedinstitution }">
+                                    <i class="fa fa-1-5x fa-close"></i>
+                                </span>
+                            </div> 
                         </div>
                         <div class="form-group col-xs-12 col-sm-12">  
                             <label class="control-label">KDM Details</label>
@@ -48,14 +68,14 @@
                             <label class="control-label">Work With</label>
                             <div class="pull-right horange">Close</div>
                             <select name="ddlworkwithinst" id="ddlworkwithinst" multiple="multiple"
-                                    data-placeholder="Select Employees." required></select>
+                                    data-placeholder="Select Employees" required></select>
                         </div>
 
                         <div class="form-group col-xs-12 col-sm-12">
                             <label class="control-label">Products Promoted</label>
                             <div class="pull-right horange">Close</div>
                             <select id="ddlproductspromotedinst" multiple="multiple"
-                                    data-placeholder="Select Products." required></select>
+                                    data-placeholder="Select Products" required></select>
                         </div>
                     </form>
                 </div>

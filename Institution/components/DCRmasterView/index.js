@@ -1,24 +1,26 @@
 'use strict';
 (function () {
     var view = app.DCRmasterView = kendo.observable();
-    var DCRmasterViewModel = kendo.observable({
-        
+    var DCRmasterViewModel = kendo.observable({ 
         onShow: function () { 
-        },
-        afterShow: function () {
-            disableBackButton();
             if (!app.utils.checkinternetconnection()) {
                 return app.navigation.navigateoffline("DCRmasterView");
             }
             app.navigation.logincheck();
-            fun_load_dcr_master_pageinit();
-            var user = JSON.parse(localStorage.getItem("userdata"));
-            var Employee_ID = user.Employee_ID;
-            var Sub_Territory_ID = user.Sub_Territory_ID;
-            var Designation_ID = user.Designation_ID;
-            var Division_ID = user.Division_ID;
-            app.utils.loading(true);
-            fun_db_APP_Get_DCR_Required_Information(Employee_ID, Sub_Territory_ID,
+        },
+        afterShow: function () { 
+                disableBackButton(); 
+                fun_load_dcr_master_pageinit();
+                var user = JSON.parse(localStorage.getItem("userdata"));
+                var Employee_ID = user.Employee_ID;
+                var Sub_Territory_ID = user.Sub_Territory_ID;
+                var Designation_ID = user.Designation_ID;
+                var Division_ID = user.Division_ID; 
+                //if ($('#hdnlatitude').val() == "") {
+                //    return app.navigation.navigateoffGPSView("DCRstartView");
+                //}
+                app.utils.loading(true);
+                fun_db_APP_Get_DCR_INS_Master_Information(Employee_ID, Sub_Territory_ID,
                 Designation_ID, Division_ID);
         },
         fun_load_master_mj: function () {
@@ -127,7 +129,7 @@
                     fun_clearcontrols_dcrmaster_otherflow();
                     //app.notify.success('Master details saved successfully.');
                     app.navigation.navigateDCRfinaentryView();
-                }  
+                }
             }
 
             //after validate n save n redirect next page
@@ -136,21 +138,6 @@
 
     view.set('DCRmasterViewModel', DCRmasterViewModel);
 }());
-
-//function get_dcr_master_id() {
-//    var render = function (tx, rs) {
-//        if (rs.rows.length == 0) {
-//            $("#hdndcr_master_id").val(1);
-//        } else {
-//            $("#hdndcr_master_id").val(rs.rows.item(0).ID);
-//        }
-//    }
-//    app.db.transaction(function (tx) {
-//        tx.executeSql("SELECT dcr_master_id+1 FROM dcr_master ORDER BY dcr_master_id desc limit 1", [],
-//                      render,
-//                      app.onError);
-//    });
-//}
 
 function fun_clearcontrols_dcrmaster_fieldstaff() {
     var ddlactivityperiod = $("#ddlactivityperiod").data("kendoDropDownList");
@@ -162,14 +149,14 @@ function fun_clearcontrols_dcrmaster_fieldstaff() {
     var ddlmode = $("#ddlmode").data("kendoDropDownList");
     ddlmode.value("---Select---");
     var ddlsfcroute = $("#ddlsfcroute").data("kendoDropDownList");
-    ddlsfcroute.value("---Select---"); 
+    ddlsfcroute.value("---Select---");
 }
 
 function fun_clearcontrols_dcrmaster_secondflow() {
     var ddlactivityperiod = $("#ddlactivityperiod").data("kendoDropDownList");
     ddlactivityperiod.value("---Select---");
     var ddlactivity = $("#ddlactivity").data("kendoDropDownList");
-    ddlactivity.value("---Select---"); 
+    ddlactivity.value("---Select---");
     var ddlworkwithmaster = $("#ddlworkwithmaster").data("kendoMultiSelect");
     ddlworkwithmaster.value("");
     var ddlmajortownmaster = $("#ddlmajortownmaster").data("kendoMultiSelect");
@@ -180,7 +167,7 @@ function fun_clearcontrols_dcrmaster_otherflow() {
     var ddlactivityperiod = $("#ddlactivityperiod").data("kendoDropDownList");
     ddlactivityperiod.value("---Select---");
     var ddlactivity = $("#ddlactivity").data("kendoDropDownList");
-    ddlactivity.value("---Select---"); 
+    ddlactivity.value("---Select---");
 }
 
 function fun_load_dcr_master_pageinit() {
@@ -190,37 +177,35 @@ function fun_load_dcr_master_pageinit() {
     $("#ddlmode").kendoDropDownList().data("kendoDropDownList");
     $("#ddlsfcroute").kendoDropDownList().data("kendoDropDownList");
 
-
-    //if (localStorage.getItem("dcr_master_ispageinitiated") == null ||
-    //  localStorage.getItem("dcr_master_ispageinitiated") != 1) {
-        $("#ddlmajortownmaster").kendoMultiSelect({
-            index: 0,
-            dataTextField: "Market_Area_Name",
-            dataValueField: "Market_Area_ID",
-            dataSource: [],
-            optionLabel: "---Select---",
-            autoClose: false,
-            clearButton: false,
-        });
-        $("#ddlworkwithmaster").kendoMultiSelect({
-            index: 0,
-            dataTextField: "Employee_Name",
-            dataValueField: "Sub_Territory_ID",
-            dataSource: [],
-            optionLabel: "---Select---",
-            autoClose: false,
-            clearButton: false,
-            change: function (e) {
-                var ddlmajortownmaster = $("#ddlmajortownmaster").data("kendoMultiSelect");
-                ddlmajortownmaster.value("");
-
-                var ddlmajortownmaster = $("#ddlmajortownmaster").data("kendoMultiSelect");
-                ddlmajortownmaster.setDataSource([]);
-                ddlmajortownmaster.refresh();
-            },
-        });
-   // }
-    //localStorage.setItem("dcr_master_ispageinitiated", 1);
+    $("#ddlmajortownmaster").kendoMultiSelect({
+        index: 0,
+        dataTextField: "Market_Area_Name",
+        dataValueField: "Market_Area_ID",
+        dataSource: [],
+        optionLabel: "---Select---",
+        autoClose: true,
+        clearButton: false,
+        change: function (e) {
+            //$("#ddlmajortownmaster").blur();
+        },
+    });
+    $("#ddlworkwithmaster").kendoMultiSelect({
+        index: 0,
+        dataTextField: "Employee_Name",
+        dataValueField: "Sub_Territory_ID",
+        dataSource: [],
+        optionLabel: "---Select---",
+        autoClose: true,
+        clearButton: false,
+        filter: "contains",
+        change: function (e) {
+            var ddlmajortownmaster = $("#ddlmajortownmaster").data("kendoMultiSelect");
+            ddlmajortownmaster.value("");
+            ddlmajortownmaster.setDataSource([]);
+            ddlmajortownmaster.refresh();
+            //$(".k-widget .k-multiselect ").blur();
+        },
+    }); 
 }
 
 function fun_load_dcr_master_pageload() {
@@ -230,10 +215,7 @@ function fun_load_dcr_master_pageload() {
     fun_dcr_load_mode();
 }
 
-function fun_save_dcrmaster_fieldstaff() {
-    //localStorage.setItem("Activity_Period_ID", parseInt($("#ddlactivityperiod").val()));
-    //localStorage.setItem("Activity_ID", parseInt($("#ddlactivity").val()));
-    //localStorage.setItem("DCR_isavailable", 1);
+function fun_save_dcrmaster_fieldstaff() { 
     // need to save dcr master data in sql lite db
     var dcr_date = $("#txtdcrdate").val();
     var activity_peroid_id = parseInt($("#ddlactivityperiod").val());
@@ -258,7 +240,7 @@ function fun_save_dcrmaster_fieldstaff() {
 
     var user = JSON.parse(localStorage.getItem("userdata"));
     var Employee_ID = user.Employee_ID;
-    var Sub_Territory_ID = user.Sub_Territory_ID; 
+    var Sub_Territory_ID = user.Sub_Territory_ID;
     app.addto_dcr_master(Employee_ID, Sub_Territory_ID, dcr_date, activity_peroid_id, activity_peroid_name, activity_id, activity_name,
         category_id, category_name, mode_id, mode_name, sfcroute_id,
         sfcroute_place, deviation_reason, deviation_description,
@@ -267,7 +249,7 @@ function fun_save_dcrmaster_fieldstaff() {
 }
 
 function fun_save_dcrmaster_secondflow() {
-      
+
     // need to save dcr master data in sql lite db
     var dcr_date = $("#txtdcrdate").val();
     var activity_peroid_id = parseInt($("#ddlactivityperiod").val());
@@ -288,7 +270,7 @@ function fun_save_dcrmaster_secondflow() {
 
     var user = JSON.parse(localStorage.getItem("userdata"));
     var Employee_ID = user.Employee_ID;
-    var Sub_Territory_ID = user.Sub_Territory_ID; 
+    var Sub_Territory_ID = user.Sub_Territory_ID;
     app.addto_dcr_master(Employee_ID, Sub_Territory_ID, dcr_date, activity_peroid_id, activity_peroid_name, activity_id, activity_name,
         category_id, category_name, mode_id, mode_name, sfcroute_id,
         sfcroute_place, deviation_reason, deviation_description,
@@ -318,7 +300,7 @@ function fun_save_dcrmaster_secondflow() {
 }
 
 function fun_save_dcrmaster_otherflow() {
-     
+
     // need to save dcr master data in sql lite db
     var dcr_date = $("#txtdcrdate").val();
     var activity_peroid_id = parseInt($("#ddlactivityperiod").val());
@@ -336,20 +318,19 @@ function fun_save_dcrmaster_otherflow() {
     var user = JSON.parse(localStorage.getItem("userdata"));
     var Employee_ID = user.Employee_ID;
     var Sub_Territory_ID = user.Sub_Territory_ID;
-     
+
     app.addto_dcr_master(Employee_ID, Sub_Territory_ID, dcr_date, activity_peroid_id, activity_peroid_name, activity_id, activity_name,
         category_id, category_name, mode_id, mode_name, sfcroute_id,
         sfcroute_place, deviation_reason, deviation_description,
         "", "");
-    setTimeout(fun_update_dcr_master_geo, 1000); 
+    setTimeout(fun_update_dcr_master_geo, 1000);
 }
 
-function fun_update_dcr_master_geo()
-{
+function fun_update_dcr_master_geo() {
     var options = {
-            enableHighAccuracy: false,
-            timeout: 10000
-        };
+        enableHighAccuracy: false,
+        timeout: 10000
+    };
     var geolo = navigator.geolocation.getCurrentPosition(function () {
         app.update_dcr_master_geo(1,
                 JSON.stringify(arguments[0].coords.latitude),
@@ -360,7 +341,7 @@ function fun_update_dcr_master_geo()
                 "");
     }, options);
 }
-function fun_dcr_load_activityperiod() { 
+function fun_dcr_load_activityperiod() {
     var ethosmastervaluesdata = JSON.parse(localStorage.getItem("dcrlastreporteddetails"));
     var records = JSON.parse(Enumerable.From(ethosmastervaluesdata)
    .ToJSON());
@@ -496,13 +477,12 @@ function fun_dcr_master_chiefs() {
     var ddlworkwithmaster = $("#ddlworkwithmaster").data("kendoMultiSelect");
     ddlworkwithmaster.setDataSource(ethosmastervaluesrecords);
     ddlworkwithmaster.refresh();
-}
-
-function fun_db_APP_Get_DCR_Required_Information(Employee_ID, Sub_Territory_ID, Designation_ID, Division_ID) {
+} 
+function fun_db_APP_Get_DCR_INS_Master_Information(Employee_ID, Sub_Territory_ID, Designation_ID, Division_ID) {
     var datasource = new kendo.data.DataSource({
         transport: {
             read: {
-                url: "https://api.everlive.com/v1/dvu4zra5xefb2qfq/Invoke/SqlProcedures/APP_Get_DCR_Required_Information",
+                url: "https://api.everlive.com/v1/dvu4zra5xefb2qfq/Invoke/SqlProcedures/APP_Get_DCR_INS_Master_Information",
                 type: "POST",
                 dataType: "json",
                 data: {
@@ -524,23 +504,17 @@ function fun_db_APP_Get_DCR_Required_Information(Employee_ID, Sub_Territory_ID, 
     });
     datasource.fetch(function () {
         var data = this.data();
-        app.utils.loading(false); 
-        localStorage.setItem("dcractivitytypedetails", JSON.stringify(data[0])); // ActivityType details 
+        app.utils.loading(false);
+        localStorage.setItem("dcrlastreporteddetails", JSON.stringify(data[0])); // last reported details  
 
-        localStorage.setItem("dcrproductdetails", JSON.stringify(data[1])); // product details
+        localStorage.setItem("dcrtourplandetails", JSON.stringify(data[1])); // tourplan details  based on empid,sub id,reported date
 
-        localStorage.setItem("dcrsfcroutedetails", JSON.stringify(data[2])); // sfcroutes details 
+        localStorage.setItem("dcractivitytypedetails", JSON.stringify(data[2])); // ActivityType details 
 
-        localStorage.setItem("dcrchiefdetails", JSON.stringify(data[3])); // chief details
+        localStorage.setItem("dcrsfcroutedetails", JSON.stringify(data[3])); // sfcroutes details 
 
-        localStorage.setItem("dcrinstutitiondetails", JSON.stringify(data[4])); // instutition details 
-
-        localStorage.setItem("dcrkdmdetails", JSON.stringify(data[5])); // kdm details
-
-        localStorage.setItem("dcrlastreporteddetails", JSON.stringify(data[6])); // last reported details  
-
-        localStorage.setItem("dcrtourplandetails", JSON.stringify(data[7])); // tourplan details  based on empid,sub id,reported date
-
+        localStorage.setItem("dcrchiefdetails", JSON.stringify(data[4])); // chief details 
+        
         fun_load_dcr_master_pageload();
     });
 }

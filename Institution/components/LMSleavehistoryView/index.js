@@ -57,7 +57,7 @@ function loadleavehistory() {
         dataBound: function (e) {
             if (this.dataSource.data().length == 0) {
                 //custom logic
-                $("#listview-leavehistory").append("<li>No leaves on this year!</li>");
+                $("#listview-leavehistory").append("<li>No leaves in this year!</li>");
             }
         },
         template: $("#template-leavehistory").html(), 

@@ -1,0 +1,59 @@
+<div id="GPSworklocationsView" data-role="view" data-title="Field Work Locations"
+     data-after-show="disableBackButton" data-before-hide="enableBackButton"
+     data-layout="afterlogin"
+     data-model="app.GPSworklocationsView.GPSworklocationsViewModel"
+     data-bind="events: { show: onShow }"> 
+    <footer data-role="footer">
+        <div class="row text-center">
+            <div data-role="button"
+                 data-click="app.navigation.back">
+                <i class="fa fa-arrow-left"></i> Back
+            </div>
+            <div data-role="button" data-bind="events: {click: onRefresh }">
+                <i class="fa fa-refresh"></i> Refresh
+            </div>
+            <div data-role="button"
+                 data-click="app.navigation.navigateteamcoverage">
+                <i class="fa fa-home"> </i> Home
+            </div>
+
+        </div>
+    </footer>
+    <div id="dvGPSworklocationsView">
+        <div class="panel panel-default">
+            <div class="panel-heading text-center"
+                 style="background-color:#fff!important ">
+                <div class="row">
+                    <!--<div class="form-group col-xs-12 col-sm-12">
+                        <input id="txtfslist" name="txtfslist"
+                               class="form-control">
+                    </div>-->
+
+                    <div class="form-group col-xs-12 col-sm-12">
+                        <div class="input-group">
+                            <input id="txtfslist" name="txtfslist" class="form-control">
+                            <span class="input-group-addon" data-bind="events: {click: fun_close_txtfslist }">
+                                <i class="fa fa-1-5x fa-close"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-12">
+                        <select name="ddlworklocations" id="ddlworklocations"
+                                class="dropdown-control">
+                            <option value="ALL" selected>---ALL---</option>
+                            <option value="YESTERDAY">YESTERDAY </option>
+                            <option value="TODAY">TODAY </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div id='mapwl' style="display:block!important;height:300px; width:100%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

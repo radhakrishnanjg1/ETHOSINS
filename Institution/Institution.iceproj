@@ -32,6 +32,7 @@
     <Content Include=".release.abproject" />
     <Content Include=".yo-rc.json" />
     <Content Include="app.js" />
+    <Content Include="App_Resources\Android\AndroidManifest.xml" />
     <Content Include="App_Resources\Android\xml\config.xml" />
     <Content Include="App_Resources\iOS\config.xml" />
     <Content Include="bower_components\bootstrap\.bower.json" />
@@ -556,6 +557,8 @@
     <Content Include="components\DCRunlistedinstitutionView\view.html" />
     <Content Include="components\fieldlocatorView\index.js" />
     <Content Include="components\fieldlocatorView\view.html" />
+    <Content Include="components\GPSworklocationsView\index.js" />
+    <Content Include="components\GPSworklocationsView\view.html" />
     <Content Include="components\holidaysView\index.js" />
     <Content Include="components\holidaysView\view.html" />
     <Content Include="components\LMSapplyleaveView\index.js" />
@@ -570,6 +573,8 @@
     <Content Include="components\LMSleavehistoryView\view.html" />
     <Content Include="components\LMSleavemanagementView\index.js" />
     <Content Include="components\LMSleavemanagementView\view.html" />
+    <Content Include="components\offGPSView\index.js" />
+    <Content Include="components\offGPSView\view.html" />
     <Content Include="components\offlineView\index.js" />
     <Content Include="components\offlineView\view.html" />
     <Content Include="components\supportView\index.js" />
@@ -850,6 +855,8 @@
     <Folder Include="components\DCRpreviewView\" />
     <Folder Include="components\fieldlocatorView\" />
     <Folder Include="components\DCRscheduleView\" />
+    <Folder Include="components\GPSworklocationsView\" />
+    <Folder Include="components\offGPSView\" />
     <Folder Include="components\supportView\" />
     <Folder Include="components\teamcoverageView\" />
     <Folder Include="components\offlineView\" />

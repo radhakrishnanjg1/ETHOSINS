@@ -114,7 +114,7 @@ function loadyearholidays(currentdivision, currentstate, currentyear) {
         dataBound: function (e) {
             if (this.dataSource.data().length == 0) {
                 //custom logic
-                $("#yearholidays-listview").append("<li>No holidays on this year!</li>");
+                $("#yearholidays-listview").append("<li>No holidays in this year!</li>");
             }
         },
         template: $("#template-yearholidays").html(),
@@ -195,7 +195,7 @@ function loadmonthholidaydetails(currentdivision, currentstate, currentyear,curr
         dataBound: function(e) {
         if(this.dataSource.data().length == 0){
             //custom logic
-            $("#holidays-listview").append("<li>No holidays on this month!</li>");
+            $("#holidays-listview").append("<li>No holidays in this month!</li>");
         }
         },
         template: $("#template-holidays").html(),

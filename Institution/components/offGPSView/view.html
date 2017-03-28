@@ -1,0 +1,21 @@
+<div id="offGPSView"   data-role="view" data-title="GPS off"
+     data-after-show="disableBackButton" data-before-hide="enableBackButton"
+     data-layout="afterlogin"
+     data-model="app.offGPSView.offGPSViewModel"
+     data-bind="events: { show: onShow }" data-stretch="true">
+    <div data-role="header"> 
+    </div>
+    <div class="col-xs-12 col-sm-12 full-height"  
+         align="center">
+        <div class="middle-align">
+            <i class="fa fa-5x fa-map-marker" id="fa-map-marker"></i>
+            <p class="horange">
+                You seem to be GPS Offline. <br>
+                Switch on the GPS location on your phone device
+            </p>
+            <a data-role="button" class="btn btn-success" id="currentpage"
+               data-click="goto_onGPSpage">Refresh</a>
+        </div>
+    </div>
+    <input type="hidden" value="" id="hdngpscurrentpage"/> 
+</div>
