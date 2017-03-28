@@ -7,28 +7,12 @@ var disableBackButton = function () {
 var enableBackButton = function ()
 {
     document.removeEventListener("backbutton", emptyFunc);
-};
-//detect the keyboard opening and closing:
-var keyboardOpen = function () {
-    //cordova.plugins.Keyboard.show();
-};
-var keyboardClose2 = function () {
-   setTimeout(function() {
-    	            cordova.plugins.Keyboard.close();                    
-                }, 310);
-            alert(11);
-}; 
-var keyboarddisableScroll = function () {
-  
-  //cordova.plugins.Keyboard.disableScroll(true);
- 
-}; 
-
+};  
 (function () {
     app.utils = app.utils || {}; 
     //Get a device infor with actin
     app.utils.deviceinformation = function (action) {
-        var deviceinformation = "App:Institution|action:"+action+"|" +
+        var deviceinformation = "App:ETHOS-INS|action:"+action+"|" +
              "model:" + device.model + "|"
                 + "cordova:" + device.cordova + "|"
             + "platform:" + device.platform + "|"
@@ -38,46 +22,38 @@ var keyboarddisableScroll = function () {
             + "serial:" + device.serial;
         return deviceinformation;
     };
+
+    app.utils.isGpsLocationEnabled = function () {
+        //CheckGPS.check(function () {
+        //    alert("s");
+        //    return true;
+        //}, function () {
+        //    alert("f");
+        //    return false;
+        //});
+        return true;
+    };
     app.utils.get_geoinfo = function () {
         var options = {
-            enableHighAccuracy: false,
-            timeout: 10000
+            maximumAge: 3000,
+            timeout: 5000,
+            enableHighAccuracy: true
         };
-        $('#hdnlatitude').val('');
-        $('#hdnlongitude').val('');
+        //$('#hdnlatitude').val('');
+        //$('#hdnlongitude').val('');
         var geolo = navigator.geolocation.getCurrentPosition(function () {
             $('#hdnlatitude').val(JSON.stringify(arguments[0].coords.latitude)); 
             $('#hdnlongitude').val(JSON.stringify(arguments[0].coords.longitude));
-            return true;
+            //alert("success:" + $('#hdnlatitude').val());
+            return JSON.stringify(arguments[0].coords.latitude);
         }, function () {
             $('#hdnlatitude').val('');
             $('#hdnlongitude').val('');
-            return false;
-        }, options);
-        return false;
+           // alert("failure:" + $('#hdnlatitude').val());
+            return 0;
+        }, options); 
     };
-
-    //Menual checking internet with GPS  
-    app.utils.checkGPS = function () {
-        app.utils.get_geoinfo = function () {
-            var options = {
-                enableHighAccuracy: false,
-                timeout: 10000
-            };
-            $('#hdnlatitude').val('');
-            $('#hdnlongitude').val('');
-            var geolo = navigator.geolocation.getCurrentPosition(function () {
-                $('#hdnlatitude').val(JSON.stringify(arguments[0].coords.latitude));
-                $('#hdnlongitude').val(JSON.stringify(arguments[0].coords.longitude));
-                return true;
-            }, function () {
-                $('#hdnlatitude').val('');
-                $('#hdnlongitude').val('');
-                return false;
-            }, options); 
-        };
-        return false;
-    };
+     
     //Menual checking internet checking 
     app.utils.checkinternetconnection = function () {
         var networkState = navigator.connection.type;

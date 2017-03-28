@@ -337,11 +337,11 @@ label {
     } 
 @media(min-height : 480px ) {
     #login-form  {
-        padding-top: 30% !important;
+        padding-top: 40% !important;
     }
 
     #right-drawer {
-        padding-top: 30% !important;
+        padding-top: 35% !important;
     }
 
     .full-height {

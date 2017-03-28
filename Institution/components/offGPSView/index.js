@@ -17,9 +17,15 @@
  
  
 function goto_onGPSpage() {
-    var page = $('#hdngpscurrentpage').val();
-    if (app.utils.checkinternetconnection()) {
-        return app.mobileApp.navigate('components/' + page + '/view.html'); 
+    var page = $('#hdngpscurrentpage').val(); 
+    //app.utils.get_geoinfo();
+   // setTimeout(function () { 
+        //alert("refresh:" + $('#hdnlatitude').val());
+        //if ($('#hdnlatitude').val() != "") {
+        //    return app.mobileApp.navigate('components/' + page + '/view.html');
+        //}
+    //}, 1500);
+    if (!app.utils.get_geoinfo()) {
+        return app.mobileApp.navigate('components/' + page + '/view.html');
     }
-    app.navigation.navigateoffline(page);
 };

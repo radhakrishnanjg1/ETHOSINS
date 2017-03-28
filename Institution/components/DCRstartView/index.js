@@ -6,17 +6,34 @@
     var DCRstartViewModel = kendo.observable({
         onShow: function () { 
             if (!app.utils.checkinternetconnection()) {
-                return app.navigation.navigateoffGPSView("DCRstartView");
+                return app.navigation.navigateoffline("DCRstartView");
+            }
+            else
+            {
+                if (app.utils.get_geoinfo()==0) {
+                        return app.navigation.navigateoffGPSView("DCRstartView");
+                }
+
+                //if (!app.utils.isGpsLocationEnabled()) {
+                //    return app.navigation.navigateoffGPSView("DCRstartView");
+                //}
+                //if (!app.utils.get_geoinfo()) {
+                //    return app.navigation.navigateoffGPSView("DCRstartView");
+                //}
+                //app.utils.get_geoinfo();
+                //setTimeout(function () {
+                    //alert("load:"+$('#hdnlatitude').val());
+                    //if ($('#hdnlatitude').val() == "") {
+                    //    return app.navigation.navigateoffGPSView("DCRstartView");
+                    //}
+               // }, 1000); 
             }
             app.navigation.logincheck();
-            //app.utils.get_geoinfo();
         },
         afterShow: function () {
             disableBackButton();
             get_dcr_master_values(); 
-            //if ($('#hdnlatitude').val() == "") {
-            //    return app.navigation.navigateoffGPSView("DCRstartView");
-            //}
+            
 
         },
         redirecttocontinuedcr: function () {
