@@ -156,7 +156,8 @@ function fun_load_geolocation_by_filter(Employee_ID, ddlworklocation) {
             title: data[i].Employee_Name + "," + data[i].DailyReport_Date + ","
                 + data[i].Activity_Period + "," + data[i].Activity,
             animation: google.maps.Animation.DROP,
-            map: map,
+            map: map, 
+            icon: 'images/orange.png'
             //icon: { 
             //    fillColor: '#ff6600',
             //},

@@ -10,23 +10,26 @@
             }
             else
             {
-                if (app.utils.get_geoinfo()==0) {
-                        return app.navigation.navigateoffGPSView("DCRstartView");
+                setTimeout(app.utils.isGpsLocationEnabled, 1000);
+                if($("#hdnlatitude").val()=="")
+                {
+                    return app.navigation.navigateoffGPSView("DCRstartView");
                 }
+                //alert("dcr:" + app.utils.get_geoinfo());
+                //if (app.utils.get_geoinfo() == 0)
+                //{ 
+                //    return app.navigation.navigateoffGPSView("DCRstartView");
+                //} 
 
-                //if (!app.utils.isGpsLocationEnabled()) {
+                //var options = {
+                //    enableHighAccuracy: false,
+                //    timeout: 100
+                //};
+                //var geolo = navigator.geolocation.getCurrentPosition(function () {
+                //    $("#hdnlatitude").val(JSON.stringify(arguments[0].coords.latitude));
+                //}, function () {
                 //    return app.navigation.navigateoffGPSView("DCRstartView");
-                //}
-                //if (!app.utils.get_geoinfo()) {
-                //    return app.navigation.navigateoffGPSView("DCRstartView");
-                //}
-                //app.utils.get_geoinfo();
-                //setTimeout(function () {
-                    //alert("load:"+$('#hdnlatitude').val());
-                    //if ($('#hdnlatitude').val() == "") {
-                    //    return app.navigation.navigateoffGPSView("DCRstartView");
-                    //}
-               // }, 1000); 
+                //}, options);
             }
             app.navigation.logincheck();
         },
@@ -89,6 +92,7 @@ function redirectDCRView() {
         app.navigation.navigateDCRmasterView();
     }
 }
+
 function get_dcr_master_values() {
     // $("#spandcrstartpage").html('start');
     $("#spandcrstartpage").attr('src', "images/start.jpg");

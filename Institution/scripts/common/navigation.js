@@ -13,16 +13,9 @@
         navigateNoAppId: function () {
             return app.mobileApp.navigate('components/missingSettingsView/noappidView.html');
         },
-
-        //common page for offline
-        navigateoffline: function (redirect) {
-            return app.mobileApp.navigate('components/offlineView/view.html?pageid=' + redirect);
-        },
-
-        navigateoffGPSView: function (redirect) {
-            return app.mobileApp.navigate('components/offGPSView/view.html?pageid=' + redirect);
-        },
-
+        navigateAuthentication: function () {
+            return app.mobileApp.navigate('components/authenticationView/view.html');
+        }, 
         //right side menu 
         navigatedashboard: function () {
             return app.mobileApp.navigate('components/dashboardView/view.html');
@@ -93,22 +86,19 @@
         },
         navigateDCRpreviewView: function () {
             return app.mobileApp.navigate('components/DCRpreviewView/view.html');
-        }, 
-
-        navigateDCRscheduleView: function () {
-            return app.mobileApp.navigate('components/DCRscheduleView/view.html');
         },
 
-
-        //navigatefieldlocatorView 
-        navigatefieldlocatorView: function () {
-            return app.mobileApp.navigate('components/fieldlocatorView/view.html');
-        },
+        //navigatefieldlocatorView  
         navigateGPSworklocationsView: function () {
             return app.mobileApp.navigate('components/GPSworklocationsView/view.html');
         },
-        navigateAuthentication: function () {
-            return app.mobileApp.navigate('components/authenticationView/view.html');
+        
+        //common page for offline and GPS disabled
+        navigateoffline: function (redirect) {
+            return app.mobileApp.navigate('components/offlineView/view.html?pageid=' + redirect);
+        }, 
+        navigateoffGPSView: function (redirect) {
+            return app.mobileApp.navigate('components/offGPSView/view.html?pageid=' + redirect);
         },
     };
 }());

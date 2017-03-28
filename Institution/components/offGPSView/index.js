@@ -17,15 +17,25 @@
  
  
 function goto_onGPSpage() {
-    var page = $('#hdngpscurrentpage').val(); 
-    //app.utils.get_geoinfo();
-   // setTimeout(function () { 
-        //alert("refresh:" + $('#hdnlatitude').val());
-        //if ($('#hdnlatitude').val() != "") {
-        //    return app.mobileApp.navigate('components/' + page + '/view.html');
-        //}
-    //}, 1500);
-    if (!app.utils.get_geoinfo()) {
+    var page = $('#hdngpscurrentpage').val();
+    //alert(app.utils.get_geoinfo());
+    //if (app.utils.get_geoinfo() != 0) {
+    //    return app.mobileApp.navigate('components/' + page + '/view.html');
+    //}
+
+
+    //var options = {
+    //    enableHighAccuracy: false,
+    //    timeout: 1
+    //};
+    //var geolo = navigator.geolocation.getCurrentPosition(function () {
+    //    return app.mobileApp.navigate('components/' + page + '/view.html');
+    //}, function () { 
+    //}, options);
+
+
+    setTimeout(app.utils.isGpsLocationEnabled, 1000);
+    if ($("#hdnlatitude").val() != "") {
         return app.mobileApp.navigate('components/' + page + '/view.html');
     }
 };

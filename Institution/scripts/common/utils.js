@@ -24,35 +24,39 @@ var enableBackButton = function ()
     };
 
     app.utils.isGpsLocationEnabled = function () {
-        //CheckGPS.check(function () {
-        //    alert("s");
-        //    return true;
-        //}, function () {
-        //    alert("f");
-        //    return false;
-        //});
-        return true;
+        var options = {
+            enableHighAccuracy: false,
+            timeout: 10000
+        };
+        var geolo = navigator.geolocation.getCurrentPosition(function () {
+            $("#hdnlatitude").val(JSON.stringify(arguments[0].coords.latitude));
+
+        }, function () {
+            $("#hdnlatitude").val('');
+
+        }, options); 
     };
     app.utils.get_geoinfo = function () {
         var options = {
-            maximumAge: 3000,
-            timeout: 5000,
-            enableHighAccuracy: true
+            maximumAge: Infinity,
+            timeout: 1,
+            enableHighAccuracy: false
         };
-        //$('#hdnlatitude').val('');
-        //$('#hdnlongitude').val('');
-        var geolo = navigator.geolocation.getCurrentPosition(function () {
-            $('#hdnlatitude').val(JSON.stringify(arguments[0].coords.latitude)); 
-            $('#hdnlongitude').val(JSON.stringify(arguments[0].coords.longitude));
-            //alert("success:" + $('#hdnlatitude').val());
-            return JSON.stringify(arguments[0].coords.latitude);
-        }, function () {
-            $('#hdnlatitude').val('');
-            $('#hdnlongitude').val('');
-           // alert("failure:" + $('#hdnlatitude').val());
-            return 0;
-        }, options); 
-    };
+        navigator.geolocation.getCurrentPosition(function () {
+            $("#hdnlatitude").val(JSON.stringify(arguments[0].coords.latitude));
+        }, function () {}, options);
+         setTimeout(function()
+         {
+             if ($("#hdnlatitude").val() != "")
+             {
+                 return 1;
+             }
+             else
+             {
+                 return 0;
+             }
+         }, 100);
+     };
      
     //Menual checking internet checking 
     app.utils.checkinternetconnection = function () {
