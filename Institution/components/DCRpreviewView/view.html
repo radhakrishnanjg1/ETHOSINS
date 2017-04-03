@@ -2,7 +2,7 @@
      data-after-show="disableBackButton" data-before-hide="enableBackButton"
      data-layout="afterlogin"
      data-model="app.DCRpreviewView.DCRpreviewViewModel"
-     data-bind="events: { show: onShow ,afterShow:afterShow}"> 
+     data-bind="events: { show: onShow ,afterShow:afterShow}">
     <footer data-role="footer">
         <div class="row text-center">
             <div data-role="button"
@@ -94,7 +94,7 @@
                                                 <script type="text/x-kendo-tmpl" id="template-dcr-listedinstutition">
                                                     <div class="row">
                                                         <div class="col-xs-12" style="padding-left:20px !important"
-                                                              data-role="button"
+                                                             data-role="button"
                                                              data-dcr_ins_master_id="${dcr_ins_master_id}"
                                                              data-click="fun_dcr_listedinstutition_modelopen">
                                                             <div class="pull-left horange">
@@ -134,7 +134,7 @@
                                                 </script>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                 </div>
                                 <div id="dvflow_second" style="display:none">
                                     <div class="col-xs-12">
@@ -196,7 +196,7 @@
                                                     <div id="dvdcrmaster_deviationreason"></div>
                                                 </div>
                                                 <div class="col-xs-12">
-                                                    <label class="control-label">Description</label>
+                                                    <label class="control-label">Description/Feedback</label>
                                                     <div id="dvdcrmaster_description"></div>
                                                 </div>
                                             </div>
@@ -217,8 +217,8 @@
             <div class="row">
                 <div class="panel-title" style="padding-left:10px !important ; ">
                     Listed Institution  Description<a data-click="fun_dcr_listedinstutition_modelclose"
-                                               data-role="button" class="pull-right"
-                                               style="padding : 0 10px 0 0; ">
+                                                      data-role="button" class="pull-right"
+                                                      style="padding : 0 10px 0 0; ">
                         <i class="fa fa-close"></i>
                     </a>
                 </div>
@@ -227,23 +227,6 @@
         <div class="panel panel-custom">
             <div class="panel-body" style="padding-top:0px;background-color:#fff !important">
                 <div class="row">
-                    <div class="panel-headingsubcustom">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                KDM Details
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body padding0">
-                        <div data-role="listview" id="listview-dcr_listedinstutition_kdm"></div>
-                        <script type="text/x-kendo-tmpl" id="template-dcr_listedinstutition_kdm">
-                            <div class="row">
-                                <div class="col-xs-12 ">
-                                    <div class="pull-left"> #: kdm_name # - #: pob #</div>
-                                </div>
-                            </div>
-                        </script>
-                    </div>
                     <div class="panel-headingsubcustom">
                         <div class="row">
                             <div class="col-xs-12">
@@ -263,6 +246,23 @@
                             </div>
                         </script>
                     </div>
+                    <div class="panel-headingsubcustom">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                KDM Details
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body padding0">
+                        <div data-role="listview" id="listview-dcr_listedinstutition_kdm"></div>
+                        <script type="text/x-kendo-tmpl" id="template-dcr_listedinstutition_kdm">
+                            <div class="row">
+                                <div class="col-xs-12 ">
+                                    <div class="pull-left"> #: kdm_name # - #: pob #</div>
+                                </div>
+                            </div>
+                        </script>
+                    </div> 
                     <div class="panel-headingsubcustom">
                         <div class="row">
                             <div class="col-xs-12">

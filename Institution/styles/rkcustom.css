@@ -555,9 +555,9 @@ footer {
     content: "\e080"; /* adjust as needed, taken from bootstrap.css */
 }
 
-.panel-footer {
+/*.panel-footer {
     padding: 3px 3px;
-}
+}*/
 
 /* bootstrap modal*/
  

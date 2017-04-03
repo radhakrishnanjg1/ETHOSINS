@@ -2,7 +2,7 @@
     $.noty.defaults = _.extend({}, $.noty.defaults, {
         layout: 'center',
         theme: 'metroui', // or relax or defaultTheme
-        type: 'alert',
+        type: 'alert', 
         timeout: 1000,
         modal: true,
         killer: true,

@@ -12,14 +12,10 @@
     "1",
     "2"
   ],
-  "iOSBackgroundMode": [
-    "location"
-  ],
+  "iOSBackgroundMode": [],
   "ProjectTypeGuids": "{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}",
   "FrameworkVersion": "4.0.0",
   "AndroidPermissions": [
-    "android.permission.ACCESS_COARSE_LOCATION",
-    "android.permission.ACCESS_FINE_LOCATION",
     "android.permission.INTERNET"
   ],
   "DeviceOrientations": [
@@ -47,6 +43,8 @@
   ],
   "CordovaPluginVariables": {
     "com.telerik.plugin.telerikanalytics": {
+      "AUTO_TRACK_EXCEPTIONS": "True",
+      "AUTO_TRACK_KENDO_EVENTS": "True",
       "PRODUCT_ID": "6431c65bf8674b178e4fa0b206094f1f"
     }
   },

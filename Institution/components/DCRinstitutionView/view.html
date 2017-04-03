@@ -1,12 +1,12 @@
-<div id="DCRinstitutionView" data-role="view" 
+<div id="DCRinstitutionView" data-role="view"
      data-reload="true"
      data-title="MSL Entry"
-       data-before-hide="enableBackButton"
+     data-before-hide="enableBackButton"
      data-layout="afterlogin"
-     data-model="app.DCRinstitutionView.DCRinstitutionViewModel" 
+     data-model="app.DCRinstitutionView.DCRinstitutionViewModel"
      data-show="app.DCRinstitutionView.DCRinstitutionViewModel.onShow"
-     data-after-show="app.DCRinstitutionView.DCRinstitutionViewModel.afterShow" >
-    <footer data-role="footer"> 
+     data-after-show="app.DCRinstitutionView.DCRinstitutionViewModel.afterShow">
+    <footer data-role="footer">
         <div class="row text-center">
             <div data-role="button"
                  data-bind="events: {click: savelisteddcrdetails }">
@@ -22,55 +22,67 @@
             </div>
         </div>
     </footer>
-    <div id="dvDCRinstitutionView">
+    <!--<div id="dvDCRinstitutionView_offgps" style="display:none">
+        <div class="col-xs-12 col-sm-12 full-height"
+             align="center">
+            <div class="middle-align">
+                <i class="fa fa-5x fa-map-marker" id="fa-map-marker"></i>
+                <p class="horange">
+                    You seem to be GPS Offline. <br>
+                    Switch on the GPS location in your phone device
+                </p>
+                <a data-role="button" class="btn btn-success"
+                   id="currentpage"
+                   data-click="fun_show_dcr_master_listed">Retry</a>
+            </div>
+        </div>
+    </div>-->
+    <div id="dvDCRinstitutionView" >
         <div class="panel panel-custom padding0">
             <div class="panel-body">
                 <div class="row">
-                    <form id="form-listeddcr"> 
+                    <form id="form-listeddcr">
                         <div class="form-group col-xs-12 col-sm-12">
                             <label class="control-label">Serial Number</label>
-                            <input type="text" value="1" class="form-control" 
-                                   disabled 
-                                   id="hdndcr_ins_master_id" name="hdndcr_master_id" />
+                            <input type="text" value="1" class="form-control"
+                                   disabled
+                                   id="hdndcr_ins_master_id" name="hdndcr_master_id" /> 
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12">
+                            <label class="control-label">Selected Work With</label>
+                            <div data-role="listview" id="listview-dcr_listedinstutition_ww_temp"></div>
+                            <script type="text/x-kendo-tmpl" id="template-dcr_listedinstutition_ww_temp">
+                                <div class="row">
+                                    <div class="col-xs-10"> 
+                                         #: ww_name # 
+                                    </div>
+                                    <div class="col-xs-1"> 
+                                            <a class="btn btn-danger" data-role="button"
+                                               data-dcr_master_ww_detail_temp_institution_id="${dcr_master_ww_detail_temp_institution_id}"
+                                               data-click="fun_delete_dcr_listedinstutition_ww_temp"><i class="fa fa-trash"></i></a>
+                                       
+                                    </div>
+                                </div>
+                            </script>
                         </div>
                         <div class="form-group col-xs-12 col-sm-12">
                             <label class="control-label">Institution</label>
-                            <!--<input id="txtlistedinstitution" name="txtlistedinstitution"
-                                   class="form-control" required>-->
-
-                            <!--<div class="col-xs-11">
-                                <input id="txtlistedinstitution" name="txtlistedinstitution"
-                                        class="form-control" required>
-                            </div>
-                            <div class="col-xs-1 paddingTopBottom-5">
-                                <div class="pull-left"
-                                     data-bind="events: {click: fun_close_txtlistedinstitution }">
-                                    <i class="fa fa-1-5x fa-close horange"></i>
-                                </div>
-                            </div>--> 
                             <div class="input-group">
                                 <input id="txtlistedinstitution" name="txtlistedinstitution"
-                                        class="form-control " required>
+                                       class="form-control " required>
                                 <span class="input-group-addon" data-bind="events: {click: fun_close_txtlistedinstitution }">
                                     <i class="fa fa-1-5x fa-close"></i>
                                 </span>
-                            </div> 
+                            </div>
                         </div>
-                        <div class="form-group col-xs-12 col-sm-12">  
+                        <div class="form-group col-xs-12 col-sm-12">
                             <label class="control-label">KDM Details</label>
-                            <!-- grid start -->  
+                            <!-- grid start -->
                             <div id="tblkdmlist"></div>
                             <script id="template-tblkdmlist" type="text/x-kendo-template">
                             </script>
                             <!-- grid  end -->
-                        </div>
-                        <div class="form-group col-xs-12 col-sm-12">
-                            <label class="control-label">Work With</label>
-                            <div class="pull-right horange">Close</div>
-                            <select name="ddlworkwithinst" id="ddlworkwithinst" multiple="multiple"
-                                    data-placeholder="Select Employees" required></select>
-                        </div>
-
+                        </div> 
                         <div class="form-group col-xs-12 col-sm-12">
                             <label class="control-label">Products Promoted</label>
                             <div class="pull-right horange">Close</div>
@@ -83,4 +95,3 @@
         </div>
     </div>
 </div>
- 

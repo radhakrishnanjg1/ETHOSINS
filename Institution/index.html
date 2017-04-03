@@ -7,15 +7,13 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *;
 	style-src 'self' 'unsafe-inline' 'unsafe-eval'  *;media-src 'self'
 	'unsafe-inline' 'unsafe-eval' *;">
-    <!--<meta name="apple-mobile-web-app-status-bar-style" content="black">-->
-    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="kendo/styles/kendo.common.min.css" rel="stylesheet" />
     <link href="kendo/styles/kendo.default.min.css" rel="stylesheet" />
     <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" /> 
-    <!--Mapbox css-->
-    <!--<link href="styles/mapbox.css" rel="stylesheet" />-->
-    <link href="styles/rkcustom.css" rel="stylesheet" />
+    
+     <link href="styles/rkcustom.css" rel="stylesheet" />
     <script src="cordova.js"></script>
     <script src="kendo/js/jquery.min.js"></script>
     <script src="kendo/js/kendo.dataviz.mobile.min.js"></script>
@@ -43,38 +41,37 @@
     <!--data provider-->
     <script src="dataProviders/defaultProvider.js"></script>
     <!--new pages scripts-->
-    <!--left-->
+    <!--left menu start-->
     <script src="components/authenticationView/index.js"></script>
     <script src="components/dashboardView/index.js"></script>
     <script src="components/teamcoverageView/index.js"></script>
-    <script src="components/holidaysView/index.js"></script>
-
-    <!--right-->
-    <script src="components/updateprofileView/index.js"></script>
-    <script src="components/changepasswordView/index.js"></script>
-      
-    <!--Leave Management-->
+    <!--Leave Management start-->
     <script src="components/LMSleavemanagementView/index.js"></script>
     <script src="components/LMSapplyleaveView/index.js"></script>
     <script src="components/LMScancelleaveView/index.js"></script>
     <script src="components/LMSleavehistoryView/index.js"></script>
-
+    <!--Leave Management end-->
     <script src="components/LMSapproveleaveView/index.js"></script>
     <script src="components/LMSapproveleavecancelView/index.js"></script>
-
-    <!--DCR-->
+    <!--DCR start-->
     <script src="components/DCRstartView/index.js"></script>
     <script src="components/DCRmasterView/index.js"></script>
     <script src="components/DCRinstitutionView/index.js"></script>
     <script src="components/DCRunlistedinstitutionView/index.js"></script>
     <script src="components/DCRfinaentryView/index.js"></script>
-    <script src="components/DCRpreviewView/index.js"></script>  
-
+    <script src="components/DCRpreviewView/index.js"></script>   
     <script src="components/GPSworklocationsView/index.js"></script>
+    <script src="components/holidaysView/index.js"></script>
+
+     <!--DCR end-->
+    <!--left menu end-->
+    <!--right menu start-->
+    <script src="components/updateprofileView/index.js"></script>
+    <script src="components/changepasswordView/index.js"></script>  
+    <script src="components/supportView/index.js"></script>  
+    <!--right menu end-->
     <!--common -->
-    <script src="components/offlineView/index.js"></script>
-    <script src="components/supportView/index.js"></script>
-    <script src="components/offGPSView/index.js"></script>
+    <script src="components/offlineView/index.js"></script> 
    
     </head>
 <body id="ethosapp">
@@ -104,9 +101,7 @@
             <div id="page-wrapper" class="container-fluid" style="overflow:auto ;">
             </div>
         </div>
-    </div>
-    <!--data-swipe-to-open-views="['dashboard-view','coveragedetail-view','holidays-view','profile-view','changepassword-view']"-->
-    <!--data-use-native-scrolling="false"-->
+    </div> 
     <div data-role="drawer" id="left-drawer" data-title="left"
          data-swipe-to-open-views="['dashboard-view','teamcoveragedetail-view',
          'LMSleavemanagementView','LMSapplyleaveView','LMScancelleaveView',
@@ -122,12 +117,10 @@
         </header>
         <ul data-role="listview" class="nav" style="background-color:#fff !important">
             <li data-role="button">
-                Hi &nbsp; <span id="dvusername">
+               <span class="hgreen">Hi</span>  &nbsp; <span id="dvusername" class="horange">
                 </span>
                 <input type="hidden" id="hdnLogin_ID" value="0" />
-                <input type="hidden" id="hdnEmployee_ID" value="0" />
-                <input type="hidden" name="hdnlatitude" id="hdnlatitude" value="" />
-                <input type="hidden" name="hdnlongitude" id="hdnlongitude" value="" />
+                <input type="hidden" id="hdnEmployee_ID" value="0" /> 
             </li>
             <li data-role="button" data-click="app.navigation.navigatedashboard"
                 id="dvindvcoverage" style="display:none">
@@ -142,14 +135,7 @@
             </li>
             <li data-role="button" data-click="app.navigation.navigateDCRstartView">
                 <i class="fa fa-1-5x fa-calendar-plus-o"></i> DCR
-            </li>
-            <!--<li data-role="button" data-click="app.navigation.navigateDCRscheduleView">
-                <i class="fa fa-1-5x fa-calendar-check-o"></i>  DCR View
-            </li>-->
-            <!--<li data-role="button" data-click="app.navigation.navigatefieldlocatorView"
-                id="dvfieldlocator" style="display:none">
-                <i class="fa fa-1-5x fa-map-marker"></i> Field Locator
-            </li>-->
+            </li> 
             <li data-role="button" data-click="app.navigation.navigateGPSworklocationsView"
                 id="dvfieldlocator" style="display:none">
                 <i class="fa fa-1-5x fa-map-marker"></i>Field Work Locations
@@ -164,7 +150,7 @@
          'LMSleavemanagementView','LMSapplyleaveView','LMScancelleaveView',
          'LMSleavehistoryView','LMSapproveleaveView','LMSapproveleavecancelView',
          'DCRstartView',
-         'fieldlocatorView',
+         'GPSworklocationsView',
          'supportView',
          'holidays-view','profile-view','changepassword-view']">
         <ul data-role="listview" class="km-vertical-tabstrip nav" style="background-color:#fff !important">

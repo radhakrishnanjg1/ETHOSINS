@@ -11,10 +11,30 @@
            id="hdnactivity_id" name="hdnactivity_id" />
     <input type="hidden" value="0"
            id="hdnactivityperiod" name="hdnactivityperiod" />
-    <div id="dvDCRstartView" > 
+    <input type="hidden" value=""
+           id="hdndcrworkwithmaster_subterritories"
+           name="hdndcrworkwithmaster_subterritories" />
+
+
+    <div id="dvDCRstartView_offgps" style="display:none">
+        <div class="col-xs-12 col-sm-12 full-height"
+             align="center">
+            <div class="middle-align">
+                <i class="fa fa-5x fa-map-marker" id="fa-map-marker"></i>
+                <p class="horange">
+                    You seem to be GPS Offline. <br>
+                    Switch on the GPS location in your phone device
+                </p>
+                <a data-role="button" class="btn btn-success"
+                   id="currentpage"
+                   data-click="fun_show_dcr_startView">Retry</a>
+            </div>
+        </div>
+    </div>
+    <div id="dvDCRstartView" style="display:none">
         <img src="images/start.jpg" id="spandcrstartpage"
              data-role="button"
-         data-bind="events: {click: redirecttocontinuedcr }"
-              style="border:0px !important;padding:0px !important;width:99%;height:100%;" />
-    </div>
+             data-bind="events: {click: redirecttocontinuedcr }"
+             style="border:0px !important;padding:0px !important;width:99%;height:100%;" />
+    </div> 
 </div>

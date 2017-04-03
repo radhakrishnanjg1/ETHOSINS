@@ -4,11 +4,11 @@
 (function () {
     var view = app.DCRpreviewView = kendo.observable();
     var DCRpreviewViewModel = kendo.observable({
-        onShow: function () { 
+        onShow: function () {
             if (!app.utils.checkinternetconnection()) {
                 return app.navigation.navigateoffline("DCRpreviewView");
-            } 
-            app.navigation.logincheck(); 
+            }
+            app.navigation.logincheck();
         },
         afterShow: function () {
             fun_get_dcr_all_details();
@@ -60,6 +60,14 @@
             app.select_dcr_master_byid(render_dcrmaster, hdndcr_master_id);
         },
         submitdcrdetails: function () {
+            var hdndcr_ins_master_string = $('#hdndcr_ins_master_string').val();
+            var hdndcr_unlisted_ins_master_string = $('#hdndcr_unlisted_ins_master_string').val();
+            var hdnactivity_id=$("#hdnactivity_id").val();
+            if (hdnactivity_id == 235 && (hdndcr_ins_master_string == "[]" || hdndcr_unlisted_ins_master_string == "[]"))
+            {
+                app.notify.error("MSL or unlisted should not be empty!");
+                return false;
+            }
             var confirmation = "Are you sure you want to save the details?";
             app.notify.confirmation(confirmation, function (confirm) {
                 if (!confirm) {
@@ -113,7 +121,7 @@ function fun_get_dcr_all_details() {
     fun_get_dcr_ins_master_pp_data();
     fun_get_dcr_unlisted_ins_master_data();
     fun_get_dcr_unlisted_ins_master_ww_data();
-    fun_get_dcr_unlisted_ins_master_pp_data(); 
+    fun_get_dcr_unlisted_ins_master_pp_data();
 }
 
 
@@ -494,17 +502,20 @@ function fun_db_APP_Insert_DCR_INS_Report(Activity_Id, DCR_Master_String, DCR_Ma
             localStorage.setItem("DCR_isavailable", 0);
             app.notify.success(data[0].Output_Message);
             fun_clear_dcr_all_details();
-            $('#dvDCRstartView').show(); 
+            $('#dvDCRstartView').show();
             fun_clearcontrols_dcrmaster_finalentry();
             fun_delete_all_dcrrecords();
             fun_set_dcr_fields();
             app.navigation.navigateDCRstartView();
         }
+        else if (data[0].Output_ID == 0) {
+            app.notify.error(data[0].Output_Message);
+        }
         else {
-            app.notify.error(data[0].Output_Message); 
+            app.notify.error(data[0].Output_Message);
             fun_db_adderrorlog(parseInt($('#hdnLogin_ID').val()), "ETHOS-INS",
                 data[0].Output_Message, data[0].ErrorMessage);
-    } 
+        }
     });
 }
 
@@ -516,7 +527,7 @@ function fun_db_adderrorlog(Login_ID, App_Name, Error_key, Error_Message) {
                 url: "https://api.everlive.com/v1/dvu4zra5xefb2qfq/Invoke/SqlProcedures/APP_Insert_Error_Log",
                 type: "POST",
                 dataType: "json",
-                data: { 
+                data: {
                     "Login_ID": Login_ID,
                     "App_Name": App_Name,
                     "Error_key": Error_key,
@@ -534,7 +545,7 @@ function fun_db_adderrorlog(Login_ID, App_Name, Error_key, Error_Message) {
             app.utils.loading(false); // alert(e);
             app.notify.error('Error loading data please try again later!');
         }
-    }); 
+    });
     errorlogds.fetch();
 }
 

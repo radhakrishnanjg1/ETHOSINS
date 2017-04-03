@@ -13,10 +13,13 @@
             $("#txtauocmpemployeelist").kendoAutoComplete({
                 clearButton: false
             })
-            $('#dvteamename').html('Team');
-            app.utils.loading(true);
-            fun_db_APP_Get_MSL_Coverage_Details_INS_Employee_Team($('#hdnEmployee_ID').val());
-
+            //
+            //if ($('#dvteamename').html().trim() != 'Team')
+            //{
+                $('#dvteamename').html('Team');
+                app.utils.loading(true);
+                fun_db_APP_Get_MSL_Coverage_Details_INS_Employee_Team($('#hdnEmployee_ID').val());
+            //} 
         },
         fun_close_txtauocmpemployeelist: function () {
             $('#txtauocmpemployeelist').val('');

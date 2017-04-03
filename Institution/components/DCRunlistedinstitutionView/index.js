@@ -11,51 +11,48 @@
             app.navigation.logincheck(); 
         },
         afterShow: function () {
-            disableBackButton(); 
+            disableBackButton();  
             get_dcrmaster_unlisted_institution_values();
              if (localStorage.getItem("dcrs_unlistedinstutition_details_live") == null ||
                 localStorage.getItem("dcrs_unlistedinstutition_details_live") != 1) {
                 var user = JSON.parse(localStorage.getItem("userdata"));
                 var Sub_Territory_ID = user.Sub_Territory_ID;
                 app.utils.loading(true);
-                fun_db_APP_Get_DCR_State_City_Information(Sub_Territory_ID);
+                fun_db_APP_Get_Market_Area_Names(Sub_Territory_ID);
             }
              else {
                  fun_load_dcr_unlistedinstitution_pageinit();
-                fun_load_dcr_unlistedinstitution_pageload();
+                 fun_load_dcr_unlistedinstitution_pageload();
              }
-            // if ($('#hdnlatitude').val() == "") {
-            //    return app.navigation.navigateoffGPSView("DCRstartView");
-            //}
         },
         dcrunlistedscrValidator: null,
         saveunlistedscrdetails: function () { 
             var txtinstitution = ($("#txtinstitution").val());
             var txtpobsingle = parseInt($("#txtpobsingle").val());
             var ddlmajortownunlisted = parseInt($("#ddlmajortownunlisted").val());
-            var ddlstate = parseInt($("#ddlstate").val());
-            var ddlcity = parseInt($("#ddlcity").val());
+            //var ddlstate = parseInt($("#ddlstate").val());
+            //var ddlcity = parseInt($("#ddlcity").val());
             var ddlworkwithunlisted = $("#ddlworkwithunlisted").data("kendoMultiSelect").value().toString();
             if (txtinstitution == "") {
                 app.notify.error("Enter institution!");
                 return false;
             }
-            else if (txtpobsingle == "" || isNaN(txtpobsingle)) {
-                app.notify.error("Enter POB!");
-                return false;
-            }
+            //else if (txtpobsingle == "" || isNaN(txtpobsingle)) {
+            //    app.notify.error("Enter POB!");
+            //    return false;
+            //}
             else if (ddlmajortownunlisted == "" || isNaN(ddlmajortownunlisted)) {
                 app.notify.error("Select major town!");
                 return false;
             }
-            else if (ddlstate == "" || isNaN(ddlstate)) {
-                app.notify.error("Select state!");
-                return false;
-            }
-            else if (ddlcity == "" || isNaN(ddlcity)) {
-                app.notify.error("Select city!");
-                return false;
-            }
+            //else if (ddlstate == "" || isNaN(ddlstate)) {
+            //    app.notify.error("Select state!");
+            //    return false;
+            //}
+            //else if (ddlcity == "" || isNaN(ddlcity)) {
+            //    app.notify.error("Select city!");
+            //    return false;
+            //}
             else if (ddlworkwithunlisted == "") {
                 app.notify.error("Select work with!");
                 return false;
@@ -84,10 +81,15 @@ function fun_save_dcrmaster_unlisted_institution() {
     var txtinstitution = $("#txtinstitution").val();
     var txtkdm = "";//($("#txtkdm").val());
     var txtpobsingle = parseInt($("#txtpobsingle").val());
-    var ddlstate = parseInt($("#ddlstate").val());
-    var ddlstate_name = $("#ddlstate option:selected").text();
-    var ddlcity = parseInt($("#ddlcity").val());
-    var ddlcity_name = $("#ddlcity option:selected").text();
+    //var ddlstate = parseInt($("#ddlstate").val());
+    //var ddlstate_name = $("#ddlstate option:selected").text();
+    //var ddlcity = parseInt($("#ddlcity").val());
+    //var ddlcity_name = $("#ddlcity option:selected").text();
+    var user = JSON.parse(localStorage.getItem("userdata"));
+    var ddlstate = user.State_ID;
+    var ddlcity = user.City_ID;
+    var ddlstate_name = ""; 
+    var ddlcity_name = "";
     var ddlmajortownunlisted = parseInt($("#ddlmajortownunlisted").val());
     var ddlmajortownunlisted_name = $("#ddlmajortownunlisted option:selected").text();
     var txtaddressunlisted = $("#txtaddressunlisted").val();
@@ -143,10 +145,10 @@ function fun_clearcontrols_dcr_unlisted_institution() {
     $("#txtpobsingle").val('');
     var ddlmajortownunlisted = $("#ddlmajortownunlisted").data("kendoDropDownList");
     ddlmajortownunlisted.value("---Select---");
-    var ddlstate = $("#ddlstate").data("kendoDropDownList");
-    ddlstate.value("---Select---");
-    var ddlcity = $("#ddlcity").data("kendoDropDownList");
-    ddlcity.value("---Select---"); 
+    //var ddlstate = $("#ddlstate").data("kendoDropDownList");
+    //ddlstate.value("---Select---");
+    //var ddlcity = $("#ddlcity").data("kendoDropDownList");
+    //ddlcity.value("---Select---"); 
     $("#txtaddressunlisted").val('');
     $("#txtpincode").val('');
     $("#txtphone").val('');
@@ -159,10 +161,11 @@ function fun_clearcontrols_dcr_unlisted_institution() {
 }
 
 function fun_load_dcr_unlistedinstitution_pageinit() {
-    $("#ddlstate").kendoDropDownList().data("kendoDropDownList");
-    $("#ddlcity").kendoDropDownList().data("kendoDropDownList");
+    //$("#ddlstate").kendoDropDownList().data("kendoDropDownList");
+    //$("#ddlcity").kendoDropDownList().data("kendoDropDownList");
+    //fun_dcr_unlistedinstitution_states();
     fun_dcr_unlistedinstitution_marketareas();
-    fun_dcr_unlistedinstitution_states();
+    
     $("#ddlworkwithunlisted").kendoMultiSelect({
         index: 0,
         dataTextField: "Employee_Name",
@@ -184,10 +187,11 @@ function fun_load_dcr_unlistedinstitution_pageinit() {
 }
 
 function fun_load_dcr_unlistedinstitution_pageload() {
-    $("#ddlstate").kendoDropDownList().data("kendoDropDownList");
-    $("#ddlcity").kendoDropDownList().data("kendoDropDownList");
+   
+    //$("#ddlstate").kendoDropDownList().data("kendoDropDownList");
+    //$("#ddlcity").kendoDropDownList().data("kendoDropDownList");
+    //fun_dcr_unlistedinstitution_states(); 
     fun_dcr_unlistedinstitution_marketareas();
-    fun_dcr_unlistedinstitution_states(); 
     fun_dcr_unlistedinstitution_chiefs();
     fun_dcr_unlistedinstitution_productspromoted();
 }
@@ -196,7 +200,7 @@ function fun_dcr_unlistedinstitution_chiefs() {
     var ethosmastervaluesdata = JSON.parse((localStorage.getItem("dcrchiefdetails")));
     var ethosmastervaluesrecords = JSON.parse(Enumerable.From(ethosmastervaluesdata)
    .ToJSON());
-    app.utils.loading(false);  
+      
     var ddlworkwithunlisted = $("#ddlworkwithunlisted").data("kendoMultiSelect");
     ddlworkwithunlisted.setDataSource(ethosmastervaluesrecords);
     ddlworkwithunlisted.refresh();
@@ -215,7 +219,7 @@ function fun_dcr_unlistedinstitution_marketareas() {
     var ethosmastervaluesdata = JSON.parse((localStorage.getItem("dcrmarketareadetails")));
     var ethosmastervaluesrecords = JSON.parse(Enumerable.From(ethosmastervaluesdata)
    .ToJSON());
-    app.utils.loading(false);
+    
     $("#ddlmajortownunlisted").kendoDropDownList({
         index: 0,
         dataTextField: "Market_Area_Name",
@@ -229,7 +233,7 @@ function fun_dcr_unlistedinstitution_states() {
     var ethosmastervaluesdata = JSON.parse((localStorage.getItem("dcrstatedetails")));
     var ethosmastervaluesrecords = JSON.parse(Enumerable.From(ethosmastervaluesdata)
    .ToJSON());
-    app.utils.loading(false);
+    
     $("#ddlstate").kendoDropDownList({
         index: 0,
         dataTextField: "State_Name",
@@ -242,7 +246,21 @@ function fun_dcr_unlistedinstitution_states() {
         },
     });
 }
-
+function fun_show_dcr_master_unlisted() {
+    app.utils.loading(true);
+    var options = {
+        enableHighAccuracy: false,
+        timeout: 10000
+    };
+    var geolo = navigator.geolocation.getCurrentPosition(function () {
+        $("#dvDCRunlistedinstitutionView").show();
+        $("#dvDCRunlistedinstitutionView_offgps").hide();
+    }, function () {
+        $("#dvDCRunlistedinstitutionView_offgps").show();
+        $("#dvDCRunlistedinstitutionView").hide();
+    }, options);
+    app.utils.loading(false);
+}
 function fun_dcr_unlistedinstitution_cities(State_ID) {
     var ethosmastervaluesdata = JSON.parse(localStorage.getItem("dcrcitydetails"));
     var records = JSON.parse(Enumerable.From(ethosmastervaluesdata)
@@ -257,11 +275,11 @@ function fun_dcr_unlistedinstitution_cities(State_ID) {
     });
 }
 
-function fun_db_APP_Get_DCR_State_City_Information(Sub_Territory_ID) {
+function fun_db_APP_Get_Market_Area_Names(Sub_Territory_ID) {
     var datasource = new kendo.data.DataSource({
         transport: {
             read: {
-                url: "https://api.everlive.com/v1/dvu4zra5xefb2qfq/Invoke/SqlProcedures/APP_Get_DCR_State_City_Information",
+                url: "https://api.everlive.com/v1/dvu4zra5xefb2qfq/Invoke/SqlProcedures/APP_Get_Market_Area_Names",
                 type: "POST",
                 dataType: "json",
                 data: {
@@ -276,7 +294,8 @@ function fun_db_APP_Get_DCR_State_City_Information(Sub_Territory_ID) {
             }
         },
         error: function (e) {
-            app.utils.loading(false); // alert(e);
+            // alert(e);
+            app.utils.loading(false);
             app.notify.error('Error loading data please try again later!');
         }
     });
@@ -284,11 +303,11 @@ function fun_db_APP_Get_DCR_State_City_Information(Sub_Territory_ID) {
         var data = this.data();
         app.utils.loading(false);
 
-        localStorage.setItem("dcrstatedetails", JSON.stringify(data[0])); // state details 
+        //localStorage.setItem("dcrstatedetails", JSON.stringify(data[0])); // state details 
 
-        localStorage.setItem("dcrcitydetails", JSON.stringify(data[1])); // city details
+        //localStorage.setItem("dcrcitydetails", JSON.stringify(data[1])); // city details
 
-        localStorage.setItem("dcrmarketareadetails", JSON.stringify(data[2])); // market area details
+        localStorage.setItem("dcrmarketareadetails", JSON.stringify(data[0])); // market area details
 
         localStorage.setItem("dcrs_unlistedinstutition_details_live", 1);
         fun_load_dcr_unlistedinstitution_pageinit();

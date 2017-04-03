@@ -151,28 +151,33 @@ function fun_load_geolocation_by_filter(Employee_ID, ddlworklocation) {
     for (i = 0; i < totlength; i++) {
         positions = new google.maps.LatLng(data[i].Latitude, data[i].Longitude);
         bounds.extend(positions);
+        var iconstype = "images/orange.png";
+        if (data[i].MasterType == "MASTER")
+        {
+            iconstype='images/green.png';
+        }
+        else if (data[i].MasterType == "LISTED")
+        {
+            iconstype = 'images/orange.png';
+        } 
+        else if (data[i].MasterType == "UNLISTED") {
+            iconstype = 'images/red.png';
+        }
         marker = new google.maps.Marker({
             position: positions,
             title: data[i].Employee_Name + "," + data[i].DailyReport_Date + ","
                 + data[i].Activity_Period + "," + data[i].Activity,
             animation: google.maps.Animation.DROP,
             map: map, 
-            icon: 'images/orange.png'
-            //icon: { 
-            //    fillColor: '#ff6600',
-            //},
-            //icon: {
-            //    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-            //    strokeColor: "#ff6600",
-            //    scale: 3
-            //},
+            icon: iconstype
         });
         google.maps.event.addListener(marker, 'click', (function (marker, i) {
             return function () {
                 infoWindow.setContent(data[i].Employee_Name +
                     "<br>" + data[i].DailyReport_Date +
-                    "<br>" + data[i].Activity_Period +
-                    "<br>" + data[i].Activity);
+                    "<br>" + data[i].Activity_Period + 
+                    "<br>" + data[i].Activity+
+                   "<br>" + data[i].Institution_Name);
                 infoWindow.open(map, marker);
             }
         })(marker, i));

@@ -7,39 +7,16 @@
         onShow: function () { 
             if (!app.utils.checkinternetconnection()) {
                 return app.navigation.navigateoffline("DCRstartView");
-            }
-            else
-            {
-                setTimeout(app.utils.isGpsLocationEnabled, 1000);
-                if($("#hdnlatitude").val()=="")
-                {
-                    return app.navigation.navigateoffGPSView("DCRstartView");
-                }
-                //alert("dcr:" + app.utils.get_geoinfo());
-                //if (app.utils.get_geoinfo() == 0)
-                //{ 
-                //    return app.navigation.navigateoffGPSView("DCRstartView");
-                //} 
-
-                //var options = {
-                //    enableHighAccuracy: false,
-                //    timeout: 100
-                //};
-                //var geolo = navigator.geolocation.getCurrentPosition(function () {
-                //    $("#hdnlatitude").val(JSON.stringify(arguments[0].coords.latitude));
-                //}, function () {
-                //    return app.navigation.navigateoffGPSView("DCRstartView");
-                //}, options);
-            }
+            } 
             app.navigation.logincheck();
         },
         afterShow: function () {
             disableBackButton();
-            get_dcr_master_values(); 
-            
-
+            fun_show_dcr_startView();
+            get_dcr_master_values();
+            get_dcrworkwithmaster_subterritories_values();
         },
-        redirecttocontinuedcr: function () {
+        redirecttocontinuedcr: function () { 
             redirectDCRView();
         }
     });
@@ -57,11 +34,9 @@ function redirectDCRView() {
     var activity_period_id = parseInt($("#hdnactivityperiod").val());
 
     if (dcr_isavailable == 1 && activity_id == 235) {
-        //redirect to instiution page as default  
-        app.utils.loading(true);
-        setTimeout("app.navigation.navigateDCRinstitutionView()", 1500);
-        app.utils.loading(false);
-
+        //redirect to instiution page as default   
+       // setTimeout("app.navigation.navigateDCRinstitutionView()", 1500);
+        app.navigation.navigateDCRinstitutionView();
     }
     else if (dcr_isavailable == 1
         && (activity_id == 236 || activity_id == 239
@@ -75,10 +50,8 @@ function redirectDCRView() {
         || activity_id == 237 || activity_id == 238
             || activity_id == 242 || activity_id == 243
             || activity_id == 244 || activity_id == 1131)) { //redirect to final entry page
-
-        app.utils.loading(true);
-        setTimeout("app.navigation.navigateDCRfinaentryView()", 1500);
-        app.utils.loading(false);
+        //setTimeout("app.navigation.navigateDCRfinaentryView()", 1500);
+        app.navigation.navigateDCRfinaentryView(); 
     }
     else if (dcr_isavailable == 1 ||
         isNaN(dcr_isavailable) ||
@@ -119,6 +92,10 @@ function fun_delete_all_dcrrecords() {
     app.delete_dcr_unlisted_ins_master();
     app.delete_dcr_unlisted_ins_ww_details();
     app.delete_dcr_unlisted_ins_pp_details();
+
+
+    app.delete_dcr_master_ww_details_temp_master();
+    app.delete_dcr_master_ww_details_temp_institution();
 }
 
 function fun_set_dcr_fields() {
@@ -133,4 +110,26 @@ function fun_set_dcr_fields() {
     localStorage.removeItem("dcrs_listedinstutition_details_live");
 
     localStorage.removeItem("dcrs_unlistedinstutition_details_live");
+
+    localStorage.removeItem("dcrworkwithmaster_subterritories");
+
+    localStorage.removeItem("dcrtourplandetails_live");
+}
+
+
+
+function fun_show_dcr_startView() {
+    app.utils.loading(true);
+    var options = {
+        enableHighAccuracy: false,
+        timeout: 5000
+    };
+    var geolo = navigator.geolocation.getCurrentPosition(function () {
+        $("#dvDCRstartView").show();
+        $("#dvDCRstartView_offgps").hide();
+    }, function () {
+        $("#dvDCRstartView_offgps").show();
+        $("#dvDCRstartView").hide();
+    }, options);
+    app.utils.loading(false);
 }

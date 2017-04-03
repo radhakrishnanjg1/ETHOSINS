@@ -220,6 +220,89 @@
         });
     }
 
+    // 2 a  create dcr master worked with informaton for temp
+    app.createtable_dcr_master_ww_details_temp_master = function () {
+        app.db.transaction(function (tx) {
+            tx.executeSql("create table if not exists dcr_master_ww_details_temp_master (dcr_master_ww_detail_temp_master_id integer primary key asc,"
+                + "ww_id integer,"
+                + "ww_name text,"
+                + " added_on blob)", []);
+        });
+    }
+
+    // 2 a insert  dcr master worked with informaton for temp
+    app.addto_dcr_master_ww_details_temp_master = function (ww_id, ww_name) {
+        app.db.transaction(function (tx) {
+            var addedon = new Date();
+            tx.executeSql("insert into dcr_master_ww_details_temp_master(ww_id,ww_name,added_on) "
+                + " values (?,?,?)",
+                          [ ww_id, ww_name, addedon],
+                          app.onsuccess,
+                          app.onerror);
+        });
+    }
+
+    //   
+    app.select_dcr_master_ww_details_temp_master = function (fn) {
+        app.db.transaction(function (tx) {
+            tx.executeSql("SELECT ww_id,ww_name FROM dcr_master_ww_details_temp_master ", [], fn, app.onError);
+        });
+    };
+    app.delete_dcr_master_ww_details_temp_master = function () {
+        app.db.transaction(function (tx) {
+            tx.executeSql("delete from dcr_master_ww_details_temp_master ", [],
+                          app.onsuccess,
+                          app.onError);
+        });
+    };
+
+    // 2 a  create dcr master worked with informaton for temp
+    app.createtable_dcr_master_ww_details_temp_institution = function () {
+        app.db.transaction(function (tx) {
+            tx.executeSql("create table if not exists dcr_master_ww_details_temp_institution (dcr_master_ww_detail_temp_institution_id integer primary key asc,"
+                + "ww_id integer,"
+                + "ww_name text,"
+                + " added_on blob)", []);
+        });
+    }
+
+    
+
+    // 2 a insert  dcr master worked with informaton for temp
+    app.addto_dcr_master_ww_details_temp_institution = function (ww_id, ww_name) {
+        app.db.transaction(function (tx) {
+            var addedon = new Date();
+            tx.executeSql("insert into dcr_master_ww_details_temp_institution(ww_id,ww_name,added_on) "
+                + " values (?,?,?)",
+                          [ww_id, ww_name, addedon],
+                          app.onsuccess,
+                          app.onerror);
+        });
+    }
+
+    // 2 select dcr master ww   
+    app.select_dcr_master_ww_details_temp_institution = function (fn) {
+        app.db.transaction(function (tx) {
+            tx.executeSql("SELECT dcr_master_ww_detail_temp_institution_id,ww_id,ww_name FROM dcr_master_ww_details_temp_institution ", [], fn, app.onError);
+        });
+    };
+    //2 a Delete dcr master worked with informaton for temp
+    app.delete_dcr_master_ww_details_temp_institution_by_id = function (dcr_master_ww_detail_temp_institution_id) {
+        app.db.transaction(function (tx) {
+            tx.executeSql("delete from dcr_master_ww_details_temp_institution where dcr_master_ww_detail_temp_institution_id=?", [dcr_master_ww_detail_temp_institution_id],
+                          app.onsuccess,
+                          app.onError);
+        });
+    };
+
+    app.delete_dcr_master_ww_details_temp_institution = function () {
+        app.db.transaction(function (tx) {
+            tx.executeSql("delete from dcr_master_ww_details_temp_institution ", [],
+                          app.onsuccess,
+                          app.onError);
+        });
+    };
+
     // 3 create dcr master major town informaton
     app.createtable_dcr_master_mj_details = function () {
         app.db.transaction(function (tx) {
@@ -674,6 +757,9 @@ function app_db_init() {
     app.createtable_dcr_unlisted_ins_master();
     app.createtable_dcr_unlisted_ins_ww_details();
     app.createtable_dcr_unlisted_ins_pp_details();
+
+    app.createtable_dcr_master_ww_details_temp_master();
+    app.createtable_dcr_master_ww_details_temp_institution();
 }
  
 // START_CUSTOM_CODE_kendoUiMobileApp

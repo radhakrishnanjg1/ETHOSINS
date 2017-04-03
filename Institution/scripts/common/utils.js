@@ -12,52 +12,18 @@ var enableBackButton = function ()
     app.utils = app.utils || {}; 
     //Get a device infor with actin
     app.utils.deviceinformation = function (action) {
-        var deviceinformation = "App:ETHOS-INS|action:"+action+"|" +
-             "model:" + device.model + "|"
-                + "cordova:" + device.cordova + "|"
+        var deviceinformation = "App:ETHOS-INS|"
+            + "App Version:1.0.1|"
+            + "action:" + action + "|"
+            + "model:" + device.model + "|"
+            + "cordova:" + device.cordova + "|"
             + "platform:" + device.platform + "|"
             + "uuid:" + device.uuid + "|"
             + "version:" + device.version + "|"
             + "manufacturer:" + device.manufacturer + "|"
             + "serial:" + device.serial;
         return deviceinformation;
-    };
-
-    app.utils.isGpsLocationEnabled = function () {
-        var options = {
-            enableHighAccuracy: false,
-            timeout: 10000
-        };
-        var geolo = navigator.geolocation.getCurrentPosition(function () {
-            $("#hdnlatitude").val(JSON.stringify(arguments[0].coords.latitude));
-
-        }, function () {
-            $("#hdnlatitude").val('');
-
-        }, options); 
-    };
-    app.utils.get_geoinfo = function () {
-        var options = {
-            maximumAge: Infinity,
-            timeout: 1,
-            enableHighAccuracy: false
-        };
-        navigator.geolocation.getCurrentPosition(function () {
-            $("#hdnlatitude").val(JSON.stringify(arguments[0].coords.latitude));
-        }, function () {}, options);
-         setTimeout(function()
-         {
-             if ($("#hdnlatitude").val() != "")
-             {
-                 return 1;
-             }
-             else
-             {
-                 return 0;
-             }
-         }, 100);
-     };
-     
+    }; 
     //Menual checking internet checking 
     app.utils.checkinternetconnection = function () {
         var networkState = navigator.connection.type;

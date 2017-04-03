@@ -44,9 +44,9 @@
             //username: 'Shirali', //top most
             //password: 'Shirali',
 
-            username: 'IN-MGR-LUCKNOW1', //approval level
-            password: 'JAYASWAL7',
-
+            //username: 'IN-MGR-LUCKNOW1', //approval level
+            //password: 'JAYASWAL7',
+            //password: 'doss',
             //username: 'IN-MGR-AURANGABAD1', //approval level
             //password: 'ABCD',
 

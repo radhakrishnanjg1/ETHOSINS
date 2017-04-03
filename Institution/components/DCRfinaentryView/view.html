@@ -14,19 +14,32 @@
             <div class="panel-body">
                 <div class="row">
                     <form id="form-finalentry">
+                        <input type="hidden" value=""
+                               id="hdn_dcr_master_date" name="hdn_dcr_master_date" />
+                        <input type="hidden" value=""
+                               id="hdn_dcr_master_activity_period" name="hdn_dcr_master_activity_period" />
+                        <input type="hidden" value=""
+                               id="hdn_dcr_master_activity_id" name="hdn_dcr_master_activity_id" />
+
+                        <input type="hidden" value=""
+                               id="hdndcr_master_ww_details_string_finalentry" name="hdndcr_master_ww_details_string_finalentry" />
+                        <input type="hidden" value=""
+                               id="hdndcr_ins_master_string_finalentry" name="hdndcr_ins_master_string_finalentry" />
+
                         <div class="form-group col-xs-12 col-sm-12">
                             <label class="control-label">Deviation Reason</label>
-                            <input name="txtdeviationreason" id="txtdeviationreason"
+                            <!--<input name="txtdeviationreason" id="txtdeviationreason"
                                    required
                                    class="form-control" type="text"
-                                   onkeyup="return textinputlength(this.value, 1000, this.id);" />
+                                   onkeyup="return textinputlength(this.value, 1000, this.id);" />-->
+
+                            <textarea class="form-control" rows="5" id="txtdeviationreason"
+                                      onkeyup="return textinputlength(this.value, 1000, this.id);"></textarea>
                         </div>
                         <div class="form-group col-xs-12 col-sm-12">
                             <label class="control-label">Description/Feedback</label>
-                            <input name="txtdescription" id="txtdescription"
-                                   required
-                                   class="form-control" type="text"
-                                   onkeyup="return textinputlength(this.value, 1000, this.id);" />
+                            <textarea class="form-control" rows="5" id="txtdescription"
+                                      onkeyup="return textinputlength(this.value, 1000, this.id);"></textarea>
                         </div>
                     </form>
                 </div>

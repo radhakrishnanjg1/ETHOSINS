@@ -1,4 +1,5 @@
 'use strict';
+
 (function () {
     var view = app.DCRmasterView = kendo.observable();
     var DCRmasterViewModel = kendo.observable({ 
@@ -6,22 +7,20 @@
             if (!app.utils.checkinternetconnection()) {
                 return app.navigation.navigateoffline("DCRmasterView");
             }
-            app.navigation.logincheck();
+            app.navigation.logincheck(); 
         },
         afterShow: function () { 
-                disableBackButton(); 
-                fun_load_dcr_master_pageinit();
-                var user = JSON.parse(localStorage.getItem("userdata"));
-                var Employee_ID = user.Employee_ID;
-                var Sub_Territory_ID = user.Sub_Territory_ID;
-                var Designation_ID = user.Designation_ID;
-                var Division_ID = user.Division_ID; 
-                //if ($('#hdnlatitude').val() == "") {
-                //    return app.navigation.navigateoffGPSView("DCRstartView");
-                //}
-                app.utils.loading(true);
-                fun_db_APP_Get_DCR_INS_Master_Information(Employee_ID, Sub_Territory_ID,
-                Designation_ID, Division_ID);
+            disableBackButton();
+            fun_load_dcr_master_pageinit(); 
+            var user = JSON.parse(localStorage.getItem("userdata"));
+            var Employee_ID = user.Employee_ID;
+            var Sub_Territory_ID = user.Sub_Territory_ID;
+            var Designation_ID = user.Designation_ID;
+            var Division_ID = user.Division_ID;
+            app.utils.loading(true);
+            fun_db_APP_Get_DCR_INS_Master_Information(Employee_ID, Sub_Territory_ID,
+            Designation_ID, Division_ID);
+            
         },
         fun_load_master_mj: function () {
             var ddlworkwithmaster = $("#ddlworkwithmaster").data("kendoMultiSelect");
@@ -32,7 +31,7 @@
                 app.notify.error("Select work with!");
                 return false;
             }
-            app.utils.loading(true);
+             
             var user = JSON.parse(localStorage.getItem("userdata"));
             var emp_Sub_Territory_ID = user.Sub_Territory_ID;
             if (Sub_Territory_ID.match(',') && Sub_Territory_ID.match(emp_Sub_Territory_ID)) {
@@ -40,6 +39,7 @@
                 return false;
             }
             else {
+                app.utils.loading(true);
                 fun_db_dcr_master_APP_Get_Market_Area_Names(Sub_Territory_ID);
             }
         },
@@ -59,9 +59,14 @@
                 var ddlcategory = parseInt($("#ddlcategory").val());
                 var ddlmode = parseInt($("#ddlmode").val());
                 var ddlsfcroute = parseInt($("#ddlsfcroute").val());
+                var ddlworkwithmaster = $("#ddlworkwithmaster").data("kendoMultiSelect").value().toString();
                 if (ddlactivity == 235) //Field Work
                 {
-                    if (ddlcategory == "" || isNaN(ddlcategory)) {
+                    if (ddlworkwithmaster == "") {
+                        app.notify.error("Select work with!");
+                        return false;
+                    }
+                    else if (ddlcategory == "" || isNaN(ddlcategory)) {
                         app.notify.error("Select category!");
                         return false;
                     }
@@ -74,7 +79,17 @@
                         return false;
                     }
                     else {
+                        var user = JSON.parse(localStorage.getItem("userdata"));
+                        var emp_Sub_Territory_ID = user.Sub_Territory_ID;
+                        var Sub_Territory_ID = ddlworkwithmaster;
+                        if (Sub_Territory_ID.match(',') && Sub_Territory_ID.match(emp_Sub_Territory_ID)) {
+                            app.notify.error("You can't select alone and some one at same time!");
+                            return false;
+                        }
                         fun_save_dcrmaster_fieldstaff();
+                        //get_dcrworkwithmaster_subterritories_values();
+                        //$('#hdndcrworkwithmaster_subterritories_ins').val(ddlworkwithmaster); 
+                        //fun_load_listedinstitution_page();
                         fun_clearcontrols_dcrmaster_fieldstaff();
                         //app.notify.success('Master details saved successfully.');
                         app.navigation.navigateDCRinstitutionView();
@@ -138,6 +153,8 @@
 
     view.set('DCRmasterViewModel', DCRmasterViewModel);
 }());
+
+
 
 function fun_clearcontrols_dcrmaster_fieldstaff() {
     var ddlactivityperiod = $("#ddlactivityperiod").data("kendoDropDownList");
@@ -245,6 +262,20 @@ function fun_save_dcrmaster_fieldstaff() {
         category_id, category_name, mode_id, mode_name, sfcroute_id,
         sfcroute_place, deviation_reason, deviation_description,
         "", "");
+
+    var dcr_master_id = $("#hdndcr_master_id").val();
+    var ddlwwrecords = $("#ddlworkwithmaster")
+                            .data("kendoMultiSelect").dataItems();
+    var empids = "";
+    $.each(ddlwwrecords, function (i, item) {
+        var emp_id = ddlwwrecords[i].Employee_Name.split('|')[1];
+        empids += emp_id +",";
+        var emp_name = ddlwwrecords[i].Employee_Name.split('|')[0];
+        app.addto_dcr_master_ww_details(dcr_master_id, emp_id, emp_name);
+        app.addto_dcr_master_ww_details_temp_master(emp_id, emp_name);
+        app.addto_dcr_master_ww_details_temp_institution(emp_id, emp_name);
+    });
+    localStorage.setItem("dcrworkwithmaster_subterritories", empids);
     setTimeout(fun_update_dcr_master_geo, 1000);
 }
 
@@ -286,7 +317,11 @@ function fun_save_dcrmaster_secondflow() {
         var emp_id = ddlwwrecords[i].Employee_Name.split('|')[1];
         var emp_name = ddlwwrecords[i].Employee_Name.split('|')[0];
         app.addto_dcr_master_ww_details(dcr_master_id, emp_id, emp_name);
+        app.addto_dcr_master_ww_details_temp_master(emp_id, emp_name);
+        app.addto_dcr_master_ww_details_temp_institution(emp_id, emp_name);
     });
+    var ddlwwrecords_string = $("#ddlworkwithmaster").data("kendoMultiSelect").value().toString();
+    //localStorage.setItem("dcrworkwithmaster_subterritory_string", ddlwwrecords_string);
     var ddlmjrecords = $("#ddlmajortownmaster")
         .data("kendoMultiSelect").dataItems();
     $.each(ddlmjrecords, function (i, item) {
@@ -369,12 +404,15 @@ function fun_dcr_load_activity() {
         optionLabel: "---Select---",
         change: function (e) {
             // Use the value of the widget
-            app.utils.loading(true);
+             
             var activity = this.value();
             if (activity == 235) //Field Work
             {
+                 
+                fun_dcr_master_chiefs();
                 $("#dvdcrmasterdata").show();
-                $("#dvdcrmasterdata_ww").hide();
+                $("#dvdcrmasterdata_ww").hide(); 
+                $("#dvdcrworkwithmaster").show();
             }
             else if (activity == 236 || activity == 239
                 || activity == 240 || activity == 241
@@ -388,19 +426,21 @@ function fun_dcr_load_activity() {
                 // 254 , 255, 256, 258
             { // others options 
 
-                app.utils.loading(true);
+                 
                 fun_dcr_master_chiefs();
                 $("#dvdcrmasterdata").hide();
-                $("#dvdcrmasterdata_ww").show();
+                $("#dvdcrmasterdata_ww").show(); 
+                $("#dvdcrworkwithmaster").show();
             }
             else if (activity == 237 || activity == 238
                 || activity == 242 || activity == 243
                 || activity == 244 || activity == 1131) // other option Sunday / Holiday/cl/sl/el/lta/nyjd
             {
                 $("#dvdcrmasterdata").hide();
-                $("#dvdcrmasterdata_ww").hide();
+                $("#dvdcrmasterdata_ww").hide(); 
+                $("#dvdcrworkwithmaster").hide();
             }
-            app.utils.loading(false);
+             
         },
     });
 }
@@ -456,7 +496,7 @@ function fun_dcr_load_sfcroute() {
     if (isNaN(Mode_ID)) {
         Mode_ID = 0;
     }
-    app.utils.loading(false);
+     
     var ethosmastervaluesdata = JSON.parse(localStorage.getItem("dcrsfcroutedetails"));
     var ethosmastervaluesrecords = JSON.parse(Enumerable.From(ethosmastervaluesdata)
         .Where("$.Category_ID==" + Category_ID + " && $.Mode_ID==" + Mode_ID).ToJSON());
@@ -473,11 +513,27 @@ function fun_dcr_master_chiefs() {
     var ethosmastervaluesdata = JSON.parse(localStorage.getItem("dcrchiefdetails"));
     var ethosmastervaluesrecords = JSON.parse(Enumerable.From(ethosmastervaluesdata)
    .ToJSON());
-    app.utils.loading(false);
+     
     var ddlworkwithmaster = $("#ddlworkwithmaster").data("kendoMultiSelect");
     ddlworkwithmaster.setDataSource(ethosmastervaluesrecords);
     ddlworkwithmaster.refresh();
-} 
+}
+
+function fun_show_dcr_master() {
+    app.utils.loading(true);
+    var options = {
+        enableHighAccuracy: false,
+        timeout: 10000
+    };
+    var geolo = navigator.geolocation.getCurrentPosition(function () {
+        $("#dvDCRmasterView").show();
+        $("#dvDCRmasterView_offgps").hide();
+    }, function () {
+        $("#dvDCRmasterView_offgps").show();
+        $("#dvDCRmasterView").hide();
+    }, options);
+    app.utils.loading(false);
+}
 function fun_db_APP_Get_DCR_INS_Master_Information(Employee_ID, Sub_Territory_ID, Designation_ID, Division_ID) {
     var datasource = new kendo.data.DataSource({
         transport: {
@@ -498,7 +554,8 @@ function fun_db_APP_Get_DCR_INS_Master_Information(Employee_ID, Sub_Territory_ID
             }
         },
         error: function (e) {
-            app.utils.loading(false); // alert(e);
+            // alert(e);
+            app.utils.loading(false);
             app.notify.error('Error loading data please try again later!');
         }
     });
@@ -507,13 +564,13 @@ function fun_db_APP_Get_DCR_INS_Master_Information(Employee_ID, Sub_Territory_ID
         app.utils.loading(false);
         localStorage.setItem("dcrlastreporteddetails", JSON.stringify(data[0])); // last reported details  
 
-        localStorage.setItem("dcrtourplandetails", JSON.stringify(data[1])); // tourplan details  based on empid,sub id,reported date
+       // localStorage.setItem("dcrtourplandetails", JSON.stringify(data[1])); // tourplan details  based on empid,sub id,reported date
 
-        localStorage.setItem("dcractivitytypedetails", JSON.stringify(data[2])); // ActivityType details 
+        localStorage.setItem("dcractivitytypedetails", JSON.stringify(data[1])); // ActivityType details 
 
-        localStorage.setItem("dcrsfcroutedetails", JSON.stringify(data[3])); // sfcroutes details 
+        localStorage.setItem("dcrsfcroutedetails", JSON.stringify(data[2])); // sfcroutes details 
 
-        localStorage.setItem("dcrchiefdetails", JSON.stringify(data[4])); // chief details 
+        localStorage.setItem("dcrchiefdetails", JSON.stringify(data[3])); // chief details 
         
         fun_load_dcr_master_pageload();
     });
@@ -538,8 +595,9 @@ function fun_db_dcr_master_APP_Get_Market_Area_Names(Sub_Territory_ID) {
             }
         },
         error: function (e) {
-            app.utils.loading(false); // alert(e);
+              // alert(e);
             app.notify.error('Error loading data please try again later!');
+            app.utils.loading(false);
         }
     });
     datasource.fetch(function () {
