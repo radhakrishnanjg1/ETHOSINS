@@ -25,6 +25,9 @@
             fun_get_dcr_ins_master_data_finalentry(); 
         },
         savefinalentrydetails: function () {
+            //update dcr master deviaion details n description 
+            var txtdeviationreason = $('#txtdeviationreason').val(); 
+            app.update_dcr_master_deviation(1, txtdeviationreason, $('#txtdescription').val());
             if (localStorage.getItem("dcrtourplandetails_live") == null ||
                 localStorage.getItem("dcrtourplandetails_live") != 1)
             { 

@@ -63,6 +63,7 @@
                 fun_clearcontrols_dcr_unlisted_institution();
                 app.notify.success('Unlisted institution details saved successfully.');
             }
+            $(".km-scroll-container").css("transform", "none");
         },
     });
 

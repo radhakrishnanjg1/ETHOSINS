@@ -9,13 +9,13 @@
   "BundleVersion": "1.0.1",
   "AndroidVersionCode": "1",
   "iOSDeviceFamily": [
-    "1",
-    "2"
+    "1"
   ],
   "iOSBackgroundMode": [],
   "ProjectTypeGuids": "{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}",
   "FrameworkVersion": "4.0.0",
   "AndroidPermissions": [
+    "android.permission.ACCESS_FINE_LOCATION",
     "android.permission.INTERNET"
   ],
   "DeviceOrientations": [
@@ -43,18 +43,18 @@
   ],
   "CordovaPluginVariables": {
     "com.telerik.plugin.telerikanalytics": {
-      "AUTO_TRACK_EXCEPTIONS": "True",
-      "AUTO_TRACK_KENDO_EVENTS": "True",
+      "AUTO_TRACK_EXCEPTIONS": "true",
+      "AUTO_TRACK_KENDO_EVENTS": "true",
       "PRODUCT_ID": "6431c65bf8674b178e4fa0b206094f1f"
     }
   },
   "iOSDeploymentTarget": "6.0",
   "CorePlugins": [
+    "com.telerik.LivePatch",
     "com.telerik.plugin.telerikanalytics@3.4.1",
     "cordova-plugin-device",
     "cordova-plugin-device-orientation",
     "cordova-plugin-geolocation",
-    "cordova-plugin-media",
     "cordova-plugin-network-information",
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",

@@ -9,15 +9,15 @@
             if (!app.utils.checkinternetconnection()) {
                 return app.navigation.navigateoffline("DCRinstitutionView");
             }
-            app.navigation.logincheck(); 
+            app.navigation.logincheck();
+            
         },
         afterShow: function () { 
-            disableBackButton(); 
+            disableBackButton();
             get_dcr_listedinstitution_values();
             get_dcrworkwithmaster_subterritories_values();
-            fun_load_listedinstitution_page(); 
             fun_load_dcr_listedinstutition_ww_temp();
-           
+            fun_load_listedinstitution_page();
         },
         fun_close_txtlistedinstitution: function () {
             $('#txtlistedinstitution').val('');
@@ -75,6 +75,7 @@
                 fun_clearcontrols_dcr_listedinstitution();
                 app.notify.success('Institution details saved successfully.');
             }
+            $(".km-scroll-container").css("transform", "none");
         },
     });
     view.set('DCRinstitutionViewModel', DCRinstitutionViewModel);
@@ -98,13 +99,11 @@ function fun_load_listedinstitution_page() {
         var Division_ID = user.Division_ID;
         app.utils.loading(true);
         fun_db_APP_Get_DCR_INS_ListedInstitution_Information(Employee_ID, Sub_Territory_ID,
-        Designation_ID, Division_ID) 
+        Designation_ID, Division_ID);
     }
     else {
-        app.utils.loading(true);
         fun_load_dcr_institution_pageinit();
         fun_load_dcr_institution_pageload();
-        app.utils.loading(false);
     }
 }
 
@@ -144,16 +143,7 @@ function fun_clearcontrols_dcr_listedinstitution() {
 }
 
 function fun_load_dcr_institution_pageinit() {
-    $('#txtlistedinstitution').val('');
-    //$("#ddlworkwithinst").kendoMultiSelect({
-    //    index: 0,
-    //    dataTextField: "Employee_Name",
-    //    dataValueField: "Sub_Territory_ID",
-    //    dataSource: [],
-    //    optionLabel: "---Select---",
-    //    autoClose: true,
-    //    clearButton: false,
-    //});
+    $('#txtlistedinstitution').val(''); 
     $("#ddlproductspromotedinst").kendoMultiSelect({
         index: 0,
         dataTextField: "ProductGroup_Name",
@@ -262,7 +252,7 @@ function fun_reload_dcr_master_ww_details_temp_institution() {
 function fun_load_dcr_institution_institutions() {
     $("#txtlistedinstitution").kendoAutoComplete({
         clearButton: false
-    })
+    });
     var ethosmastervaluesdata = JSON.parse(localStorage.getItem("dcrinstutitiondetails"));
     var ethosmastervaluesrecords = JSON.parse(Enumerable.From(ethosmastervaluesdata)
    .ToJSON());
@@ -433,7 +423,6 @@ function fun_delete_dcr_listedinstutition_ww_temp(e) {
     //}  
 }
 function fun_show_dcr_master_listed() {
-    app.utils.loading(true);
     var options = {
         enableHighAccuracy: false,
         timeout: 10000
@@ -445,7 +434,6 @@ function fun_show_dcr_master_listed() {
         $("#dvDCRinstitutionView_offgps").show();
         $("#dvDCRinstitutionView").hide();
     }, options);
-    app.utils.loading(false);
 }
 function fun_db_APP_Get_DCR_INS_ListedInstitution_Information(Employee_ID, Sub_Territory_ID, Designation_ID, Division_ID) {
     var datasource = new kendo.data.DataSource({

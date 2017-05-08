@@ -83,21 +83,27 @@ function fun_applyleave_pageload() {
 }
 
 function fun_applyleave_load_mlandpl() {
+    var userdata = JSON.parse(localStorage.getItem("userdata"));
+    var Gender = userdata.Sex;
+    var LeaveApplyYear = userdata.LeaveApplyYear;
+    var MaritalStatus = userdata.Marital_Status;
     $("#txtfrom").kendoDatePicker({
         format: app.constants.dateFormat,//app.constants.dateFormat,
         parseFormats: [app.constants.dateFormat],
         disableDates: ["su"],
-    }); 
+        min: new Date(LeaveApplyYear, 0, 1),
+        max: new Date(LeaveApplyYear, 11, 31)
+    });
     $("#txtto").kendoDatePicker({
         format: app.constants.dateFormat,//app.constants.dateFormat,"dd-MM-yyyy
         parseFormats: [app.constants.dateFormat],
         disableDates: ["su"],
+        min: new Date(LeaveApplyYear, 0, 1),
+        max: new Date(LeaveApplyYear, 11, 31)
     });
-    
-   // $('#txtto').attr('disabled', 'disabled');
-    var userdata = JSON.parse(localStorage.getItem("userdata"));
-    var Gender = userdata.Sex;
-    var MaritalStatus = userdata.Marital_Status;
+
+
+
     if (Gender == "20" && MaritalStatus == "21") {
         $("#ddlleavetype").data("kendoDropDownList")
         .dataSource.add({ "Master_Value_Name": "ML", "Master_Value_ID": 2234 });

@@ -13,6 +13,7 @@
         afterShow: function () {
             disableBackButton();
             fun_show_dcr_startView();
+           //$("#dvDCRstartView").show();
             get_dcr_master_values();
             get_dcrworkwithmaster_subterritories_values();
         },

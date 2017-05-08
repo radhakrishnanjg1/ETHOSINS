@@ -33,8 +33,8 @@
     var vm = kendo.observable({
         user: {
             displayName: '',
-            //username: '',
-            //password: '',
+            username: '',
+            password: '',
             //username: 'ZE-RM-GUWAHATI1', //rm
             //password: 'himalaya',
 
@@ -112,9 +112,15 @@ function fun_db_APP_Verify_Field_User_Authentication(username, password, devicei
 
             localStorage.setItem("ethosmastervalues", JSON.stringify(data[1])); // ethosmastervalues details 
 
-            if (data[0][0].IsManager == 0) {
-                $('#dvindvcoverage').show();
+            if (data[0][0].Login_ID == 2473 || data[0][0].Login_ID ==2917 || data[0][0].Login_ID == 2722 ||data[0][0].Login_ID == 10500) {
+                $('#dvfieldlocator').show();
+            }
+            else   {
                 $('#dvfieldlocator').hide();
+            }
+
+            if (data[0][0].IsManager == 0) {
+                $('#dvindvcoverage').show(); 
                 //redirect dashboard/indiviual  page 
                 app.navigation.navigatedashboard();//  navigateDCRstartView 
                 //navigateLMSleavemanagementView  navigateLMSapplyleaveView
@@ -122,13 +128,13 @@ function fun_db_APP_Verify_Field_User_Authentication(username, password, devicei
                 app.utils.loading(false);
             }
             else if (data[0][0].IsManager == 1) {
-                $('#dvteamcoverage').show();
-                $('#dvfieldlocator').show();
+                $('#dvteamcoverage').show(); 
                 //redirect dashboard/team coverage page 
                 app.navigation.navigateteamcoverage();// navigateDCRstartView 
                 //navigateLMSleavemanagementView  navigateLMSapplyleaveView navigatedashboard
                 app.utils.loading(false);
             } 
+            // NIKIL SHIRALI login id
             app_db_init();
         }
         else {
