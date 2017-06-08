@@ -33,28 +33,12 @@
     var vm = kendo.observable({
         user: {
             displayName: '',
-            username: '',
-            password: '',
+             username: '',
+             password: '',
             //username: 'ZE-RM-GUWAHATI1', //rm
-            //password: 'himalaya',
-
-            //username: 'ZE-ASANSOL1', //rep
-            //password: 'ASANSOL', 
-
-            //username: 'Shirali', //top most
-            //password: 'Shirali',
-
-            //username: 'IN-MGR-LUCKNOW1', //approval level
-            //password: 'JAYASWAL7',
-            //password: 'doss',
-            //username: 'IN-MGR-AURANGABAD1', //approval level
-            //password: 'ABCD',
-
-            //username: 'IN-MGR-PATNA1', //   rep level 
-            //password: 'emp2114',
-
-            //username: 'IN-MGR-DELHI1', //   rep level 
-            //password: 'CHARLIE',
+            //password: 'himalaya', 
+            username: 'IN-MGR-LUCKNOW1', //approval level
+            password: 'JAYASWAL7', 
             //email: ''
         },
         loginValidator: null,

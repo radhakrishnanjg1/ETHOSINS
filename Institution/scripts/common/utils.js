@@ -12,8 +12,9 @@ var enableBackButton = function ()
     app.utils = app.utils || {}; 
     //Get a device infor with actin
     app.utils.deviceinformation = function (action) {
-        var deviceinformation = "App:ETHOS-INS|"
-            + "App Version:1.0.1|"
+        var deviceinformation = app.constants.appname + "|"
+            + app.constants.appversion + "|"
+              + app.constants.appmode + "|"
             + "action:" + action + "|"
             + "model:" + device.model + "|"
             + "cordova:" + device.cordova + "|"

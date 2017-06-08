@@ -6,8 +6,8 @@
   "DisplayName": "ETHOS-INS",
   "Author": "Radhakrishnan J",
   "Description": "ETHOS Institution",
-  "BundleVersion": "1.0.2",
-  "AndroidVersionCode": "2",
+  "BundleVersion": "1.0.3",
+  "AndroidVersionCode": "3",
   "iOSDeviceFamily": [
     "1"
   ],
@@ -43,8 +43,8 @@
   ],
   "CordovaPluginVariables": {
     "com.telerik.plugin.telerikanalytics": {
-      "AUTO_TRACK_EXCEPTIONS": "true",
-      "AUTO_TRACK_KENDO_EVENTS": "true",
+      "AUTO_TRACK_EXCEPTIONS": "True",
+      "AUTO_TRACK_KENDO_EVENTS": "True",
       "PRODUCT_ID": "6431c65bf8674b178e4fa0b206094f1f"
     }
   },

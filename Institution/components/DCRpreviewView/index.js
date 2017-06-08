@@ -46,6 +46,9 @@
                 {
                     fun_load_dcr_master_ww(hdndcr_master_id);
                     fun_load_dcr_master_mj(hdndcr_master_id);
+                    $("#dvdcrmaster_category_second").html(rs.rows.item(0).category_name);
+                    $("#dvdcrmaster_mode_second").html(rs.rows.item(0).mode_name);
+                    $("#dvdcrmaster_sfcroute_second").html(rs.rows.item(0).sfcroute_place);
                     $("#dvflow_second").show();
                     $("#dvflow_fiedstaff").hide();
                 }
@@ -506,6 +509,7 @@ function fun_db_APP_Insert_DCR_INS_Report(Activity_Id, DCR_Master_String, DCR_Ma
             fun_clearcontrols_dcrmaster_finalentry();
             fun_delete_all_dcrrecords();
             fun_set_dcr_fields();
+            $(".km-scroll-container").css("transform", "none");
             app.navigation.navigateDCRstartView();
         }
         else if (data[0].Output_ID == 0) {
@@ -513,7 +517,7 @@ function fun_db_APP_Insert_DCR_INS_Report(Activity_Id, DCR_Master_String, DCR_Ma
         }
         else {
             app.notify.error(data[0].Output_Message);
-            fun_db_adderrorlog(parseInt($('#hdnLogin_ID').val()), "ETHOS-INS",
+            fun_db_adderrorlog(parseInt($('#hdnLogin_ID').val()), app.constants.appname,
                 data[0].Output_Message, data[0].ErrorMessage);
         }
     });
