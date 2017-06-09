@@ -8,11 +8,7 @@
             if (actionvalue == "logout") {                
                 app.utils.loading(true);
                 var user = JSON.parse(localStorage.getItem("userdata"));
-                fun_db_APP_User_Logout(user.Login_ID, user.Employee_ID, app.utils.deviceinformation('Logout'));
-                $('#username').val('');
-                $('#password').val('');
-                $('#hdnLogin_ID').val('0'); 
-                localStorage.clear(); 
+                fun_db_APP_User_Logout(user.Login_ID, user.Employee_ID, app.utils.deviceinformation('Logout')); 
             }
             if (app.user != null) {
                 return app.navigation.navigatedashboard();
@@ -33,29 +29,29 @@
     var vm = kendo.observable({
         user: {
             displayName: '',
-             username: '',
-             password: '',
+             //username: '',
+             //password: '',
             //username: 'ZE-RM-GUWAHATI1', //rm
             //password: 'himalaya', 
-            username: 'IN-MGR-LUCKNOW1', //approval level
-            password: 'JAYASWAL7', 
+               username: 'IN-MGR-LUCKNOW1', //approval level
+               password: 'JAYASWAL7', 
             //email: ''
         },
         loginValidator: null,
         registerValidator: null,
         signin: function (username, password) { 
             var model = vm.user;
-            if (model.username == '') {
+            if ($('#username').val() == '' || model.username == '' || model.username == undefined) {
                 username = model.username;
                 app.notify.error("Enter username!");
                 return false;
             }
 
-            if (model.password == '') {
+            if ($('#password').val() == '' || model.password == '' || model.password == undefined) {
                 password = model.password;
                 app.notify.error("Enter password!");
                 return false;
-            } 
+            }
             app.utils.loading(true);
             fun_db_APP_Verify_Field_User_Authentication(model.username, model.password, app.utils.deviceinformation('Login'));
         },
@@ -152,8 +148,12 @@ function fun_db_APP_User_Logout(Login_ID, Employee_ID, deviceinfo) {
     datasource.fetch(function () {
         var data = this.data();
         if (data[0].Output_ID == 1) {
-            app.notify.success(data[0].Output_Message);
+            app.notify.success(data[0].Output_Message); 
             app.utils.loading(false);
+            $('#username').val('');
+            $('#password').val('');
+            $('#hdnLogin_ID').val('0'); 
+            localStorage.clear(); 
         }
         else {
             app.notify.error(data[0].Output_Message);

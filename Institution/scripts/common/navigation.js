@@ -10,6 +10,14 @@
             app.mobileApp.navigate('#:back');
             app.utils.loading(false);
         },
+        homepage: function () {
+            var userdata = JSON.parse(localStorage.getItem("userdata"));
+            var IsManager = userdata.IsManager;
+            if (IsManager) {
+                return app.mobileApp.navigate('components/teamcoverageView/view.html');
+            }
+            return app.mobileApp.navigate('components/dashboardView/view.html');
+        },
         navigateNoAppId: function () {
             return app.mobileApp.navigate('components/missingSettingsView/noappidView.html');
         },
@@ -66,6 +74,9 @@
         //DCR end  
         navigateGPSworklocationsView: function () {
             return app.mobileApp.navigate('components/GPSworklocationsView/view.html');
+        },
+        navigateTeamAbsensesView: function () {
+            return app.mobileApp.navigate('components/TeamAbsensesView/view.html');
         },
         navigateholidays: function () {
             return app.mobileApp.navigate('components/holidaysView/view.html');
