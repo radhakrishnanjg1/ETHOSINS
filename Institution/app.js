@@ -16,6 +16,42 @@
         }
     }; 
 
+    var checkpushnotification = function () {
+        $(function () { 
+            if (localStorage.getItem("pushnotify") != 1) {
+                var pushSettings = {
+                    android: {
+                        senderID: '944328119073'
+                    },
+                    iOS: {
+                        badge: 'true',
+                        sound: 'true',
+                        alert: 'true'
+                    },
+                    wp8: {
+                        channelName: 'EverlivePushChannel'
+                    },
+                    customParameters: {
+                        Age: 21
+                    }
+                }; 
+                app.everlive.push.register(pushSettings)
+                    .then(
+                        function () { 
+                            localStorage.setItem("pushnotify", "1");
+                           // console.log(app.constants.SUCCESS_TEXT);
+                            console.log("Success");
+                        },
+                        function (err) {
+                            //  alert('REGISTER ERROR: ' + JSON.stringify(err));
+                        }
+                ); 
+            }
+       });
+    };
+
+
+
     var bootstrap = function () {
           var os = kendo.support.mobileOS,
         statusBarStyle = os.ios && os.flatVersion >= 700 ? 'white-translucent' : 'white';
@@ -41,10 +77,12 @@
             //    document.body.style.marginTop = "20px";
             //} 
             bootstrap();
+            checkpushnotification();
           
         }, false);
     } else { 
         bootstrap();
+        checkpushnotification();
     }
 
     app.keepActiveState = function _keepActiveState(item) {

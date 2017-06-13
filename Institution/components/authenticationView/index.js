@@ -29,12 +29,12 @@
     var vm = kendo.observable({
         user: {
             displayName: '',
-             //username: '',
-             //password: '',
+             username: '',
+             password: '',
             //username: 'ZE-RM-GUWAHATI1', //rm
             //password: 'himalaya', 
-               username: 'IN-MGR-LUCKNOW1', //approval level
-               password: 'JAYASWAL7', 
+            //  username: 'IN-MGR-LUCKNOW1', //approval level
+            //  password: 'JAYASWAL7', 
             //email: ''
         },
         loginValidator: null,

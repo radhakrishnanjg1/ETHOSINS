@@ -2,7 +2,7 @@
     app.constants = {
         appname: 'App Name:ETHOS-INS',
         appversion: 'App Version:1.0.4', //app.constants.appname
-        appmode: 'App Mode:Debug',//Debug/Release
+        appmode: 'App Mode:Release',//Debug/Release
         authenticationModeSignin: 'signin',
         authenticationModeRegister: 'register',
         userprofilePicture: 'images/employee/',

@@ -6,8 +6,8 @@
   "DisplayName": "ETHOS-INS",
   "Author": "Radhakrishnan J",
   "Description": "ETHOS Institution",
-  "BundleVersion": "1.0.3",
-  "AndroidVersionCode": "3",
+  "BundleVersion": "1.0.4",
+  "AndroidVersionCode": "4",
   "iOSDeviceFamily": [
     "1"
   ],
@@ -50,6 +50,7 @@
   },
   "iOSDeploymentTarget": "6.0",
   "CorePlugins": [
+    "com.phonegap.plugins.PushPlugin@3.3.0",
     "com.telerik.LivePatch",
     "com.telerik.plugin.telerikanalytics@3.4.1",
     "cordova-plugin-device",
