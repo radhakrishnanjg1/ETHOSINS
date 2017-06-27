@@ -6,8 +6,8 @@
   "DisplayName": "ETHOS-INS",
   "Author": "Radhakrishnan J",
   "Description": "ETHOS Institution",
-  "BundleVersion": "1.0.4",
-  "AndroidVersionCode": "4",
+  "BundleVersion": "1.0.5",
+  "AndroidVersionCode": "5",
   "iOSDeviceFamily": [
     "1"
   ],
@@ -19,7 +19,8 @@
     "android.permission.INTERNET"
   ],
   "DeviceOrientations": [
-    "Portrait"
+    "Portrait",
+    "Landscape"
   ],
   "AndroidHardwareAcceleration": "true",
   "iOSStatusBarStyle": "BlackTranslucent",

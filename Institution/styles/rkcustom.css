@@ -361,6 +361,21 @@ label {
     .full-height {
         height: 320px !important;
     }
+
+    .km-flat .km-loader:after {
+    content: "Please wait...";
+    display: block;
+    position: absolute;
+    margin-top: -2em;
+    margin-left: -2em;
+    width: 8em;
+    height: 4em;
+    top: 70%;
+    left: 47%;
+    color: #00C8B7 !important;
+    font-size: larger !important;
+    font-weight: 800 !important;
+}
 }
 
 .full-height {
@@ -662,12 +677,11 @@ footer {
 }
 /*field locator end*/
 
-/* Ios header issue start*/
-.km-on-ios .km-header .km-navbar {
-            background-color: skyblue;
-        }
-        .km-on-ios .km-header .km-widget,
-        .km-on-ios .km-header .km-view-title {
-            color: white;
-        }
-/*Ios header issue end */
+/* rk */
+.km-content h4
+{
+    margin: 0 0 3px!important
+}
+p{
+   margin: 0 0 3px!important
+}

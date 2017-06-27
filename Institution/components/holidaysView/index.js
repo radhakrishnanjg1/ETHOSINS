@@ -36,26 +36,12 @@ function fun_db_APP_Get_Field_Permited_Holiday_Master(Employee_ID) {
 
     datasource.fetch(function () {
         var data = this.data();
-        //app.utils.loading(false);
-        //localStorage.setItem("holidaydetails", JSON.stringify(data)); // holiday  details 
-        //localStorage.setItem("holidaydetails_live", 1);
-        //loaddropdownlist();
-        //loadcontrols();
-        //$('#dvholidaysummary').show();
         app.utils.loading(false);
-        if (data[0].SNO > 0) {
-            localStorage.setItem("holidaydetails", JSON.stringify(data)); // holiday  details 
-            localStorage.setItem("holidaydetails_live", 1);  
-            loaddropdownlist();
-            loadcontrols();
-            $('#dvholidaysummary').show(); 
-            app.utils.loading(false);
-
-        }
-        else {
-            //app.notify.error(data[0][0].Output_Message);
-            app.utils.loading(false);
-        }
+        localStorage.setItem("holidaydetails", JSON.stringify(data)); // holiday  details 
+        localStorage.setItem("holidaydetails_live", 1);
+        loaddropdownlist();
+        loadcontrols();
+        $('#dvholidaysummary').show(); 
     });
 
 }

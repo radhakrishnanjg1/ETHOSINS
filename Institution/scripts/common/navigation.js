@@ -75,6 +75,21 @@
         navigateGPSworklocationsView: function () {
             return app.mobileApp.navigate('components/GPSworklocationsView/view.html');
         },
+        navigateMSLView: function () {
+            return app.mobileApp.navigate('components/MSLView/view.html');
+        },
+        navigateLastActivitiesView: function () {
+            return app.mobileApp.navigate('components/LastActivitiesView/view.html');
+        },
+        navigateTourplanEntryView: function () {
+            return app.mobileApp.navigate('components/TourplanEntryView/view.html');
+        },
+        navigateTourplanPreviewView: function () {
+            return app.mobileApp.navigate('components/TourplanPreviewView/view.html');
+        },
+        navigateTourplanView: function () {
+            return app.mobileApp.navigate('components/TourplanView/view.html');
+        },
         navigateTeamAbsensesView: function () {
             return app.mobileApp.navigate('components/TeamAbsensesView/view.html');
         },

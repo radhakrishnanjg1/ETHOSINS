@@ -1,0 +1,72 @@
+<div id="MSLView" data-role="view" data-title="Institution MSL List" 
+     data-layout="afterlogin"
+     data-model="app.MSLView.MSLViewModel"
+     data-bind="events: { show: onShow,afterShow:afterShow }"> 
+    <!--<footer data-role="footer">
+        <div class="btn-group btn-group-justified">
+            <a class="btn btn-primary"
+               data-bind="events: {click: onRefresh }">
+                <i class="fa fa-2x fa-refresh"></i>
+            </a> 
+        </div>
+    </footer>-->
+    <footer data-role="footer">
+        <div class="btn-group btn-group-justified">
+            <a data-role="button"  
+                 data-click="app.navigation.back">
+                <i class="fa  fa-arrow-left"></i> Back
+            </a>
+            <a data-role="button"  
+               data-click="app.navigation.homepage">
+                <i class="fa  fa-home"></i> Home
+            </a>
+            <a data-role="button"
+               data-bind="events: {click: ScrollTop }">
+                <i class="fa fa-arrow-up"></i> Top
+            </a>
+        </div>
+    </footer>
+    <div id="dvmsldetails" >
+        <div class="panel-body padding0">
+            <!--Institution_MSL_Number
+                Institution_Name
+                Row_KDM
+                Name_of_Key_Decision_Maker
+                Contact_No
+                Institution_Search
+            -->
+            <div data-role="listview" id="listview-institutionmsldetails"></div>
+            <script type="text/x-kendo-tmpl" id="template-institutionmsldetails">
+                <div class="row">
+                    <div data-role="button"
+                         data-Institution_MSL_Number="${Institution_MSL_Number}"
+                         data-click="fun_open_modalviewmslview"
+                         style="text-align:left;">
+                        <h4 class="horange">
+                            #: Institution_Search #
+                        </h4>
+                    </div>
+                </div>
+            </script>
+        </div>
+    </div>
+</div>
+<div data-role="modalview" id="modalview-mslview" style="height:250px !important;
+        width:90%!important ">
+    <div class="panel-headingmodal" data-role="header">
+        <div class="row">
+            <div class="panel-title" style="padding-left:10px !important ; ">
+                KDM Details <a data-click="fun_close_modalviewmslview"
+                               data-role="button" class="pull-right"
+                               style="padding : 0 10px 0 0; ">
+                    <i class="fa fa-close"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-custom">
+        <div class="panel-body padding0" style="background-color:#fff !important">
+            <div id="mslview-inskdmlist"></div>
+        </div>
+    </div>
+</div>

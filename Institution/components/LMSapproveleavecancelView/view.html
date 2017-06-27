@@ -3,15 +3,11 @@
      data-model="app.LMSapproveleavecancelView.LMSapproveleavecancelViewModel"
      data-bind="events: { show: onShow }">
     <footer data-role="footer">
-        <div class="row text-center">
-            <div data-role="button"
-                 data-click="app.navigation.back">
-                <i class="fa fa-arrow-left"></i> Back
-            </div>
-            <div data-role="button"
-                 data-click="app.navigation.navigateholidays">
-                <i class="fa fa-calendar"> </i> Holidays
-            </div>
+        <div class="btn-group btn-group-justified">
+            <a class="btn btn-primary"
+               data-bind="events: {click: onRefresh }">
+                <i class="fa fa-2x fa-refresh"></i>
+            </a>
         </div>
     </footer>
     <div id="dvleavecancelapprovalView">

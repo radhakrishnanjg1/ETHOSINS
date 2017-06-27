@@ -3,8 +3,25 @@
      data-layout="afterlogin"
      data-model="app.DCRpreviewView.DCRpreviewViewModel"
      data-bind="events: { show: onShow ,afterShow:afterShow}">
-    <footer data-role="footer">
+    <!--<footer data-role="footer">
         <div class="row text-center">
+            <div data-role="button"
+                 data-click="app.navigation.back">
+                <i class="fa fa-arrow-left"></i> Back
+            </div>
+            <div data-role="button"
+                 data-bind="events: {click: cleardcrdetails }">
+                <i class="fa fa-trash"> </i> Clear All
+            </div>
+            <div data-role="button"
+                 data-bind="events: {click: submitdcrdetails }">
+                <i class="fa fa-save"> </i> Submit
+            </div>
+        </div>
+    </footer>-->
+
+    <footer data-role="footer">
+        <div class="btn-group btn-group-justified">
             <div data-role="button"
                  data-click="app.navigation.back">
                 <i class="fa fa-arrow-left"></i> Back

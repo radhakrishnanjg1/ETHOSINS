@@ -30,11 +30,7 @@
         user: {
             displayName: '',
              username: '',
-             password: '',
-            //username: 'ZE-RM-GUWAHATI1', //rm
-            //password: 'himalaya', 
-            //  username: 'IN-MGR-LUCKNOW1', //approval level
-            //  password: 'JAYASWAL7', 
+             password: '',   
             //email: ''
         },
         loginValidator: null,
@@ -86,7 +82,8 @@ function fun_db_APP_Verify_Field_User_Authentication(username, password, devicei
         if (data[0][0].Output_ID == 1) { 
             $('#dvusername').html(data[0][0].Employee_Name)
             $('#hdnLogin_ID').val(data[0][0].Login_ID)
-            $('#hdnEmployee_ID').val(data[0][0].Employee_ID)
+            $('#hdnEmployee_ID').val(data[0][0].Employee_ID);
+            $('#dvlast_visited').html(data[2][0].Last_Visited);
             localStorage.clear();
             localStorage.setItem("userdata", JSON.stringify(data[0][0])); // userdata details 
 

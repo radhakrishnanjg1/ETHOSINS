@@ -6,8 +6,24 @@
      data-model="app.DCRinstitutionView.DCRinstitutionViewModel"
      data-show="app.DCRinstitutionView.DCRinstitutionViewModel.onShow"
      data-after-show="app.DCRinstitutionView.DCRinstitutionViewModel.afterShow">
-    <footer data-role="footer">
+    <!--<footer data-role="footer">
         <div class="row text-center">
+            <div data-role="button"
+                 data-bind="events: {click: savelisteddcrdetails }">
+                <i class="fa fa-plus"> </i> Add
+            </div>
+            <div data-role="button"
+                 data-click="app.navigation.navigateDCRunlistedinstitutionView">
+                <i class="fa fa-university"> </i>  Unlisted
+            </div>
+            <div data-role="button"
+                 data-click="app.navigation.navigateDCRfinaentryView">
+                <i class="fa fa-file-text"></i>  Final Entry
+            </div>
+        </div>
+    </footer>--> 
+    <footer data-role="footer">
+        <div class="btn-group btn-group-justified">
             <div data-role="button"
                  data-bind="events: {click: savelisteddcrdetails }">
                 <i class="fa fa-plus"> </i> Add

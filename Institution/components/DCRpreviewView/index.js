@@ -63,14 +63,18 @@
             app.select_dcr_master_byid(render_dcrmaster, hdndcr_master_id);
         },
         submitdcrdetails: function () {
-            // var hdndcr_ins_master_string = $('#hdndcr_ins_master_string').val();
-            // var hdndcr_unlisted_ins_master_string = $('#hdndcr_unlisted_ins_master_string').val();
-            // var hdnactivity_id=$("#hdnactivity_id").val();
-            // if (hdnactivity_id == 235 && (hdndcr_ins_master_string == "[]" || hdndcr_unlisted_ins_master_string == "[]"))
-            // {
-            //     app.notify.error("MSL or unlisted should not be empty!");
-            //     return false;
-            // }
+             var hdndcr_ins_master_string = $('#hdndcr_ins_master_string').val();
+             var hdndcr_unlisted_ins_master_string = $('#hdndcr_unlisted_ins_master_string').val();
+             var hdnactivity_id=$("#hdnactivity_id").val();
+             if(hdnactivity_id == 235)
+             { 
+                 if ((hdndcr_ins_master_string == "[]"
+                     && hdndcr_unlisted_ins_master_string == "[]"))
+                 {
+                     app.notify.error("MSL or unlisted should not be empty!");
+                     return false;
+                 }
+             }
             var confirmation = "Are you sure you want to save the details?";
             app.notify.confirmation(confirmation, function (confirm) {
                 if (!confirm) {

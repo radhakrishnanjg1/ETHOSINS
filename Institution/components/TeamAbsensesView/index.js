@@ -10,14 +10,21 @@
             }
             app.navigation.logincheck();
 
-        },
-
+        }, 
         afterShow: function () {
             var userdata = JSON.parse(localStorage.getItem("userdata"));
-            var Employee_ID = parseInt(userdata.Employee_ID);
-            var Sub_Territory_ID = parseInt(userdata.Sub_Territory_ID);
+            var Employee_ID = parseInt(userdata.Employee_ID); 
+            if (localStorage.getItem("teamabsensesviewdetails_live") == null ||
+               localStorage.getItem("teamabsensesviewdetails_live") != 1) {
+                app.utils.loading(true);
+                fun_db_APP_Get_Employee_Absenses(Employee_ID);
+            }
+        }, 
+        onRefresh: function () { 
+            var userdata = JSON.parse(localStorage.getItem("userdata"));
+            var Employee_ID = parseInt(userdata.Employee_ID); 
             app.utils.loading(true);
-            fun_db_APP_Get_Employee_Absenses(Employee_ID);
+            fun_db_APP_Get_Employee_Absenses(Employee_ID); 
         },
     });
 
@@ -49,6 +56,7 @@ function fun_db_APP_Get_Employee_Absenses(Employee_ID) {
         var data = this.data();
         app.utils.loading(false);
         localStorage.setItem("teamabsensesviewdetails", JSON.stringify(data));
+        localStorage.setItem("teamabsensesviewdetails_live",1);
         $('#dvTeamAbsensesView').show();
         loadmonth_absenses_calendar();
         var value = new Date();
@@ -56,7 +64,7 @@ function fun_db_APP_Get_Employee_Absenses(Employee_ID) {
         var today = new Date(value.getFullYear(), value.getMonth(), value.getDate());
         var dayOfYear = ((today - onejan + 1) / 86400000);
         var currentweeknumber = Math.ceil(dayOfYear / 7);
-        load_absenses_details_today(currentdate);
+        load_absenses_details_today(value);
         load_absenses_details_week(currentweeknumber);
     });
 }

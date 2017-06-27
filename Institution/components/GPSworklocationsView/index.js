@@ -133,7 +133,7 @@ function fun_load_geolocation_by_filter(Employee_ID, ddlworklocation) {
         panControl: true,
         zoomControl: true,
         zoomControlOptions: { style: google.maps.ZoomControlStyle.SMALL },
-        zoom: 6,
+        zoom: 3,
         mapTypeControl: true,
         scaleControl: true,
         streetViewControl: false,

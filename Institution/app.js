@@ -8,10 +8,10 @@
     // using sql db for storing offline information 
     app.openDb = function () {
         if (window.sqlitePlugin !== undefined) {
-            app.db = window.sqlitePlugin.openDatabase("EthosINS4");
+            app.db = window.sqlitePlugin.openDatabase("EthosINS5");
         } else {
             // For debugging in simulator fallback to native SQL Lite
-            app.db = window.openDatabase("EthosINS4", "1.0", "Cordova Demo", 200000);
+            app.db = window.openDatabase("EthosINS5", "1.0", "Cordova Demo", 200000);
             //app.db = window.sqlitePlugin.openDatabase("EthosINS");
         }
     }; 
@@ -752,6 +752,197 @@
         });
     };
      
+    /* tour plan start*/
+    // 1 create tp master informaton
+    app.createtable_tourplan_master = function () {
+        app.db.transaction(function (tx) {
+            tx.executeSql("create table if not exists tourplan_master (tourplan_master_id integer primary key asc,"
+               + "employee_id integer,"
+               + "sub_territory_id integer,"
+               + "tp_date date,"
+               + "activity_peroid_id integer,"
+               + "activity_peroid_name text,"
+               + "activity_id integer,"
+               + "activity_name text,"
+               + "category_id integer,"
+               + "category_name text,"
+               + "mode_id integer,"
+               + "mode_name text,"
+               + "tp_contact text,"
+               + "tp_objective text,"
+               + " added_on blob)", []);
+        });
+    }
+
+    // 2 create tp master worked with informaton
+    app.createtable_tourplan_master_ww_details = function () {
+        app.db.transaction(function (tx) {
+            tx.executeSql("create table if not exists tourplan_master_ww_details (tourplan_master_ww_detail_id integer primary key asc,"
+                + "tourplan_master_id integer,"
+                + "ww_id integer,"
+                + "ww_name text,"
+                + " added_on blob)", []);
+        });
+    }
+
+    // 3 create tp master major town informaton
+    app.createtable_tourplan_master_mj_details = function () {
+        app.db.transaction(function (tx) {
+            tx.executeSql("create table if not exists tourplan_master_mj_details (tourplan_master_mj_details_id integer primary key asc,"
+                + "tourplan_master_id integer,"
+                + "mj_id integer,"
+                + "mj_name text,"
+                + " added_on blob)", []);
+        });
+    }
+
+    // 4 create tp institution and kdm informaton
+    app.createtable_tourplan_master_institutionkdm_details = function () {
+        app.db.transaction(function (tx) {
+            tx.executeSql("create table if not exists tourplan_master_institutionkdm_details (tourplan_master_institutionkdm_details_id integer primary key asc,"
+                + "tourplan_master_id integer,"
+                + "source text," // institution or kdm
+                + "institution_msl_id integer," 
+                + "instutition_name text,"
+                + "kdm_name text,"
+                + "institution_kdm_id integer,"
+                + " added_on blob)", []);
+        });
+    }
+
+    // 1 insert tp master
+    app.addto_tourplan_master = function (employee_id, sub_territory_id, tp_date, activity_peroid_id, activity_peroid_name,
+        activity_id, activity_name, category_id, category_name, mode_id,
+        mode_name, tp_contact, tp_objective
+        ) {
+        app.db.transaction(function (tx) {
+            var addedon = todateddmmyyyhhmmss_hyphen(new Date());
+            tx.executeSql("insert into tourplan_master (employee_id,sub_territory_id,tp_date, activity_peroid_id, activity_peroid_name, " +
+                "activity_id, activity_name," + "category_id, category_name, mode_id," +
+                " mode_name,tp_contact, tp_objective,added_on) "
+                + " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                          [employee_id, sub_territory_id, tp_date, activity_peroid_id, activity_peroid_name,
+                              activity_id, activity_name, category_id, category_name, mode_id,
+                              mode_name, tp_contact, tp_objective, addedon],
+                          app.onsuccess,
+                          app.onerror);
+        });
+    }
+
+    // 2 insert  tourplan_master_ww_details
+    app.addto_tourplan_master_ww_details = function (tourplan_master_id, ww_id, ww_name) {
+        app.db.transaction(function (tx) {
+            var addedon = todateddmmyyyhhmmss_hyphen(new Date());
+            tx.executeSql("insert into tourplan_master_ww_details(tourplan_master_id,ww_id,ww_name,added_on) "
+                + " values (?,?,?,?)",
+                          [tourplan_master_id, ww_id, ww_name, addedon],
+                          app.onsuccess,
+                          app.onerror);
+        });
+    }
+
+    // 3 insert tp master major town informaton
+    app.addto_tourplan_master_mj_details = function (tourplan_master_id, mj_id, mj_name) {
+        app.db.transaction(function (tx) {
+            var addedon = todateddmmyyyhhmmss_hyphen(new Date());
+            tx.executeSql("insert into tourplan_master_mj_details(tourplan_master_id,mj_id,mj_name,added_on) "
+                + " values (?,?,?,?)",
+                          [tourplan_master_id, mj_id, mj_name, addedon],
+                          app.onsuccess,
+                          app.onerror);
+        });
+    }
+
+    // 4 insert tp master institution and kdm  informaton
+    app.addto_tourplan_tourplan_master_institutionkdm_details = function (tourplan_master_id,
+        source, institution_msl_id,instutition_name, kdm_name, institution_kdm_id) {
+        app.db.transaction(function (tx) {
+            var addedon = todateddmmyyyhhmmss_hyphen(new Date());
+            tx.executeSql("insert into tourplan_master_institutionkdm_details(tourplan_master_id,source,institution_msl_id,instutition_name, kdm_name, institution_kdm_id,added_on) "
+                + " values (?,?,?,?,?,?,?)",
+                          [tourplan_master_id,source,institution_msl_id, instutition_name, kdm_name, institution_kdm_id, addedon],
+                          app.onsuccess,
+                          app.onerror);
+        });
+    }
+
+    //1 Delete
+    app.delete_tourplan_master = function () {
+        app.db.transaction(function (tx) {
+            tx.executeSql("delete from tourplan_master ", [],
+                          app.onsuccess,
+                          app.onError);
+        });
+    };
+
+    //2 Delete
+    app.delete_tourplan_master_ww_details = function () {
+        app.db.transaction(function (tx) {
+            tx.executeSql("delete from tourplan_master_ww_details ", [],
+                          app.onsuccess,
+                          app.onError);
+        });
+    };
+
+    //3 Delete
+    app.delete_tourplan_master_mj_details = function () {
+        app.db.transaction(function (tx) {
+            tx.executeSql("delete from tourplan_master_mj_details ", [],
+                          app.onsuccess,
+                          app.onError);
+        });
+    };
+
+    //4 Delete tp master institution and kdm details 
+    app.delete_tourplan_master_institutionkdm_details = function () {
+        app.db.transaction(function (tx) {
+            tx.executeSql("delete from tourplan_master_institutionkdm_details ", [],
+                          app.onsuccess,
+                          app.onError);
+        });
+    };
+
+    // 1 select  
+    app.select_tourplan_master = function (fn) {
+        app.db.transaction(function (tx) {
+            tx.executeSql("SELECT * FROM tourplan_master ", [], fn, app.onError);
+        });
+    };
+
+    // 2 select tp master ww   
+    app.select_tourplan_master_ww_details = function (fn) {
+        app.db.transaction(function (tx) {
+            tx.executeSql("SELECT ww_id,ww_name FROM tourplan_master_ww_details ", [], fn, app.onError);
+        });
+    };
+
+    // 3 select tp master mj    
+    app.select_tourplan_master_mj_details = function (fn) {
+        app.db.transaction(function (tx) {
+            tx.executeSql("SELECT mj_id,mj_name FROM tourplan_master_mj_details ", [], fn, app.onError);
+        });
+    };
+
+    // 4 select tp master institution and kdm details     
+    app.select_tourplan_master_institutionkdm_details = function (fn,source) {
+        app.db.transaction(function (tx) {
+            tx.executeSql("SELECT institution_msl_id,instutition_name, kdm_name, institution_kdm_id FROM tourplan_master_institutionkdm_details where source=?", [source], fn, app.onError);
+        });
+    };
+    // 4 select tp master institution and kdm details     
+    app.select_tourplan_master_institutionkdm_details_by_institution_msl_id = function (fn, institution_msl_id) {
+        app.db.transaction(function (tx) {
+            tx.executeSql("SELECT institution_msl_id,instutition_name, kdm_name, institution_kdm_id FROM tourplan_master_institutionkdm_details where institution_msl_id=?", [institution_msl_id], fn, app.onError);
+        });
+    };
+    // 5 select tp master institution and kdm details withoutsource
+    app.select_tourplan_master_institutionkdm_detailswithoutsource = function (fn) {
+        app.db.transaction(function (tx) {
+            tx.executeSql("SELECT institution_msl_id,instutition_name, kdm_name, institution_kdm_id FROM tourplan_master_institutionkdm_details", [], fn, app.onError);
+        });
+    };
+
+    /* tour plan end*/
     app.onError = function (tx, e) {
         alert(e.message);
         console.log("Error: " + e.message);
@@ -798,6 +989,12 @@ function app_db_init() {
 
     app.createtable_dcr_master_ww_details_temp_master();
     app.createtable_dcr_master_ww_details_temp_institution();
+
+    //tourplan tables
+    app.createtable_tourplan_master();
+    app.createtable_tourplan_master_ww_details();
+    app.createtable_tourplan_master_mj_details();
+    app.createtable_tourplan_master_institutionkdm_details();
 }
  
 // START_CUSTOM_CODE_kendoUiMobileApp

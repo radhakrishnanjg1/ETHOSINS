@@ -4,9 +4,10 @@
      data-model="app.GPSworklocationsView.GPSworklocationsViewModel"
      data-bind="events: { show: onShow }">
     <!--google scripts-->
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+ 
     <footer data-role="footer">
-        <div class="row text-center">
+        <div class="btn-group btn-group-justified">
             <div data-role="button"
                  data-click="app.navigation.back">
                 <i class="fa fa-arrow-left"></i> Back
@@ -18,7 +19,6 @@
                  data-click="app.navigation.navigateteamcoverage">
                 <i class="fa fa-home"> </i> Home
             </div>
-
         </div>
     </footer>
     <div id="dvGPSworklocationsView">

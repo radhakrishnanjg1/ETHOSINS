@@ -6,19 +6,36 @@
      data-model="app.DCRunlistedinstitutionView.DCRunlistedinstitutionViewModel"
      data-show="app.DCRunlistedinstitutionView.DCRunlistedinstitutionViewModel.onShow"
      data-after-show="app.DCRunlistedinstitutionView.DCRunlistedinstitutionViewModel.afterShow">
-    <footer data-role="footer">
+    <!--<footer data-role="footer">
         <div class="row text-center">
             <div data-role="button"
                  data-bind="events: {click: saveunlistedscrdetails }">
-                <i class="fa fa-plus"> </i> Add  <!--Save & Unlisted Insts.-->
+                <i class="fa fa-plus"> </i> Add   
             </div>
             <div data-role="button"
                  data-click="app.navigation.navigateDCRinstitutionView">
-                <i class="fa fa-university"> </i> MSL <!--MSL Entry-->
+                <i class="fa fa-university"> </i> MSL  
             </div>
             <div data-role="button"
                  data-click="app.navigation.navigateDCRfinaentryView">
-                <i class="fa fa-file-text"></i>  Final Entry  <!--Finaly Entry-->
+                <i class="fa fa-file-text"></i>  Final Entry   
+            </div>
+        </div>
+    </footer>-->
+
+    <footer data-role="footer">
+        <div class="btn-group btn-group-justified">
+            <div data-role="button"
+                 data-bind="events: {click: saveunlistedscrdetails }">
+                <i class="fa fa-plus"> </i> Add   
+            </div>
+            <div data-role="button"
+                 data-click="app.navigation.navigateDCRinstitutionView">
+                <i class="fa fa-university"> </i> MSL  
+            </div>
+            <div data-role="button"
+                 data-click="app.navigation.navigateDCRfinaentryView">
+                <i class="fa fa-file-text"></i>  Final Entry   
             </div>
         </div>
     </footer>
