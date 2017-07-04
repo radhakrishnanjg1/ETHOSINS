@@ -2,7 +2,7 @@
   "ProjectName": "Institution",
   "ProjectGuid": "a175c3c0-5dc9-4dfe-9000-3515cbe341c0",
   "projectVersion": 1,
-  "AppIdentifier": "com.telerik.EthosINS",
+  "AppIdentifier": "com.telerik.EthosInstitution",
   "DisplayName": "ETHOS-INS",
   "Author": "Radhakrishnan J",
   "Description": "ETHOS Institution",
