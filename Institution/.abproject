@@ -6,7 +6,7 @@
   "DisplayName": "ETHOS-INS",
   "Author": "Radhakrishnan J",
   "Description": "ETHOS Institution",
-  "BundleVersion": "1.0.6",
+  "BundleVersion": "1.0.5",
   "AndroidVersionCode": "5",
   "iOSDeviceFamily": [
     "1"
